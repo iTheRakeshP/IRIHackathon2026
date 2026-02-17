@@ -13,41 +13,59 @@
 .modal-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 24px 32px;
+  align-items: center;
+  padding: 16px 24px;
   background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
   color: white;
+  min-height: 60px;
 
   .header-content {
     flex: 1;
+    display: flex;
+    align-items: center;
 
-    .client-info {
-      margin-bottom: 8px;
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+
+      .client-section,
+      .policy-section {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
 
       .client-name {
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 600;
-        margin: 0 0 4px 0;
       }
 
       .client-account {
         font-size: 14px;
         opacity: 0.9;
-        margin: 0;
       }
-    }
 
-    .policy-info {
       .policy-name {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 500;
-        margin: 0 0 4px 0;
       }
 
       .policy-id {
         font-size: 13px;
         opacity: 0.85;
-        margin: 0;
+      }
+
+      .separator {
+        font-size: 14px;
+        opacity: 0.7;
+      }
+
+      .divider {
+        font-size: 18px;
+        opacity: 0.5;
+        margin: 0 4px;
       }
     }
   }

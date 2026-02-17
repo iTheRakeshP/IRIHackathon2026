@@ -1,0 +1,121 @@
+<div class="ai-chat-drawer" [class.open]="chatService.isOpen()">
+  <!-- Chat Header -->
+  <div class="chat-header">
+    <div class="header-title">
+      <mat-icon class="ai-icon">psychology</mat-icon>
+      <div>
+        <h3>PolicyPilot</h3>
+        <p class="subtitle">Your intelligent in-force policy guide</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button mat-icon-button (click)="onClearChat()" matTooltip="Clear chat">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+      <button mat-icon-button (click)="onClose()" matTooltip="Close chat">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Context Badge -->
+  <div class="context-badge">
+    <mat-icon>info_outline</mat-icon>
+    <span>{{ getContextLabel() }}</span>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Messages Container -->
+  <div class="messages-container" #messagesContainer>
+    @for (message of chatService.messages(); track $index) {
+      <div class="message" [class.user]="message.role === 'user'" [class.assistant]="message.role === 'assistant'">
+        <div class="message-avatar">
+          @if (message.role === 'user') {
+            <mat-icon>person</mat-icon>
+          } @else {
+            <mat-icon>smart_toy</mat-icon>
+          }
+        </div>
+        <div class="message-content">
+          <div class="message-text">{{ message.content }}</div>
+          @if (message.timestamp) {
+            <div class="message-time">
+              {{ message.timestamp | date: 'shortTime' }}
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Loading indicator -->
+    @if (chatService.isLoading()) {
+      <div class="message assistant loading">
+        <div class="message-avatar">
+          <mat-icon>smart_toy</mat-icon>
+        </div>
+        <div class="message-content">
+          <div class="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Input Area -->
+  <div class="input-area">
+    <!-- Suggested Questions -->
+    <div class="suggested-questions">
+      <div class="suggestions-header">
+        <mat-icon>lightbulb</mat-icon>
+        <p class="suggestions-label">Try asking:</p>
+      </div>
+      <div class="suggestions-chips">
+        @for (action of getQuickActions(); track action) {
+          <button 
+            mat-stroked-button 
+            class="suggestion-chip"
+            (click)="onQuickActionClick(action)"
+            [disabled]="chatService.isLoading()">
+            {{ action }}
+          </button>
+        }
+      </div>
+    </div>
+    
+    <mat-divider></mat-divider>
+    
+    <div class="input-container">
+      <textarea
+        [(ngModel)]="userInput"
+        (keypress)="onKeyPress($event)"
+        placeholder="Ask me anything about this policy..."
+        rows="2"
+        [disabled]="chatService.isLoading()"
+        class="chat-input">
+      </textarea>
+      <button 
+        mat-fab 
+        color="primary" 
+        (click)="onSendMessage()"
+        [disabled]="!userInput.trim() || chatService.isLoading()"
+        class="send-button">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+    <div class="input-hint">
+      <mat-icon>lightbulb_outline</mat-icon>
+      <span>Press Enter to send, Shift+Enter for new line</span>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay backdrop -->
+@if (chatService.isOpen()) {
+  <div class="chat-overlay" (click)="onClose()"></div>
+}

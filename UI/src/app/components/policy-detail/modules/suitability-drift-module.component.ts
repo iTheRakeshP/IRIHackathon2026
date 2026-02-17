@@ -8,6 +8,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { Alert } from '../../../models/alert.model';
 import { Policy } from '../../../models/policy.model';
 import { Client } from '../../../models/client.model';
+import { AiChatService } from '../../../services/ai-chat.service';
 
 interface DriftItem {
   category: string;
@@ -36,6 +37,8 @@ export class SuitabilityDriftModuleComponent {
   @Input() client!: Client;
   @Output() actionComplete = new EventEmitter<any>();
 
+  constructor(private chatService: AiChatService) {}
+
   // Detected suitability changes
   driftItems: DriftItem[] = [
     {
@@ -59,7 +62,15 @@ export class SuitabilityDriftModuleComponent {
   ];
 
   onAskAI(): void {
-    console.log('Ask AI about suitability drift');
+    // Open AI chat with suitability drift context
+    this.chatService.openChat({
+      policyId: this.policy.policyId,
+      clientAccountNumber: this.client.clientAccountNumber,
+      alertType: this.alert.type,
+      alertId: this.alert.alertId,
+      policy: this.policy,
+      client: this.client
+    });
   }
 
   onMarkReviewed(): void {

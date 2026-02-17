@@ -1,28 +1,34 @@
 <div class="policy-detail-modal">
+  <!-- AI Chat Drawer -->
+  <app-ai-chat-drawer></app-ai-chat-drawer>
+  
   <!-- Modal Header -->
   <div class="modal-header">
     <div class="header-content">
-      <div class="client-info">
-        @if (client(); as clientData) {
-          <h2 class="client-name">{{ clientData.name }}</h2>
-          <p class="client-account">{{ clientData.clientAccountNumber }}</p>
-        } @else {
-          <div class="skeleton-loader"></div>
-        }
-      </div>
-      <div class="policy-info">
-        @if (policy(); as policyData) {
-          <h3 class="policy-name">{{ policyData.carrier }} {{ policyData.productType }}</h3>
-          <p class="policy-id">{{ policyData.policyId }}</p>
-        } @else {
-          <div class="skeleton-loader"></div>
-        }
-      </div>
+      @if (client(); as clientData) {
+        <div class="info-row">
+          <div class="client-section">
+            <span class="client-name">{{ clientData.name }}</span>
+            <span class="separator">•</span>
+            <span class="client-account">{{ clientData.clientAccountNumber }}</span>
+          </div>
+          @if (policy(); as policyData) {
+            <span class="divider">|</span>
+            <div class="policy-section">
+              <span class="policy-name">{{ policyData.carrier }} {{ policyData.productType }}</span>
+              <span class="separator">•</span>
+              <span class="policy-id">{{ policyData.policyId }}</span>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="skeleton-loader"></div>
+      }
     </div>
     <div class="header-actions">
       <button mat-raised-button color="accent" (click)="onOpenAICopilot()" class="ai-button">
         <mat-icon>psychology</mat-icon>
-        Ask AI
+        PolicyPilot
       </button>
       <button mat-icon-button (click)="onClose()" aria-label="Close modal">
         <mat-icon>close</mat-icon>
@@ -88,11 +94,11 @@
 
       <mat-divider></mat-divider>
 
-      <!-- Review Modules (Accordion Pattern) -->
-      <section class="review-modules-section">
+      <!-- Alert Action & Analysis Section -->
+      <section class="review-modules-section" #reviewModulesSection>
         <h3 class="section-title">
-          <mat-icon>assignment</mat-icon>
-          Review Modules
+          <mat-icon>fact_check</mat-icon>
+          Alert Action & Analysis
         </h3>
 
         <div class="review-modules-container">

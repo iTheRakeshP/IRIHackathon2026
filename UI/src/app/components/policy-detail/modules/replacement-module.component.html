@@ -7,7 +7,7 @@
         <p class="alert-reason">{{ alert.reasonShort }}</p>
       </div>
     </div>
-    <button mat-icon-button class="ai-assist-btn" (click)="onAskAI()" matTooltip="Ask AI about this alert">
+    <button mat-icon-button class="ai-assist-btn" (click)="onAskAI()" matTooltip="Ask PolicyPilot">
       <mat-icon>psychology</mat-icon>
     </button>
   </div>
@@ -163,26 +163,10 @@
                   <tr [class.highlight-row]="row.highlight">
                     <td class="feature-name">{{ row.feature }}</td>
                     <td class="current-value">{{ row.current }}</td>
-                    @if (row.alt1) {
-                      <td class="alt-value" [class.better]="row.highlight === 'rate' && row.alt1 > row.current">
-                        {{ row.alt1 }}
-                        @if (row.highlight === 'rate' && row.alt1 > row.current) {
-                          <mat-icon class="improvement-icon">trending_up</mat-icon>
-                        }
-                      </td>
-                    }
-                    @if (row.alt2) {
-                      <td class="alt-value" [class.better]="row.highlight === 'rate' && row.alt2 > row.current">
-                        {{ row.alt2 }}
-                        @if (row.highlight === 'rate' && row.alt2 > row.current) {
-                          <mat-icon class="improvement-icon">trending_up</mat-icon>
-                        }
-                      </td>
-                    }
-                    @if (row.alt3) {
-                      <td class="alt-value" [class.better]="row.highlight === 'rate' && row.alt3 > row.current">
-                        {{ row.alt3 }}
-                        @if (row.highlight === 'rate' && row.alt3 > row.current) {
+                    @for (alt of alternatives(); track alt.productId; let idx = $index) {
+                      <td class="alt-value" [class.better]="row.highlight === 'rate' && row['alt' + (idx + 1)] > row.current">
+                        {{ row['alt' + (idx + 1)] }}
+                        @if (row.highlight === 'rate' && row['alt' + (idx + 1)] > row.current) {
                           <mat-icon class="improvement-icon">trending_up</mat-icon>
                         }
                       </td>
@@ -196,7 +180,10 @@
           <!-- Alternative Highlights -->
           <div class="alternatives-highlights">
             @for (alt of alternatives(); track alt.productId; let idx = $index) {
-              <mat-card class="alternative-card">
+              <mat-card 
+                class="alternative-card"
+                (mouseenter)="onAlternativeHover(alt)"
+                (mouseleave)="onAlternativeLeave()">
                 <div class="alt-card-header">
                   <h5>Alternative {{ idx + 1 }}: {{ alt.productName }}</h5>
                   <mat-chip class="suitability-badge" [class.high-match]="alt.suitabilityScore >= 90">
@@ -212,6 +199,12 @@
                     </div>
                   }
                 </div>
+                <div class="card-actions">
+                  <button mat-raised-button color="primary" (click)="onInitiateReplacementReviewForProduct(alt)">
+                    <mat-icon>assignment</mat-icon>
+                    Initiate Replacement Review
+                  </button>
+                </div>
               </mat-card>
             }
           </div>
@@ -221,14 +214,6 @@
           <button mat-button (click)="currentStep.set(1)">
             <mat-icon>arrow_back</mat-icon>
             Back to Suitability
-          </button>
-          <button mat-button (click)="onAskAI()">
-            <mat-icon>psychology</mat-icon>
-            Ask AI to Compare
-          </button>
-          <button mat-raised-button color="primary" (click)="onInitiateReplacementReview()">
-            <mat-icon>assignment</mat-icon>
-            Initiate Replacement Review
           </button>
         </div>
       }

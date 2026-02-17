@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, signal, computed } from '@angular/core';
+import { Component, Input, Output, EventEmitter, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +14,7 @@ import { Policy } from '../../../models/policy.model';
 import { Client } from '../../../models/client.model';
 import { SuitabilityFormComponent } from '../components/suitability-form.component';
 import { ApiService } from '../../../services/api.service';
+import { AiChatService } from '../../../services/ai-chat.service';
 
 interface Alternative {
   productId: string;
@@ -66,7 +67,20 @@ export class ReplacementModuleComponent {
 
   displayedColumns: string[] = ['feature', 'current', 'alternative1', 'alternative2', 'alternative3'];
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private chatService: AiChatService
+  ) {
+    // Update chat context when step changes
+    effect(() => {
+      const step = this.currentStep();
+      const stepNames = ['why-flagged', 'suitability', 'alternatives'];
+      this.chatService.updateContext({ 
+        currentStep: stepNames[step],
+        alternatives: step === 2 ? this.alternatives() : undefined
+      });
+    });
+  }
 
   onSuitabilityVerified(): void {
     this.suitabilityVerified.set(true);
@@ -199,6 +213,49 @@ export class ReplacementModuleComponent {
     });
   }
 
+  onInitiateReplacementReviewForProduct(alternative: Alternative): void {
+    // Update context when user hovers or clicks on a specific product
+    this.chatService.updateContext({
+      viewingAlternative: alternative,
+      interactionType: 'reviewing-product'
+    });
+    
+    this.actionComplete.emit({
+      action: 'initiate_replacement',
+      alertId: this.alert.alertId,
+      policyId: this.policy.policyId,
+      selectedProduct: {
+        productId: alternative.productId,
+        productName: alternative.productName,
+        carrier: alternative.carrier,
+        suitabilityScore: alternative.suitabilityScore
+      }
+    });
+    
+    console.log('Initiating replacement review for:', {
+      currentPolicy: this.policy.policyId,
+      newProduct: alternative.productName,
+      carrier: alternative.carrier,
+      matchScore: alternative.suitabilityScore
+    });
+  }
+
+  onAlternativeHover(alternative: Alternative): void {
+    // Update chat suggestions when hovering over an alternative
+    this.chatService.updateContext({
+      viewingAlternative: alternative,
+      interactionType: 'hovering-product'
+    });
+  }
+
+  onAlternativeLeave(): void {
+    // Reset to alternatives view when not hovering
+    this.chatService.updateContext({
+      viewingAlternative: undefined,
+      interactionType: 'viewing-alternatives'
+    });
+  }
+
   onSaveNote(note: string): void {
     this.savedNote.set(note);
     this.actionComplete.emit({
@@ -209,8 +266,16 @@ export class ReplacementModuleComponent {
   }
 
   onAskAI(): void {
-    // This will trigger AI Copilot with specific context
-    console.log('Ask AI about replacement opportunity');
+    // Open AI chat with replacement-specific context
+    this.chatService.openChat({
+      policyId: this.policy.policyId,
+      clientAccountNumber: this.client.clientAccountNumber,
+      alertType: this.alert.type,
+      alertId: this.alert.alertId,
+      policy: this.policy,
+      client: this.client,
+      alternatives: this.alternatives()
+    });
   }
 
   formatCurrency(value: number): string {
@@ -286,56 +351,26 @@ export class ReplacementModuleComponent {
     const alts = this.alternatives();
     if (alts.length === 0) return [];
 
+    const buildRow = (feature: string, current: any, getValue: (alt: Alternative) => any) => {
+      const row: any = { feature, current };
+      alts.forEach((alt, idx) => {
+        row[`alt${idx + 1}`] = getValue(alt);
+      });
+      return row;
+    };
+
     return [
+      buildRow('Carrier', this.policy.carrier, alt => alt.carrier),
+      buildRow('Product', this.policy.productName, alt => alt.productName),
       {
-        feature: 'Carrier',
-        current: this.policy.carrier,
-        alt1: alts[0]?.carrier || '',
-        alt2: alts[1]?.carrier || '',
-        alt3: alts[2]?.carrier || ''
-      },
-      {
-        feature: 'Product',
-        current: this.policy.productName,
-        alt1: alts[0]?.productName || '',
-        alt2: alts[1]?.productName || '',
-        alt3: alts[2]?.productName || ''
-      },
-      {
-        feature: 'Cap Rate',
-        current: this.formatPercentage(this.policy.currentCapRate || 0),
-        alt1: alts[0] ? this.formatPercentage(alts[0].capRate) : '',
-        alt2: alts[1] ? this.formatPercentage(alts[1].capRate) : '',
-        alt3: alts[2] ? this.formatPercentage(alts[2].capRate) : '',
+        ...buildRow('Cap Rate', this.formatPercentage(this.policy.currentCapRate || 0), alt => this.formatPercentage(alt.capRate)),
         highlight: 'rate'
       },
+      buildRow('Annual Fee', this.formatCurrency(this.policy.annualFee || 0), alt => this.formatCurrency(alt.annualFee)),
+      buildRow('Rider Fee', this.formatPercentage(this.policy.riderFee || 0), alt => this.formatPercentage(alt.riderFee)),
+      buildRow('Income Rider', this.policy.riders?.includes('Income') ? 'Yes' : 'No', alt => alt.incomeRider ? 'Yes' : 'No'),
       {
-        feature: 'Annual Fee',
-        current: this.formatCurrency(this.policy.annualFee || 0),
-        alt1: alts[0] ? this.formatCurrency(alts[0].annualFee) : '',
-        alt2: alts[1] ? this.formatCurrency(alts[1].annualFee) : '',
-        alt3: alts[2] ? this.formatCurrency(alts[2].annualFee) : ''
-      },
-      {
-        feature: 'Rider Fee',
-        current: this.formatPercentage(this.policy.riderFee || 0),
-        alt1: alts[0] ? this.formatPercentage(alts[0].riderFee) : '',
-        alt2: alts[1] ? this.formatPercentage(alts[1].riderFee) : '',
-        alt3: alts[2] ? this.formatPercentage(alts[2].riderFee) : ''
-      },
-      {
-        feature: 'Income Rider',
-        current: this.policy.riders?.includes('Income') ? 'Yes' : 'No',
-        alt1: alts[0]?.incomeRider ? 'Yes' : 'No',
-        alt2: alts[1]?.incomeRider ? 'Yes' : 'No',
-        alt3: alts[2]?.incomeRider ? 'Yes' : 'No'
-      },
-      {
-        feature: 'Suitability Match',
-        current: '—',
-        alt1: alts[0] ? `${alts[0].suitabilityScore}%` : '',
-        alt2: alts[1] ? `${alts[1].suitabilityScore}%` : '',
-        alt3: alts[2] ? `${alts[2].suitabilityScore}%` : '',
+        ...buildRow('Suitability Match', '—', alt => `${alt.suitabilityScore}%`),
         highlight: 'score'
       }
     ];

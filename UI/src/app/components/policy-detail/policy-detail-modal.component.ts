@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, computed, effect } from '@angular/core';
+import { Component, OnInit, signal, computed, effect, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,10 +13,12 @@ import { Policy } from '../../models/policy.model';
 import { Alert } from '../../models/alert.model';
 import { Client } from '../../models/client.model';
 import { ApiService } from '../../services/api.service';
+import { AiChatService } from '../../services/ai-chat.service';
 import { PolicyOverviewComponent } from './components/policy-overview.component';
 import { ReplacementModuleComponent } from './modules/replacement-module.component';
 import { IncomeActivationModuleComponent } from './modules/income-activation-module.component';
 import { SuitabilityDriftModuleComponent } from './modules/suitability-drift-module.component';
+import { AiChatDrawerComponent } from '../ai-chat-drawer/ai-chat-drawer.component';
 
 @Component({
   selector: 'app-policy-detail-modal',
@@ -35,12 +37,16 @@ import { SuitabilityDriftModuleComponent } from './modules/suitability-drift-mod
     PolicyOverviewComponent,
     ReplacementModuleComponent,
     IncomeActivationModuleComponent,
-    SuitabilityDriftModuleComponent
+    SuitabilityDriftModuleComponent,
+    AiChatDrawerComponent
   ],
   templateUrl: './policy-detail-modal.component.html',
   styleUrls: ['./policy-detail-modal.component.scss']
 })
 export class PolicyDetailModalComponent implements OnInit {
+  // ViewChild for scroll target
+  @ViewChild('reviewModulesSection', { read: ElementRef }) reviewModulesSection?: ElementRef;
+  
   // Signals for reactive state
   policy = signal<Policy | null>(null);
   client = signal<Client | null>(null);
@@ -67,7 +73,8 @@ export class PolicyDetailModalComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<PolicyDetailModalComponent>,
-    private apiService: ApiService
+    private apiService: ApiService,
+    public chatService: AiChatService
   ) {}
 
   ngOnInit(): void {
@@ -127,6 +134,20 @@ export class PolicyDetailModalComponent implements OnInit {
     } else {
       this.expandedAlertId.set(alert.alertId);
       this.activeAlertType.set(alert.type);
+      
+      // Scroll to the review modules section after a brief delay to allow DOM update
+      setTimeout(() => {
+        this.scrollToReviewModule();
+      }, 100);
+    }
+  }
+
+  private scrollToReviewModule(): void {
+    if (this.reviewModulesSection) {
+      this.reviewModulesSection.nativeElement.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
     }
   }
 
@@ -152,12 +173,13 @@ export class PolicyDetailModalComponent implements OnInit {
   }
 
   onOpenAICopilot(): void {
-    // This will open the AI Copilot drawer with context
-    // To be implemented with AI Copilot service
-    console.log('Open AI Copilot with context:', {
+    // Open AI Copilot drawer with full context
+    this.chatService.openChat({
       policyId: this.policy()?.policyId,
       clientAccountNumber: this.client()?.clientAccountNumber,
-      activeAlertType: this.activeAlertType()
+      alertType: this.activeAlertType() || undefined,
+      policy: this.policy(),
+      client: this.client()
     });
   }
 
