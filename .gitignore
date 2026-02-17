@@ -1,0 +1,71 @@
+# IRI Hackathon 2026 - In-Force Annuity Review Platform
+# Root .gitignore
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+*.cache
+
+# API Specific (Python/FastAPI)
+API/__pycache__/
+API/*.pyc
+API/*.pyo
+API/*.pyd
+API/.Python
+API/env/
+API/venv/
+API/.venv/
+API/ENV/
+API/*.egg-info/
+API/dist/
+API/build/
+
+# UI Specific (Angular)
+UI/node_modules/
+UI/.angular/
+UI/dist/
+UI/tmp/
+UI/out-tsc/
+UI/bazel-out/
+UI/coverage/
+
+# Documentation Artifacts
+*.pdf
+*.docx
+!wireframes/*.pdf
+!wireframes/*.docx

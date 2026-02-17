@@ -1,0 +1,142 @@
+<div class="policy-detail-modal">
+  <!-- Modal Header -->
+  <div class="modal-header">
+    <div class="header-content">
+      <div class="client-info">
+        @if (client(); as clientData) {
+          <h2 class="client-name">{{ clientData.name }}</h2>
+          <p class="client-account">{{ clientData.clientAccountNumber }}</p>
+        } @else {
+          <div class="skeleton-loader"></div>
+        }
+      </div>
+      <div class="policy-info">
+        @if (policy(); as policyData) {
+          <h3 class="policy-name">{{ policyData.carrier }} {{ policyData.productType }}</h3>
+          <p class="policy-id">{{ policyData.policyId }}</p>
+        } @else {
+          <div class="skeleton-loader"></div>
+        }
+      </div>
+    </div>
+    <div class="header-actions">
+      <button mat-raised-button color="accent" (click)="onOpenAICopilot()" class="ai-button">
+        <mat-icon>psychology</mat-icon>
+        Ask AI
+      </button>
+      <button mat-icon-button (click)="onClose()" aria-label="Close modal">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Modal Body -->
+  <div class="modal-body">
+    @if (loading()) {
+      <div class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading policy details...</p>
+      </div>
+    } @else {
+      <!-- Current Policy Overview (Always Visible) -->
+      <section class="policy-overview-section">
+        <h3 class="section-title">
+          <mat-icon>description</mat-icon>
+          Current Policy Overview
+        </h3>
+        @if (policy(); as policyData) {
+          <app-policy-overview [policy]="policyData"></app-policy-overview>
+        }
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- Active Alerts Panel -->
+      <section class="active-alerts-section">
+        <h3 class="section-title">
+          <mat-icon>notifications_active</mat-icon>
+          Active Alerts
+          <span class="alert-count">({{ sortedAlerts().length }})</span>
+        </h3>
+        
+        <div class="alerts-pills-container">
+          @for (alert of sortedAlerts(); track alert.alertId) {
+            <div 
+              class="alert-pill" 
+              [class.active]="isAlertExpanded(alert.alertId)"
+              [class]="getAlertSeverityClass(alert.severity)"
+              (click)="onAlertPillClick(alert)">
+              <mat-icon class="alert-icon">{{ getAlertIcon(alert.type) }}</mat-icon>
+              <div class="alert-pill-content">
+                <span class="alert-title">{{ alert.title }}</span>
+                <span class="alert-reason">{{ alert.reasonShort }}</span>
+              </div>
+              <mat-icon class="expand-icon">
+                {{ isAlertExpanded(alert.alertId) ? 'expand_less' : 'expand_more' }}
+              </mat-icon>
+            </div>
+          } @empty {
+            <div class="no-alerts">
+              <mat-icon>check_circle</mat-icon>
+              <p>No active alerts</p>
+            </div>
+          }
+        </div>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- Review Modules (Accordion Pattern) -->
+      <section class="review-modules-section">
+        <h3 class="section-title">
+          <mat-icon>assignment</mat-icon>
+          Review Modules
+        </h3>
+
+        <div class="review-modules-container">
+          @for (alert of sortedAlerts(); track alert.alertId) {
+            <div class="review-module-wrapper" [class.expanded]="isAlertExpanded(alert.alertId)">
+              @if (isAlertExpanded(alert.alertId)) {
+                <!-- Replacement Opportunity Module -->
+                @if (alert.type === 'REPLACEMENT') {
+                  <app-replacement-module
+                    [alert]="alert"
+                    [policy]="policy()!"
+                    [client]="client()!"
+                    (actionComplete)="onModuleActionComplete($event)">
+                  </app-replacement-module>
+                }
+
+                <!-- Income Activation Module -->
+                @if (alert.type === 'INCOME_ACTIVATION') {
+                  <app-income-activation-module
+                    [alert]="alert"
+                    [policy]="policy()!"
+                    [client]="client()!"
+                    (actionComplete)="onModuleActionComplete($event)">
+                  </app-income-activation-module>
+                }
+
+                <!-- Suitability Drift Module -->
+                @if (alert.type === 'SUITABILITY_DRIFT') {
+                  <app-suitability-drift-module
+                    [alert]="alert"
+                    [policy]="policy()!"
+                    [client]="client()!"
+                    (actionComplete)="onModuleActionComplete($event)">
+                  </app-suitability-drift-module>
+                }
+              }
+            </div>
+          } @empty {
+            <div class="no-modules">
+              <p>Select an alert to view review details</p>
+            </div>
+          }
+        </div>
+      </section>
+    }
+  </div>
+</div>

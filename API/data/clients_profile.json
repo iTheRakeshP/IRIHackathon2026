@@ -1,0 +1,302 @@
+[
+  {
+    "client": {
+      "clientAccountNumber": "101-123456-001",
+      "clientName": "Milovich Pichirallo"
+    },
+    "clientSuitabilityProfile": {
+      "age": 50,
+      "lifeStage": "Accumulation",
+      "maritalStatus": "Single",
+      "dependents": 0,
+      "riskTolerance": "Moderate",
+      "investmentExperience": "High",
+      "volatilityComfort": "Medium",
+      "primaryObjective": "Growth",
+      "secondaryObjective": "Income",
+      "liquidityImportance": "High",
+      "investmentHorizon": "Medium",
+      "withdrawalHorizon": "Long",
+      "currentIncomeNeed": "Later",
+      "annualIncomeRange": "150k-200k",
+      "netWorthRange": "2M-5M",
+      "liquidNetWorthRange": "2M-5M",
+      "taxBracket": "High",
+      "retirementTargetYear": 2040,
+      "state": "GA",
+      "citizenship": "US",
+      "advisoryModel": "Fee-Based",
+      "isFeeBasedAccount": true
+    }
+  },
+  {
+    "client": {
+      "clientAccountNumber": "102-234567-002",
+      "clientName": "Sandra Collins"
+    },
+    "clientSuitabilityProfile": {
+      "age": 62,
+      "lifeStage": "Pre-Retirement",
+      "maritalStatus": "Married",
+      "dependents": 1,
+      "riskTolerance": "Moderate",
+      "investmentExperience": "Medium",
+      "volatilityComfort": "Medium",
+      "primaryObjective": "Income",
+      "secondaryObjective": "Preservation",
+      "liquidityImportance": "Medium",
+      "investmentHorizon": "Short",
+      "withdrawalHorizon": "Medium",
+      "currentIncomeNeed": "Now",
+      "annualIncomeRange": "100k-150k",
+      "netWorthRange": "1M-2M",
+      "liquidNetWorthRange": "500k-1M",
+      "taxBracket": "Medium",
+      "retirementTargetYear": 2026,
+      "state": "NC",
+      "citizenship": "US",
+      "advisoryModel": "Fee-Based",
+      "isFeeBasedAccount": true
+    }
+  },
+  {
+    "client": {
+      "clientAccountNumber": "103-345678-003",
+      "clientName": "David Hernandez"
+    },
+    "clientSuitabilityProfile": {
+      "age": 67,
+      "lifeStage": "Retired",
+      "maritalStatus": "Married",
+      "dependents": 0,
+      "riskTolerance": "Low",
+      "investmentExperience": "High",
+      "volatilityComfort": "Low",
+      "primaryObjective": "Income",
+      "secondaryObjective": "Preservation",
+      "liquidityImportance": "Medium",
+      "investmentHorizon": "Short",
+      "withdrawalHorizon": "Short",
+      "currentIncomeNeed": "Now",
+      "annualIncomeRange": "75k-100k",
+      "netWorthRange": "2M-5M",
+      "liquidNetWorthRange": "1M-2M",
+      "taxBracket": "Medium",
+      "retirementTargetYear": 2019,
+      "state": "FL",
+      "citizenship": "US",
+      "advisoryModel": "Commission",
+      "isFeeBasedAccount": false
+    }
+  },
+  {
+    "client": {
+      "clientAccountNumber": "104-456789-004",
+      "clientName": "Amit Patel"
+    },
+    "clientSuitabilityProfile": {
+      "age": 45,
+      "lifeStage": "Accumulation",
+      "maritalStatus": "Married",
+      "dependents": 2,
+      "riskTolerance": "High",
+      "investmentExperience": "High",
+      "volatilityComfort": "High",
+      "primaryObjective": "Growth",
+      "secondaryObjective": "Tax Efficiency",
+      "liquidityImportance": "Low",
+      "investmentHorizon": "Long",
+      "withdrawalHorizon": "Long",
+      "currentIncomeNeed": "Later",
+      "annualIncomeRange": "200k-300k",
+      "netWorthRange": "5M+",
+      "liquidNetWorthRange": "2M-5M",
+      "taxBracket": "High",
+      "retirementTargetYear": 2045,
+      "state": "NJ",
+      "citizenship": "US",
+      "advisoryModel": "Fee-Based",
+      "isFeeBasedAccount": true
+    }
+  },
+  {
+    "client": {
+      "clientAccountNumber": "105-567890-005",
+      "clientName": "Linda Morrison"
+    },
+    "clientSuitabilityProfile": {
+      "age": 59,
+      "lifeStage": "Pre-Retirement",
+      "maritalStatus": "Divorced",
+      "dependents": 0,
+      "riskTolerance": "Moderate",
+      "investmentExperience": "Medium",
+      "volatilityComfort": "Medium",
+      "primaryObjective": "Income",
+      "secondaryObjective": "Growth",
+      "liquidityImportance": "High",
+      "investmentHorizon": "Medium",
+      "withdrawalHorizon": "Medium",
+      "currentIncomeNeed": "Later",
+      "annualIncomeRange": "150k-200k",
+      "netWorthRange": "1M-2M",
+      "liquidNetWorthRange": "500k-1M",
+      "taxBracket": "Medium",
+      "retirementTargetYear": 2030,
+      "state": "TX",
+      "citizenship": "US",
+      "advisoryModel": "Fee-Based",
+      "isFeeBasedAccount": true
+    }
+  },
+  {
+    "client": {
+      "clientAccountNumber": "106-678901-006",
+      "clientName": "Robert Kim"
+    },
+    "clientSuitabilityProfile": {
+      "age": 71,
+      "lifeStage": "Retired",
+      "maritalStatus": "Married",
+      "dependents": 0,
+      "riskTolerance": "Low",
+      "investmentExperience": "Medium",
+      "volatilityComfort": "Low",
+      "primaryObjective": "Preservation",
+      "secondaryObjective": "Income",
+      "liquidityImportance": "High",
+      "investmentHorizon": "Short",
+      "withdrawalHorizon": "Short",
+      "currentIncomeNeed": "Now",
+      "annualIncomeRange": "50k-75k",
+      "netWorthRange": "1M-2M",
+      "liquidNetWorthRange": "1M-2M",
+      "taxBracket": "Low",
+      "retirementTargetYear": 2014,
+      "state": "CA",
+      "citizenship": "US",
+      "advisoryModel": "Fee-Based",
+      "isFeeBasedAccount": true
+    }
+  },
+  {
+    "client": {
+      "clientAccountNumber": "107-789012-007",
+      "clientName": "Jennifer Wu"
+    },
+    "clientSuitabilityProfile": {
+      "age": 38,
+      "lifeStage": "Accumulation",
+      "maritalStatus": "Single",
+      "dependents": 0,
+      "riskTolerance": "High",
+      "investmentExperience": "Medium",
+      "volatilityComfort": "High",
+      "primaryObjective": "Growth",
+      "secondaryObjective": "Speculation",
+      "liquidityImportance": "Low",
+      "investmentHorizon": "Long",
+      "withdrawalHorizon": "Long",
+      "currentIncomeNeed": "Later",
+      "annualIncomeRange": "100k-150k",
+      "netWorthRange": "500k-1M",
+      "liquidNetWorthRange": "250k-500k",
+      "taxBracket": "Medium",
+      "retirementTargetYear": 2052,
+      "state": "WA",
+      "citizenship": "US",
+      "advisoryModel": "Fee-Based",
+      "isFeeBasedAccount": true
+    }
+  },
+  {
+    "client": {
+      "clientAccountNumber": "108-890123-008",
+      "clientName": "Thomas O\u2019Neill"
+    },
+    "clientSuitabilityProfile": {
+      "age": 64,
+      "lifeStage": "Pre-Retirement",
+      "maritalStatus": "Married",
+      "dependents": 0,
+      "riskTolerance": "Moderate",
+      "investmentExperience": "High",
+      "volatilityComfort": "Medium",
+      "primaryObjective": "Income",
+      "secondaryObjective": "Preservation",
+      "liquidityImportance": "Medium",
+      "investmentHorizon": "Short",
+      "withdrawalHorizon": "Medium",
+      "currentIncomeNeed": "Now",
+      "annualIncomeRange": "150k-200k",
+      "netWorthRange": "2M-5M",
+      "liquidNetWorthRange": "1M-2M",
+      "taxBracket": "Medium",
+      "retirementTargetYear": 2025,
+      "state": "MA",
+      "citizenship": "US",
+      "advisoryModel": "Commission",
+      "isFeeBasedAccount": false
+    }
+  },
+  {
+    "client": {
+      "clientAccountNumber": "109-901234-009",
+      "clientName": "Priya Nair"
+    },
+    "clientSuitabilityProfile": {
+      "age": 55,
+      "lifeStage": "Pre-Retirement",
+      "maritalStatus": "Married",
+      "dependents": 2,
+      "riskTolerance": "Moderate",
+      "investmentExperience": "Medium",
+      "volatilityComfort": "Medium",
+      "primaryObjective": "Growth",
+      "secondaryObjective": "Income",
+      "liquidityImportance": "High",
+      "investmentHorizon": "Medium",
+      "withdrawalHorizon": "Long",
+      "currentIncomeNeed": "Later",
+      "annualIncomeRange": "200k-300k",
+      "netWorthRange": "1M-2M",
+      "liquidNetWorthRange": "500k-1M",
+      "taxBracket": "High",
+      "retirementTargetYear": 2036,
+      "state": "IL",
+      "citizenship": "US",
+      "advisoryModel": "Fee-Based",
+      "isFeeBasedAccount": true
+    }
+  },
+  {
+    "client": {
+      "clientAccountNumber": "110-012345-010",
+      "clientName": "Carlos Ramirez"
+    },
+    "clientSuitabilityProfile": {
+      "age": 69,
+      "lifeStage": "Retired",
+      "maritalStatus": "Married",
+      "dependents": 0,
+      "riskTolerance": "Low",
+      "investmentExperience": "Medium",
+      "volatilityComfort": "Low",
+      "primaryObjective": "Income",
+      "secondaryObjective": "Preservation",
+      "liquidityImportance": "Medium",
+      "investmentHorizon": "Short",
+      "withdrawalHorizon": "Short",
+      "currentIncomeNeed": "Now",
+      "annualIncomeRange": "75k-100k",
+      "netWorthRange": "1M-2M",
+      "liquidNetWorthRange": "500k-1M",
+      "taxBracket": "Low",
+      "retirementTargetYear": 2016,
+      "state": "AZ",
+      "citizenship": "US",
+      "advisoryModel": "Fee-Based",
+      "isFeeBasedAccount": true
+    }
+  }
+]

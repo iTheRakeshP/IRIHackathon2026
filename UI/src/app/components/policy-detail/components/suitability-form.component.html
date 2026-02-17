@@ -1,0 +1,181 @@
+<mat-card class="suitability-form-card">
+  @if (!verified()) {
+    <div class="form-instructions">
+      <mat-icon class="instructions-icon">info</mat-icon>
+      <div class="instructions-content">
+        <strong>Review Current Suitability Profile</strong>
+        <p>Verify the client's current suitability information below. Make any necessary updates before proceeding to alternatives.</p>
+      </div>
+    </div>
+
+    <!-- Read-Only View -->
+    @if (!editMode()) {
+      <div class="suitability-readonly">
+        <div class="readonly-grid">
+          <div class="readonly-item">
+            <span class="field-label">Risk Tolerance</span>
+            <span class="field-value">{{ formData.riskTolerance || 'Not Set' }}</span>
+          </div>
+
+          <div class="readonly-item">
+            <span class="field-label">Primary Objective</span>
+            <span class="field-value">{{ formData.primaryObjective || 'Not Set' }}</span>
+          </div>
+
+          <div class="readonly-item">
+            <span class="field-label">Secondary Objective</span>
+            <span class="field-value">{{ formData.secondaryObjective || 'Not Set' }}</span>
+          </div>
+
+          <div class="readonly-item">
+            <span class="field-label">Current Income Need</span>
+            <span class="field-value">{{ formData.currentIncomeNeed || 'Not Set' }}</span>
+          </div>
+
+          <div class="readonly-item">
+            <span class="field-label">Life Stage</span>
+            <span class="field-value">{{ formData.lifeStage || 'Not Set' }}</span>
+          </div>
+
+          <div class="readonly-item">
+            <span class="field-label">Liquidity Importance</span>
+            <span class="field-value">{{ formData.liquidityImportance || 'Not Set' }}</span>
+          </div>
+        </div>
+
+        <div class="readonly-actions">
+          <button mat-button (click)="onEdit()" class="edit-button">
+            <mat-icon>edit</mat-icon>
+            Update Suitability
+          </button>
+          <button mat-raised-button color="primary" (click)="onVerifyWithoutChanges()">
+            <mat-icon>check_circle</mat-icon>
+            Verify & Continue
+          </button>
+        </div>
+      </div>
+    }
+
+    <!-- Edit Mode -->
+    @if (editMode()) {
+      <div class="suitability-edit">
+        <div class="edit-notice">
+          <mat-icon>edit_note</mat-icon>
+          <span>Editing Suitability Profile</span>
+        </div>
+
+        <form class="suitability-form">
+          <div class="form-grid">
+            <!-- Risk Tolerance -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Risk Tolerance</mat-label>
+              <mat-select [(ngModel)]="formData.riskTolerance" name="riskTolerance" required>
+                @for (option of riskToleranceOptions; track option) {
+                  <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-select>
+              <mat-icon matPrefix>trending_up</mat-icon>
+            </mat-form-field>
+
+            <!-- Primary Objective -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Primary Objective</mat-label>
+              <mat-select [(ngModel)]="formData.primaryObjective" name="primaryObjective" required>
+                @for (option of objectiveOptions; track option) {
+                  <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-select>
+              <mat-icon matPrefix>flag</mat-icon>
+            </mat-form-field>
+
+            <!-- Secondary Objective -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Secondary Objective</mat-label>
+              <mat-select [(ngModel)]="formData.secondaryObjective" name="secondaryObjective">
+                @for (option of objectiveOptions; track option) {
+                  <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-select>
+              <mat-icon matPrefix>assistant_photo</mat-icon>
+            </mat-form-field>
+
+            <!-- Current Income Need -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Current Income Need</mat-label>
+              <mat-select [(ngModel)]="formData.currentIncomeNeed" name="currentIncomeNeed" required>
+                @for (option of incomeNeedOptions; track option) {
+                  <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-select>
+              <mat-icon matPrefix>payments</mat-icon>
+            </mat-form-field>
+
+            <!-- Life Stage -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Life Stage</mat-label>
+              <mat-select [(ngModel)]="formData.lifeStage" name="lifeStage" required>
+                @for (option of lifeStageOptions; track option) {
+                  <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-select>
+              <mat-icon matPrefix>timeline</mat-icon>
+            </mat-form-field>
+
+            <!-- Liquidity Importance -->
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Liquidity Importance</mat-label>
+              <mat-select [(ngModel)]="formData.liquidityImportance" name="liquidityImportance" required>
+                @for (option of liquidityOptions; track option) {
+                  <mat-option [value]="option">{{ option }}</mat-option>
+                }
+              </mat-select>
+              <mat-icon matPrefix>water_drop</mat-icon>
+            </mat-form-field>
+          </div>
+
+          <div class="edit-actions">
+            <button mat-button (click)="onCancel()" [disabled]="saving()" type="button">
+              <mat-icon>close</mat-icon>
+              Cancel
+            </button>
+            <button 
+              mat-raised-button 
+              color="primary" 
+              (click)="onSave()" 
+              [disabled]="saving() || !hasChanges()"
+              type="button">
+              <ng-container>
+                @if (saving()) {
+                  <mat-icon class="spinner">sync</mat-icon>
+                  <span>Saving...</span>
+                } @else {
+                  <mat-icon>save</mat-icon>
+                  <span>Save & Verify</span>
+                }
+              </ng-container>
+            </button>
+          </div>
+        </form>
+      </div>
+    }
+  } @else {
+    <!-- Verified State -->
+    <div class="verified-state">
+      <div class="verified-icon-container">
+        <mat-icon class="verified-icon">check_circle</mat-icon>
+      </div>
+      <h4>Suitability Verified</h4>
+      <p>Client suitability profile has been reviewed and verified.</p>
+      @if (client?.suitability?.lastUpdated) {
+        <p class="verified-timestamp">
+          Verified: {{ client.suitability!.lastUpdated | date: 'MMM dd, yyyy h:mm a' }}
+        </p>
+      }
+      <div class="verified-summary">
+        <mat-chip>{{ formData.riskTolerance }}</mat-chip>
+        <mat-chip>{{ formData.primaryObjective }}</mat-chip>
+        <mat-chip>{{ formData.lifeStage }}</mat-chip>
+      </div>
+    </div>
+  }
+</mat-card>

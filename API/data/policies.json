@@ -1,0 +1,2163 @@
+[
+  {
+    "policyId": "POL-90001",
+    "clientAccountNumber": "101-123456-001",
+    "policyLabel": "Pacific Life FIA (2019)",
+    "carrier": "Pacific Life",
+    "productType": "FIA",
+    "issueDate": "2019-04-20",
+    "applicationState": "GA",
+    "accountValue": 603714.04,
+    "incomeBase": null,
+    "riderType": "Enhanced Death Benefit",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 10,
+    "surrenderEndDate": "2025-03-15",
+    "currentCapRate": 2.2,
+    "renewalDays": 60,
+    "renewalCapRate": 1.7,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90001-REP",
+        "type": "REPLACEMENT",
+        "severity": "HIGH",
+        "title": "Replacement Opportunity",
+        "reasonShort": "Material performance gap vs. market alternatives",
+        "reasons": [
+          "Current policy cap rate (2.2%) significantly below market",
+          "Better alternatives available with superior features",
+          "Surrender schedule considerations favorable for replacement"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 77,
+          "confidence": 0.87,
+          "scoring_breakdown": {
+            "performance_gap": 30.6,
+            "suitability_improvement": 24.5,
+            "cost_savings": 16.8,
+            "feature_upgrade": 5.5
+          },
+          "key_factors": [
+            "Cap rate gap: current 3.4% vs. available 6.0% (76% improvement)",
+            "Income rider opportunity: 7% rollup available",
+            "Surrender period ending in 8 months"
+          ],
+          "data_points_analyzed": 23,
+          "generated_at": "2026-02-16T21:52:54.595524",
+          "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90001-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "LOW",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 35,
+          "confidence": 0.72,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Moderate",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Growth",
+              "drift_score": 5,
+              "severity": "MEDIUM",
+              "mismatch": null
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Moderate",
+            "Objective changed from Growth to Growth",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.595524",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90002",
+    "clientAccountNumber": "101-123456-001",
+    "policyLabel": "Lincoln FIA (2016)",
+    "carrier": "Lincoln",
+    "productType": "FIA",
+    "issueDate": "2016-11-11",
+    "applicationState": "GA",
+    "accountValue": 472350.93,
+    "incomeBase": null,
+    "riderType": "None",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 10,
+    "surrenderEndDate": "2024-09-10",
+    "currentCapRate": 3.9,
+    "renewalDays": 15,
+    "renewalCapRate": 3.4,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90002-REP",
+        "type": "REPLACEMENT",
+        "severity": "HIGH",
+        "title": "Replacement Opportunity",
+        "reasonShort": "Material performance gap vs. market alternatives",
+        "reasons": [
+          "Current policy cap rate (3.9%) significantly below market",
+          "Better alternatives available with superior features",
+          "Surrender schedule considerations favorable for replacement"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 77,
+          "confidence": 0.87,
+          "scoring_breakdown": {
+            "performance_gap": 30.6,
+            "suitability_improvement": 24.5,
+            "cost_savings": 16.8,
+            "feature_upgrade": 5.5
+          },
+          "key_factors": [
+            "Cap rate gap: current 3.4% vs. available 6.0% (76% improvement)",
+            "Income rider opportunity: 7% rollup available",
+            "Surrender period ending in 8 months"
+          ],
+          "data_points_analyzed": 23,
+          "generated_at": "2026-02-16T21:52:54.596024",
+          "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90002-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "LOW",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 35,
+          "confidence": 0.72,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Moderate",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Growth",
+              "drift_score": 5,
+              "severity": "MEDIUM",
+              "mismatch": null
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Moderate",
+            "Objective changed from Growth to Growth",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.596024",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90003",
+    "clientAccountNumber": "102-234567-002",
+    "policyLabel": "Allianz Fixed (2018)",
+    "carrier": "Allianz",
+    "productType": "Fixed",
+    "issueDate": "2018-06-21",
+    "applicationState": "NC",
+    "accountValue": 582031.87,
+    "incomeBase": 289833.56,
+    "riderType": "Income Rider",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 7,
+    "surrenderEndDate": "2024-10-22",
+    "currentCapRate": 4.6,
+    "renewalDays": null,
+    "renewalCapRate": null,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.79
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90003-INC",
+        "type": "INCOME_ACTIVATION",
+        "severity": "LOW",
+        "title": "Income Activation Timing Review",
+        "reasonShort": "Client approaching optimal income activation window",
+        "reasons": [
+          "Income rider available but not activated",
+          "Client age and income needs suggest review timing",
+          "Deferral vs. activation tradeoffs warrant discussion"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 48,
+          "confidence": 0.75,
+          "optimal_activation_window": {
+            "start_date": "2026-06-01",
+            "end_date": "2026-12-31",
+            "reason": "Maximizes 7% rollup while meeting stated income need"
+          },
+          "scenarios": [
+            {
+              "action": "Activate Now",
+              "income_base": "$142,000",
+              "annual_income": "$7,100 (5.0% payout at age 62)"
+            },
+            {
+              "action": "Delay 2 Years",
+              "income_base": "$162,575 (after rollup)",
+              "annual_income": "$8,941 (5.5% payout at age 64)",
+              "tradeoff": "Give up $14,200 in income to gain $1,841/year ongoing"
+            }
+          ],
+          "key_factors": [
+            "Client approaching income rider eligibility",
+            "7.000000000000001% annual rollup creates significant deferral value",
+            "Payout rate increases from 5.0% to 5.5% at age 64"
+          ],
+          "data_points_analyzed": 18,
+          "generated_at": "2026-02-16T21:52:54.596524",
+          "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90003-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "MEDIUM",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 52,
+          "confidence": 0.88,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Moderate",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Income",
+              "drift_score": 21.6,
+              "severity": "HIGH",
+              "mismatch": "Policy lacks income rider feature"
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [
+            "Objective shifted to Income but policy has no income rider",
+            "Time horizon shortened but 7 years surrender period remaining"
+          ],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Moderate",
+            "Objective changed from Growth to Income",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.596524",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90004",
+    "clientAccountNumber": "102-234567-002",
+    "policyLabel": "Athene Fixed (2018)",
+    "carrier": "Athene",
+    "productType": "Fixed",
+    "issueDate": "2018-04-13",
+    "applicationState": "NC",
+    "accountValue": 594099.64,
+    "incomeBase": null,
+    "riderType": "None",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 5,
+    "surrenderEndDate": "2026-02-01",
+    "currentCapRate": 5.7,
+    "renewalDays": 15,
+    "renewalCapRate": 5.2,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90004-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "MEDIUM",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 52,
+          "confidence": 0.88,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Moderate",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Income",
+              "drift_score": 21.6,
+              "severity": "HIGH",
+              "mismatch": "Policy lacks income rider feature"
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [
+            "Objective shifted to Income but policy has no income rider",
+            "Time horizon shortened but 7 years surrender period remaining"
+          ],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Moderate",
+            "Objective changed from Growth to Income",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.596524",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90005",
+    "clientAccountNumber": "103-345678-003",
+    "policyLabel": "Lincoln Fixed (2018)",
+    "carrier": "Lincoln",
+    "productType": "Fixed",
+    "issueDate": "2018-04-30",
+    "applicationState": "FL",
+    "accountValue": 561327.8,
+    "incomeBase": null,
+    "riderType": "None",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 7,
+    "surrenderEndDate": "2026-08-11",
+    "currentCapRate": 2.3,
+    "renewalDays": 15,
+    "renewalCapRate": 1.0,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90005-REP",
+        "type": "REPLACEMENT",
+        "severity": "HIGH",
+        "title": "Replacement Opportunity",
+        "reasonShort": "Material performance gap vs. market alternatives",
+        "reasons": [
+          "Current policy cap rate (2.3%) significantly below market",
+          "Better alternatives available with superior features",
+          "Surrender schedule considerations favorable for replacement"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 77,
+          "confidence": 0.87,
+          "scoring_breakdown": {
+            "performance_gap": 30.6,
+            "suitability_improvement": 24.5,
+            "cost_savings": 16.8,
+            "feature_upgrade": 5.5
+          },
+          "key_factors": [
+            "Cap rate gap: current 3.4% vs. available 6.0% (76% improvement)",
+            "Income rider opportunity: 7% rollup available",
+            "Surrender period ending in 8 months"
+          ],
+          "data_points_analyzed": 23,
+          "generated_at": "2026-02-16T21:52:54.597024",
+          "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90005-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "MEDIUM",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 52,
+          "confidence": 0.88,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Low",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Income",
+              "drift_score": 21.6,
+              "severity": "HIGH",
+              "mismatch": "Policy lacks income rider feature"
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [
+            "Objective shifted to Income but policy has no income rider",
+            "Time horizon shortened but 7 years surrender period remaining"
+          ],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Low",
+            "Objective changed from Growth to Income",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.597024",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90006",
+    "clientAccountNumber": "104-456789-004",
+    "policyLabel": "Athene VA (2014)",
+    "carrier": "Athene",
+    "productType": "VA",
+    "issueDate": "2014-10-14",
+    "applicationState": "NJ",
+    "accountValue": 767258.59,
+    "incomeBase": null,
+    "riderType": "None",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 5,
+    "surrenderEndDate": "2027-03-22",
+    "currentCapRate": null,
+    "renewalDays": 15,
+    "renewalCapRate": null,
+    "fees": {
+      "m_e_fee": 1.04,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90006-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "LOW",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 35,
+          "confidence": 0.72,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "High",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Growth",
+              "drift_score": 5,
+              "severity": "MEDIUM",
+              "mismatch": null
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to High",
+            "Objective changed from Growth to Growth",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.597524",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90007",
+    "clientAccountNumber": "104-456789-004",
+    "policyLabel": "Nationwide VA (2020)",
+    "carrier": "Nationwide",
+    "productType": "VA",
+    "issueDate": "2020-03-06",
+    "applicationState": "NJ",
+    "accountValue": 625435.99,
+    "incomeBase": null,
+    "riderType": "Enhanced Death Benefit",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 5,
+    "surrenderEndDate": "2024-08-29",
+    "currentCapRate": null,
+    "renewalDays": 45,
+    "renewalCapRate": null,
+    "fees": {
+      "m_e_fee": 1.21,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90007-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "LOW",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 35,
+          "confidence": 0.72,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "High",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Growth",
+              "drift_score": 5,
+              "severity": "MEDIUM",
+              "mismatch": null
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to High",
+            "Objective changed from Growth to Growth",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.597524",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90008",
+    "clientAccountNumber": "104-456789-004",
+    "policyLabel": "Nationwide FIA (2013)",
+    "carrier": "Nationwide",
+    "productType": "FIA",
+    "issueDate": "2013-09-14",
+    "applicationState": "NJ",
+    "accountValue": 184425.0,
+    "incomeBase": null,
+    "riderType": "None",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 10,
+    "surrenderEndDate": "2027-03-19",
+    "currentCapRate": 6.2,
+    "renewalDays": 45,
+    "renewalCapRate": 5.7,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90008-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "LOW",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 35,
+          "confidence": 0.72,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "High",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Growth",
+              "drift_score": 5,
+              "severity": "MEDIUM",
+              "mismatch": null
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to High",
+            "Objective changed from Growth to Growth",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.598025",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90009",
+    "clientAccountNumber": "105-567890-005",
+    "policyLabel": "Nationwide VA (2018)",
+    "carrier": "Nationwide",
+    "productType": "VA",
+    "issueDate": "2018-08-31",
+    "applicationState": "TX",
+    "accountValue": 781420.34,
+    "incomeBase": null,
+    "riderType": "None",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 5,
+    "surrenderEndDate": "2028-09-16",
+    "currentCapRate": null,
+    "renewalDays": 45,
+    "renewalCapRate": null,
+    "fees": {
+      "m_e_fee": 0.87,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90009-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "MEDIUM",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 52,
+          "confidence": 0.88,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Moderate",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Income",
+              "drift_score": 21.6,
+              "severity": "HIGH",
+              "mismatch": "Policy lacks income rider feature"
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [
+            "Objective shifted to Income but policy has no income rider",
+            "Time horizon shortened but 7 years surrender period remaining"
+          ],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Moderate",
+            "Objective changed from Growth to Income",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.598025",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90010",
+    "clientAccountNumber": "105-567890-005",
+    "policyLabel": "AIG VA (2019)",
+    "carrier": "AIG",
+    "productType": "VA",
+    "issueDate": "2019-10-26",
+    "applicationState": "TX",
+    "accountValue": 726862.25,
+    "incomeBase": 475087.75,
+    "riderType": "Income Rider",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 10,
+    "surrenderEndDate": "2027-10-27",
+    "currentCapRate": null,
+    "renewalDays": 90,
+    "renewalCapRate": null,
+    "fees": {
+      "m_e_fee": 1.46,
+      "riderFee": 0.56
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90010-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "MEDIUM",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 52,
+          "confidence": 0.88,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Moderate",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Income",
+              "drift_score": 21.6,
+              "severity": "HIGH",
+              "mismatch": "Policy lacks income rider feature"
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [
+            "Objective shifted to Income but policy has no income rider",
+            "Time horizon shortened but 7 years surrender period remaining"
+          ],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Moderate",
+            "Objective changed from Growth to Income",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.598025",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90011",
+    "clientAccountNumber": "106-678901-006",
+    "policyLabel": "Nationwide Fixed (2012)",
+    "carrier": "Nationwide",
+    "productType": "Fixed",
+    "issueDate": "2012-04-02",
+    "applicationState": "CA",
+    "accountValue": 217189.51,
+    "incomeBase": null,
+    "riderType": "None",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 5,
+    "surrenderEndDate": "2025-03-22",
+    "currentCapRate": 6.2,
+    "renewalDays": 30,
+    "renewalCapRate": 5.2,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90011-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "LOW",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 45,
+          "confidence": 0.72,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Low",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Preservation",
+              "drift_score": 15,
+              "severity": "MEDIUM",
+              "mismatch": null
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Low",
+            "Objective changed from Growth to Preservation",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.598524",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90012",
+    "clientAccountNumber": "106-678901-006",
+    "policyLabel": "Jackson VA (2020)",
+    "carrier": "Jackson",
+    "productType": "VA",
+    "issueDate": "2020-04-12",
+    "applicationState": "CA",
+    "accountValue": 444488.25,
+    "incomeBase": null,
+    "riderType": "Enhanced Death Benefit",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 7,
+    "surrenderEndDate": "2024-06-14",
+    "currentCapRate": null,
+    "renewalDays": 15,
+    "renewalCapRate": null,
+    "fees": {
+      "m_e_fee": 0.93,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90012-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "LOW",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 45,
+          "confidence": 0.72,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Low",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Preservation",
+              "drift_score": 15,
+              "severity": "MEDIUM",
+              "mismatch": null
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Low",
+            "Objective changed from Growth to Preservation",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.598524",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90013",
+    "clientAccountNumber": "106-678901-006",
+    "policyLabel": "Athene VA (2021)",
+    "carrier": "Athene",
+    "productType": "VA",
+    "issueDate": "2021-11-27",
+    "applicationState": "CA",
+    "accountValue": 837107.11,
+    "incomeBase": null,
+    "riderType": "Enhanced Death Benefit",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 7,
+    "surrenderEndDate": "2027-12-17",
+    "currentCapRate": null,
+    "renewalDays": 15,
+    "renewalCapRate": null,
+    "fees": {
+      "m_e_fee": 1.13,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": []
+  },
+  {
+    "policyId": "POL-90014",
+    "clientAccountNumber": "107-789012-007",
+    "policyLabel": "Pacific Life Fixed (2014)",
+    "carrier": "Pacific Life",
+    "productType": "Fixed",
+    "issueDate": "2014-08-03",
+    "applicationState": "WA",
+    "accountValue": 313668.95,
+    "incomeBase": 659210.87,
+    "riderType": "Income Rider",
+    "incomeActivated": true,
+    "surrenderScheduleYears": 10,
+    "surrenderEndDate": "2025-01-08",
+    "currentCapRate": 2.7,
+    "renewalDays": 15,
+    "renewalCapRate": 1.7,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.54
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90014-REP",
+        "type": "REPLACEMENT",
+        "severity": "HIGH",
+        "title": "Replacement Opportunity",
+        "reasonShort": "Material performance gap vs. market alternatives",
+        "reasons": [
+          "Current policy cap rate (2.7%) significantly below market",
+          "Better alternatives available with superior features",
+          "Surrender schedule considerations favorable for replacement"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 77,
+          "confidence": 0.87,
+          "scoring_breakdown": {
+            "performance_gap": 30.6,
+            "suitability_improvement": 24.5,
+            "cost_savings": 16.8,
+            "feature_upgrade": 5.5
+          },
+          "key_factors": [
+            "Cap rate gap: current 3.4% vs. available 6.0% (76% improvement)",
+            "Income rider opportunity: 7% rollup available",
+            "Surrender period ending in 8 months"
+          ],
+          "data_points_analyzed": 23,
+          "generated_at": "2026-02-16T21:52:54.599024",
+          "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90014-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "LOW",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 35,
+          "confidence": 0.72,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "High",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Growth",
+              "drift_score": 5,
+              "severity": "MEDIUM",
+              "mismatch": null
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to High",
+            "Objective changed from Growth to Growth",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.599024",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90015",
+    "clientAccountNumber": "107-789012-007",
+    "policyLabel": "Jackson FIA (2016)",
+    "carrier": "Jackson",
+    "productType": "FIA",
+    "issueDate": "2016-09-12",
+    "applicationState": "WA",
+    "accountValue": 833137.62,
+    "incomeBase": 1147735.15,
+    "riderType": "Income Rider",
+    "incomeActivated": true,
+    "surrenderScheduleYears": 10,
+    "surrenderEndDate": "2027-10-16",
+    "currentCapRate": 4.4,
+    "renewalDays": 60,
+    "renewalCapRate": 2.4,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.97
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90015-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "LOW",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 35,
+          "confidence": 0.72,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "High",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Growth",
+              "drift_score": 5,
+              "severity": "MEDIUM",
+              "mismatch": null
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to High",
+            "Objective changed from Growth to Growth",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.599024",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90016",
+    "clientAccountNumber": "108-890123-008",
+    "policyLabel": "Pacific Life Fixed (2016)",
+    "carrier": "Pacific Life",
+    "productType": "Fixed",
+    "issueDate": "2016-06-18",
+    "applicationState": "MA",
+    "accountValue": 646460.34,
+    "incomeBase": null,
+    "riderType": "Enhanced Death Benefit",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 5,
+    "surrenderEndDate": "2025-01-25",
+    "currentCapRate": 3.8,
+    "renewalDays": null,
+    "renewalCapRate": null,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90016-REP",
+        "type": "REPLACEMENT",
+        "severity": "HIGH",
+        "title": "Replacement Opportunity",
+        "reasonShort": "Material performance gap vs. market alternatives",
+        "reasons": [
+          "Current policy cap rate (3.8%) significantly below market",
+          "Better alternatives available with superior features",
+          "Surrender schedule considerations favorable for replacement"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 77,
+          "confidence": 0.87,
+          "scoring_breakdown": {
+            "performance_gap": 30.6,
+            "suitability_improvement": 24.5,
+            "cost_savings": 16.8,
+            "feature_upgrade": 5.5
+          },
+          "key_factors": [
+            "Cap rate gap: current 3.4% vs. available 6.0% (76% improvement)",
+            "Income rider opportunity: 7% rollup available",
+            "Surrender period ending in 8 months"
+          ],
+          "data_points_analyzed": 23,
+          "generated_at": "2026-02-16T21:52:54.599524",
+          "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90016-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "MEDIUM",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 52,
+          "confidence": 0.88,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Moderate",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Income",
+              "drift_score": 21.6,
+              "severity": "HIGH",
+              "mismatch": "Policy lacks income rider feature"
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [
+            "Objective shifted to Income but policy has no income rider",
+            "Time horizon shortened but 7 years surrender period remaining"
+          ],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Moderate",
+            "Objective changed from Growth to Income",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.599524",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90017",
+    "clientAccountNumber": "108-890123-008",
+    "policyLabel": "Prudential FIA (2016)",
+    "carrier": "Prudential",
+    "productType": "FIA",
+    "issueDate": "2016-12-09",
+    "applicationState": "MA",
+    "accountValue": 590430.39,
+    "incomeBase": 713449.62,
+    "riderType": "Income Rider",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 7,
+    "surrenderEndDate": "2027-06-10",
+    "currentCapRate": 2.7,
+    "renewalDays": 30,
+    "renewalCapRate": 2.2,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.32
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90017-REP",
+        "type": "REPLACEMENT",
+        "severity": "HIGH",
+        "title": "Replacement Opportunity",
+        "reasonShort": "Material performance gap vs. market alternatives",
+        "reasons": [
+          "Current policy cap rate (2.7%) significantly below market",
+          "Better alternatives available with superior features",
+          "Surrender schedule considerations favorable for replacement"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 77,
+          "confidence": 0.87,
+          "scoring_breakdown": {
+            "performance_gap": 30.6,
+            "suitability_improvement": 24.5,
+            "cost_savings": 16.8,
+            "feature_upgrade": 5.5
+          },
+          "key_factors": [
+            "Cap rate gap: current 3.4% vs. available 6.0% (76% improvement)",
+            "Income rider opportunity: 7% rollup available",
+            "Surrender period ending in 8 months"
+          ],
+          "data_points_analyzed": 23,
+          "generated_at": "2026-02-16T21:52:54.599524",
+          "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90017-INC",
+        "type": "INCOME_ACTIVATION",
+        "severity": "LOW",
+        "title": "Income Activation Timing Review",
+        "reasonShort": "Client approaching optimal income activation window",
+        "reasons": [
+          "Income rider available but not activated",
+          "Client age and income needs suggest review timing",
+          "Deferral vs. activation tradeoffs warrant discussion"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 48,
+          "confidence": 0.75,
+          "optimal_activation_window": {
+            "start_date": "2026-06-01",
+            "end_date": "2026-12-31",
+            "reason": "Maximizes 7% rollup while meeting stated income need"
+          },
+          "scenarios": [
+            {
+              "action": "Activate Now",
+              "income_base": "$142,000",
+              "annual_income": "$7,100 (5.0% payout at age 64)"
+            },
+            {
+              "action": "Delay 2 Years",
+              "income_base": "$162,575 (after rollup)",
+              "annual_income": "$8,941 (5.5% payout at age 66)",
+              "tradeoff": "Give up $14,200 in income to gain $1,841/year ongoing"
+            }
+          ],
+          "key_factors": [
+            "Client approaching income rider eligibility",
+            "7.000000000000001% annual rollup creates significant deferral value",
+            "Payout rate increases from 5.0% to 5.5% at age 66"
+          ],
+          "data_points_analyzed": 18,
+          "generated_at": "2026-02-16T21:52:54.599524",
+          "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90017-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "MEDIUM",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 52,
+          "confidence": 0.88,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Moderate",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Income",
+              "drift_score": 21.6,
+              "severity": "HIGH",
+              "mismatch": "Policy lacks income rider feature"
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [
+            "Objective shifted to Income but policy has no income rider",
+            "Time horizon shortened but 7 years surrender period remaining"
+          ],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Moderate",
+            "Objective changed from Growth to Income",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.599524",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90018",
+    "clientAccountNumber": "108-890123-008",
+    "policyLabel": "Pacific Life FIA (2013)",
+    "carrier": "Pacific Life",
+    "productType": "FIA",
+    "issueDate": "2013-08-31",
+    "applicationState": "MA",
+    "accountValue": 221959.05,
+    "incomeBase": null,
+    "riderType": "Enhanced Death Benefit",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 7,
+    "surrenderEndDate": "2026-08-12",
+    "currentCapRate": 4.9,
+    "renewalDays": 30,
+    "renewalCapRate": 2.9,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90018-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "MEDIUM",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 52,
+          "confidence": 0.88,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Moderate",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Income",
+              "drift_score": 21.6,
+              "severity": "HIGH",
+              "mismatch": "Policy lacks income rider feature"
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [
+            "Objective shifted to Income but policy has no income rider",
+            "Time horizon shortened but 7 years surrender period remaining"
+          ],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Moderate",
+            "Objective changed from Growth to Income",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.600024",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90019",
+    "clientAccountNumber": "109-901234-009",
+    "policyLabel": "Athene VA (2012)",
+    "carrier": "Athene",
+    "productType": "VA",
+    "issueDate": "2012-12-17",
+    "applicationState": "IL",
+    "accountValue": 404387.75,
+    "incomeBase": 427994.74,
+    "riderType": "Income Rider",
+    "incomeActivated": true,
+    "surrenderScheduleYears": 10,
+    "surrenderEndDate": "2024-11-26",
+    "currentCapRate": null,
+    "renewalDays": 15,
+    "renewalCapRate": null,
+    "fees": {
+      "m_e_fee": 1.21,
+      "riderFee": 0.48
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90019-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "LOW",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 35,
+          "confidence": 0.72,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Moderate",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Growth",
+              "drift_score": 5,
+              "severity": "MEDIUM",
+              "mismatch": null
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Moderate",
+            "Objective changed from Growth to Growth",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.600024",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90020",
+    "clientAccountNumber": "109-901234-009",
+    "policyLabel": "Nationwide Fixed (2013)",
+    "carrier": "Nationwide",
+    "productType": "Fixed",
+    "issueDate": "2013-08-23",
+    "applicationState": "IL",
+    "accountValue": 367414.44,
+    "incomeBase": null,
+    "riderType": "None",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 10,
+    "surrenderEndDate": "2028-11-03",
+    "currentCapRate": 5.1,
+    "renewalDays": null,
+    "renewalCapRate": null,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90020-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "LOW",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 35,
+          "confidence": 0.72,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Moderate",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Growth",
+              "drift_score": 5,
+              "severity": "MEDIUM",
+              "mismatch": null
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Moderate",
+            "Objective changed from Growth to Growth",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.600524",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90021",
+    "clientAccountNumber": "109-901234-009",
+    "policyLabel": "Athene FIA (2017)",
+    "carrier": "Athene",
+    "productType": "FIA",
+    "issueDate": "2017-10-24",
+    "applicationState": "IL",
+    "accountValue": 569500.71,
+    "incomeBase": 677831.87,
+    "riderType": "Income Rider",
+    "incomeActivated": true,
+    "surrenderScheduleYears": 10,
+    "surrenderEndDate": "2025-04-01",
+    "currentCapRate": 3.7,
+    "renewalDays": 15,
+    "renewalCapRate": 1.7,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.85
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90021-REP",
+        "type": "REPLACEMENT",
+        "severity": "HIGH",
+        "title": "Replacement Opportunity",
+        "reasonShort": "Material performance gap vs. market alternatives",
+        "reasons": [
+          "Current policy cap rate (3.7%) significantly below market",
+          "Better alternatives available with superior features",
+          "Surrender schedule considerations favorable for replacement"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 77,
+          "confidence": 0.87,
+          "scoring_breakdown": {
+            "performance_gap": 30.6,
+            "suitability_improvement": 24.5,
+            "cost_savings": 16.8,
+            "feature_upgrade": 5.5
+          },
+          "key_factors": [
+            "Cap rate gap: current 3.4% vs. available 6.0% (76% improvement)",
+            "Income rider opportunity: 7% rollup available",
+            "Surrender period ending in 8 months"
+          ],
+          "data_points_analyzed": 23,
+          "generated_at": "2026-02-16T21:52:54.600524",
+          "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90021-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "LOW",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 35,
+          "confidence": 0.72,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Moderate",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Growth",
+              "drift_score": 5,
+              "severity": "MEDIUM",
+              "mismatch": null
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Moderate",
+            "Objective changed from Growth to Growth",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.600524",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90022",
+    "clientAccountNumber": "110-012345-010",
+    "policyLabel": "Pacific Life FIA (2020)",
+    "carrier": "Pacific Life",
+    "productType": "FIA",
+    "issueDate": "2020-04-18",
+    "applicationState": "AZ",
+    "accountValue": 726733.31,
+    "incomeBase": null,
+    "riderType": "Enhanced Death Benefit",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 5,
+    "surrenderEndDate": "2028-06-06",
+    "currentCapRate": 5.6,
+    "renewalDays": 15,
+    "renewalCapRate": 2.6,
+    "fees": {
+      "m_e_fee": 0.0,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90022-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "MEDIUM",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 52,
+          "confidence": 0.88,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Low",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Income",
+              "drift_score": 21.6,
+              "severity": "HIGH",
+              "mismatch": "Policy lacks income rider feature"
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [
+            "Objective shifted to Income but policy has no income rider",
+            "Time horizon shortened but 7 years surrender period remaining"
+          ],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Low",
+            "Objective changed from Growth to Income",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.601023",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  },
+  {
+    "policyId": "POL-90023",
+    "clientAccountNumber": "110-012345-010",
+    "policyLabel": "AIG VA (2014)",
+    "carrier": "AIG",
+    "productType": "VA",
+    "issueDate": "2014-11-27",
+    "applicationState": "AZ",
+    "accountValue": 622265.4,
+    "incomeBase": null,
+    "riderType": "None",
+    "incomeActivated": false,
+    "surrenderScheduleYears": 7,
+    "surrenderEndDate": "2026-07-04",
+    "currentCapRate": null,
+    "renewalDays": 15,
+    "renewalCapRate": null,
+    "fees": {
+      "m_e_fee": 1.45,
+      "riderFee": 0.0
+    },
+    "notes": "Illustrative policy data for hackathon PoC.",
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90023-SUIT",
+        "type": "SUITABILITY_DRIFT",
+        "severity": "MEDIUM",
+        "title": "Suitability Review Recommended",
+        "reasonShort": "Life stage and objectives may have shifted",
+        "reasons": [
+          "Policy age suggests periodic suitability review",
+          "Client profile changes may warrant product reassessment",
+          "Compliance best practice: verify current suitability"
+        ],
+        "createdAt": "2026-02-16",
+        "ai_analysis": {
+          "ai_score": 52,
+          "confidence": 0.88,
+          "drift_analysis": {
+            "risk_tolerance": {
+              "original": "Conservative",
+              "current": "Low",
+              "drift_score": 12.6,
+              "severity": "MEDIUM"
+            },
+            "primary_objective": {
+              "original": "Growth",
+              "current": "Income",
+              "drift_score": 21.6,
+              "severity": "HIGH",
+              "mismatch": "Policy lacks income rider feature"
+            },
+            "financial_situation": {
+              "net_worth_change": "+42%",
+              "income_change": "+18%",
+              "drift_score": 6.0
+            },
+            "time_horizon": {
+              "original": "15+ years",
+              "current": "7-10 years",
+              "drift_score": 12.0
+            }
+          },
+          "critical_mismatches": [
+            "Objective shifted to Income but policy has no income rider",
+            "Time horizon shortened but 7 years surrender period remaining"
+          ],
+          "review_rationale": [
+            "Client profile has materially changed since policy issue",
+            "Current needs may not align with product features",
+            "Suitability verification recommended per compliance"
+          ],
+          "key_factors": [
+            "Risk tolerance shifted from Conservative to Low",
+            "Objective changed from Growth to Income",
+            "Net worth increased 42%, income up 18%"
+          ],
+          "data_points_analyzed": 19,
+          "last_profile_update": "2026-01-15T10:30:00Z",
+          "generated_at": "2026-02-16T21:52:54.601023",
+          "algorithm_version": "1.0.0"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,173 @@
+<mat-card class="income-activation-module-card">
+  <div class="module-header">
+    <div class="module-title">
+      <mat-icon class="severity-icon medium">payments</mat-icon>
+      <div>
+        <h3>{{ alert.title }}</h3>
+        <p class="alert-reason">{{ alert.reasonShort }}</p>
+      </div>
+    </div>
+    <button mat-icon-button class="ai-assist-btn" (click)="onAskAI()" matTooltip="Ask AI about this alert">
+      <mat-icon>psychology</mat-icon>
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="module-content">
+    <!-- Why Flagged -->
+    <section class="why-flagged-section">
+      <h4 class="section-title">
+        <mat-icon>info</mat-icon>
+        Why This Is Flagged
+      </h4>
+      <div class="reasons-list">
+        @for (reason of alert.reasons; track reason) {
+          <div class="reason-item">
+            <mat-icon class="reason-icon">chevron_right</mat-icon>
+            <span>{{ reason }}</span>
+          </div>
+        }
+      </div>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <!-- Income Timing Scenarios -->
+    <section class="scenarios-section">
+      <h4 class="section-title">
+        <mat-icon>compare</mat-icon>
+        Income Timing Analysis
+      </h4>
+
+      <div class="scenarios-grid">
+        @for (scenario of scenarios; track scenario.option) {
+          <mat-card class="scenario-card" [class.recommended]="scenario.option === 'Delay Income (2 Years)'">
+            @if (scenario.option === 'Delay Income (2 Years)') {
+              <div class="recommended-badge">
+                <mat-icon>star</mat-icon>
+                Higher Lifetime Value
+              </div>
+            }
+            
+            <div class="scenario-header">
+              <h5>{{ scenario.option }}</h5>
+              <p class="scenario-description">{{ scenario.description }}</p>
+            </div>
+
+            <div class="income-amounts">
+              <div class="amount-item primary">
+                <span class="amount-label">Monthly Income</span>
+                <span class="amount-value">{{ formatCurrency(scenario.monthlyIncome) }}</span>
+              </div>
+              <div class="amount-item">
+                <span class="amount-label">Annual Income</span>
+                <span class="amount-value">{{ formatCurrency(scenario.annualIncome) }}</span>
+              </div>
+              <div class="amount-item">
+                <span class="amount-label">25-Year Projection</span>
+                <span class="amount-value">{{ formatCurrency(scenario.lifetimeProjection) }}</span>
+              </div>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <div class="trade-offs">
+              <div class="pros">
+                <h6 class="trade-off-title">
+                  <mat-icon>check_circle</mat-icon>
+                  Advantages
+                </h6>
+                <ul>
+                  @for (pro of scenario.pros; track pro) {
+                    <li>{{ pro }}</li>
+                  }
+                </ul>
+              </div>
+
+              <div class="cons">
+                <h6 class="trade-off-title">
+                  <mat-icon>warning</mat-icon>
+                  Considerations
+                </h6>
+                <ul>
+                  @for (con of scenario.cons; track con) {
+                    <li>{{ con }}</li>
+                  }
+                </ul>
+              </div>
+            </div>
+          </mat-card>
+        }
+      </div>
+
+      <!-- Comparison Summary -->
+      <div class="comparison-summary">
+        <mat-icon class="summary-icon">insights</mat-icon>
+        <div class="summary-content">
+          <strong>Key Insight:</strong>
+          <p>
+            Delaying income activation by 2 years would result in $211/month more income (25% increase) 
+            and an additional $63,300 over a 25-year period. This assumes the client can defer  income needs for 2 years.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <!-- Client Considerations -->
+    <section class="considerations-section">
+      <h4 class="section-title">
+        <mat-icon>psychology</mat-icon>
+        Key Client Considerations
+      </h4>
+      <div class="considerations-list">
+        <div class="consideration-item">
+          <mat-icon class="consideration-icon">attach_money</mat-icon>
+          <div>
+            <strong>Current Income Need:</strong>
+            <p>Does the client need income immediately or can they wait for higher payouts?</p>
+          </div>
+        </div>
+        <div class="consideration-item">
+          <mat-icon class="consideration-icon">savings</mat-icon>
+          <div>
+            <strong>Other Income Sources:</strong>
+            <p>Are there other retirement income sources available during the deferral period?</p>
+          </div>
+        </div>
+        <div class="consideration-item">
+          <mat-icon class="consideration-icon">favorite</mat-icon>
+          <div>
+            <strong>Health & Longevity:</strong>
+            <p>Client's health status and expected longevity impact optimal activation timing.</p>
+          </div>
+        </div>
+        <div class="consideration-item">
+          <mat-icon class="consideration-icon">timeline</mat-icon>
+          <div>
+            <strong>Investment Horizon:</strong>
+            <p>Longer deferral periods typically result in higher lifetime income.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Actions -->
+    <div class="module-actions">
+      <button mat-button (click)="onAskAI()">
+        <mat-icon>psychology</mat-icon>
+        Explain Timing Trade-offs
+      </button>
+      <button mat-button (click)="onMarkReviewed()">
+        <mat-icon>check</mat-icon>
+        Mark Reviewed
+      </button>
+      <button mat-raised-button color="primary" (click)="onDocumentDecision()">
+        <mat-icon>assignment</mat-icon>
+        Document Timing Decision
+      </button>
+    </div>
+  </div>
+</mat-card>

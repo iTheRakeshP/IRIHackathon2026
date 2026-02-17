@@ -1,0 +1,25 @@
+# Auto detect text files and normalize line endings to LF
+* text=auto
+
+# Explicitly declare text files
+*.md text
+*.json text
+*.py text
+*.ts text
+*.js text
+*.html text
+*.css text
+*.scss text
+*.xml text
+*.yml text
+*.yaml text
+
+# Denote binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.docx binary
+*.xlsx binary

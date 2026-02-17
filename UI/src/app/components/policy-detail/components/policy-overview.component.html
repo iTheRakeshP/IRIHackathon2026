@@ -1,0 +1,171 @@
+<mat-card class="policy-overview-card">
+  <div class="overview-grid">
+    <!-- Basic Information -->
+    <div class="overview-section">
+      <h4 class="section-header">
+        <mat-icon>info</mat-icon>
+        Basic Information
+      </h4>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">Issue Date</span>
+          <span class="value">{{ formatDate(policy.issueDate) }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Policy Type</span>
+          <span class="value">{{ policy.productType || 'N/A' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Carrier</span>
+          <span class="value">{{ policy.carrier || 'N/A' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Product Name</span>
+          <span class="value">{{ policy.productName || 'N/A' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Account Values -->
+    <div class="overview-section">
+      <h4 class="section-header">
+        <mat-icon>account_balance_wallet</mat-icon>
+        Account Values
+      </h4>
+      <div class="info-grid">
+        <div class="info-item highlight">
+          <span class="label">Contract Value</span>
+          <span class="value large">{{ formatCurrency(policy.contractValue) }}</span>
+        </div>
+        <div class="info-item highlight">
+          <span class="label">Account Value</span>
+          <span class="value large">{{ formatCurrency(policy.accountValue) }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Cash Surrender Value</span>
+          <span class="value">{{ formatCurrency(policy.cashSurrenderValue) }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Death Benefit</span>
+          <span class="value">{{ formatCurrency(policy.deathBenefit) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Surrender Schedule -->
+    <div class="overview-section">
+      <h4 class="section-header">
+        <mat-icon>schedule</mat-icon>
+        Surrender Schedule
+      </h4>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">Current Surrender Charge</span>
+          <span class="value">{{ formatPercentage(policy.currentSurrenderCharge) }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Surrender End Date</span>
+          <span class="value">{{ formatDate(policy.surrenderEndDate) }}</span>
+        </div>
+        <div class="info-item full-width">
+          <span class="label">Status</span>
+          <span class="value status-badge" [class.ending-soon]="getSurrenderStatus().includes('days')">
+            {{ getSurrenderStatus() }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Renewal Terms -->
+    @if (policy.renewalDays !== undefined && policy.renewalDays !== null) {
+      <div class="overview-section">
+        <h4 class="section-header">
+          <mat-icon>autorenew</mat-icon>
+          Renewal Terms
+        </h4>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Days to Renewal</span>
+            <span class="value" [class.urgent]="policy.renewalDays <= 15" [class.warning]="policy.renewalDays > 15 && policy.renewalDays <= 30">
+              {{ policy.renewalDays }} days
+            </span>
+          </div>
+          <div class="info-item">
+            <span class="label">Current Cap Rate</span>
+            <span class="value">{{ formatPercentage(policy.currentCapRate) }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Projected Renewal Rate</span>
+            <span class="value">{{ formatPercentage(policy.projectedRenewalRate) }}</span>
+          </div>
+          @if (policy.currentCapRate && policy.projectedRenewalRate) {
+            <div class="info-item full-width">
+              <span class="label">Rate Change</span>
+              <span class="value" [class.negative]="policy.projectedRenewalRate < policy.currentCapRate">
+                @if (policy.projectedRenewalRate < policy.currentCapRate) {
+                  <mat-icon class="trend-icon down">trending_down</mat-icon>
+                  {{ formatPercentage(policy.currentCapRate - policy.projectedRenewalRate) }} decrease
+                } @else if (policy.projectedRenewalRate > policy.currentCapRate) {
+                  <mat-icon class="trend-icon up">trending_up</mat-icon>
+                  {{ formatPercentage(policy.projectedRenewalRate - policy.currentCapRate) }} increase
+                } @else {
+                  <mat-icon class="trend-icon">trending_flat</mat-icon>
+                  No change
+                }
+              </span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+    }
+
+    <!-- Riders & Features -->
+    <div class="overview-section">
+      <h4 class="section-header">
+        <mat-icon>add_circle</mat-icon>
+        Riders & Features
+      </h4>
+      <div class="riders-container">
+        @for (rider of getRiders(); track rider) {
+          <mat-chip class="rider-chip">{{ rider }}</mat-chip>
+        }
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- Fees & Charges -->
+    <div class="overview-section">
+      <h4 class="section-header">
+        <mat-icon>receipt</mat-icon>
+        Fees & Charges
+      </h4>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="label">Annual Fee</span>
+          <span class="value">{{ formatCurrency(policy.annualFee) }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Rider Fee</span>
+          <span class="value">{{ formatPercentage(policy.riderFee) }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">M&E Fee</span>
+          <span class="value">{{ formatPercentage(policy.meFee) }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label">Admin Fee</span>
+          <span class="value">{{ formatCurrency(policy.adminFee) }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>

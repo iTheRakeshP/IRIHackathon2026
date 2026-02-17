@@ -1,0 +1,197 @@
+<div class="dashboard-container">
+  <!-- Dashboard Header -->
+  <div class="dashboard-header-section">
+    <div class="page-title">
+      <h1>My Dashboard</h1>
+      <p class="subtitle">Key portfolio metrics and alerts at a glance</p>
+    </div>
+    
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon alert-icon">
+          <mat-icon>notifications_active</mat-icon>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Total</div>
+          <div class="stat-value">{{ getTotalAlerts() }} Active Alerts</div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon critical-icon">
+          <mat-icon>priority_high</mat-icon>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Critical</div>
+          <div class="stat-value">{{ getHighPriorityCount() }} High Priority</div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon urgent-icon">
+          <mat-icon>schedule</mat-icon>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Urgent</div>
+          <div class="stat-value">{{ getUrgentRenewalsCount() }} Within 30 Days</div>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-icon aum-icon">
+          <mat-icon>account_balance</mat-icon>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">AUM</div>
+          <div class="stat-value">{{ getTotalAUM() }} Total Value</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter Bar -->
+  <mat-card class="filter-bar">
+    <div class="filter-controls">
+      <button mat-stroked-button class="filter-btn">
+        <mat-icon>business</mat-icon>
+        All Carriers
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      
+      <button mat-stroked-button class="filter-btn">
+        <mat-icon>flag</mat-icon>
+        All Priorities
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      
+      <button mat-stroked-button class="filter-btn">
+        <mat-icon>checklist</mat-icon>
+        All Status
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      
+      <div class="client-summary">
+        {{ groupedPolicies.length }} clients with {{ getTotalAlerts() }} alerts
+      </div>
+      
+      <div class="spacer"></div>
+      
+      <button mat-button class="expand-all-btn" (click)="toggleExpandAll()">
+        <mat-icon>{{ allExpanded ? 'unfold_less' : 'unfold_more' }}</mat-icon>
+        {{ allExpanded ? 'Collapse All' : 'Expand All' }}
+      </button>
+    </div>
+  </mat-card>
+
+  <!-- Policy Table -->
+  <mat-card class="policy-table-card">
+    @if (loading) {
+      <div class="loading-container">
+        <mat-spinner></mat-spinner>
+        <p>Loading policies...</p>
+      </div>
+    } @else {
+      <div class="client-list">
+        @for (group of groupedPolicies; track group.clientAccountNumber) {
+          <div class="client-group" [class.expanded]="isClientExpanded(group.clientAccountNumber)">
+            <!-- Client Header Row -->
+            <div class="client-header-row" (click)="toggleClientExpansion(group.clientAccountNumber)">
+              <div class="client-expand-icon">
+                <mat-icon>{{ isClientExpanded(group.clientAccountNumber) ? 'expand_more' : 'chevron_right' }}</mat-icon>
+              </div>
+              
+              <div class="client-info-section">
+                <div class="client-name-row">
+                  <span class="client-name">{{ group.clientName }}</span>
+                  <span class="alert-count">{{ getTotalAlertsForClient(group) }} {{ getTotalAlertsForClient(group) === 1 ? 'alert' : 'alerts' }}</span>
+                </div>
+                <div class="client-account">{{ formatAccountNumber(group.clientAccountNumber) }}</div>
+              </div>
+              
+              @if (!isClientExpanded(group.clientAccountNumber)) {
+                <div class="client-summary-stats">
+                  <span class="policy-count-summary">{{ group.policies.length }} {{ group.policies.length === 1 ? 'policy' : 'policies' }}</span>
+                  <span class="separator">•</span>
+                  <span class="renewal-summary">{{ getClientRenewalSummary(group) }}</span>
+                </div>
+              }
+              
+              <div class="client-priority">
+                <mat-chip [class]="'priority-chip ' + getClientPriority(group).toLowerCase()">
+                  {{ getClientPriority(group) }}
+                </mat-chip>
+              </div>
+            </div>
+            
+            <!-- Column Headers (only shown when expanded) -->
+            @if (isClientExpanded(group.clientAccountNumber)) {
+              <div class="table-header-row">
+                <div class="header-spacer"></div>
+                <div class="header-policy">POLICY</div>
+                <div class="header-renewal">RENEWAL</div>
+                <div class="header-alerts">ALERTS</div>
+                <div class="header-action">ACTION</div>
+              </div>
+              
+              <!-- Expanded Policy Rows -->
+              <div class="policies-container">
+                @for (policy of group.policies; track policy.policyId) {
+                  <div class="policy-row">
+                    <div class="policy-spacer"></div>
+                    
+                    <div class="policy-info-section">
+                      <div class="policy-carrier">{{ policy.carrier }}</div>
+                      <div class="policy-details">
+                        <span class="product-type">{{ policy.productType }}</span>
+                        <span class="separator">•</span>
+                        <span class="policy-id">{{ policy.policyId }}</span>
+                      </div>
+                    </div>
+                    
+                    <div class="policy-renewal">
+                      @if (policy.renewalDays !== undefined && policy.renewalDays !== null) {
+                        <div class="renewal-pill" [ngClass]="getDaysToRenewalClass(policy.renewalDays)">
+                          {{ getDaysToRenewalText(policy.renewalDays) }}
+                        </div>
+                      } @else {
+                        <span class="no-renewal">N/A</span>
+                      }
+                    </div>
+                    
+                    <div class="policy-alerts">
+                      @for (badge of getVisibleBadges(policy.alerts); track badge.type) {
+                        <mat-chip [class]="'alert-badge ' + badge.severity.toLowerCase()">
+                          <mat-icon>{{ badge.icon }}</mat-icon>
+                          {{ badge.label }}
+                        </mat-chip>
+                      }
+                      @if (getOverflowCount(policy.alerts) > 0) {
+                        <mat-chip class="overflow-badge">
+                          +{{ getOverflowCount(policy.alerts) }}
+                        </mat-chip>
+                      }
+                    </div>
+                    
+                    <div class="policy-action">
+                      <button mat-raised-button color="primary" (click)="onReviewPolicy(policy); $event.stopPropagation()">
+                        Review
+                      </button>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      @if (groupedPolicies.length === 0) {
+        <div class="empty-state">
+          <mat-icon>inbox</mat-icon>
+          <p>No policies found</p>
+        </div>
+      }
+    }
+  </mat-card>
+</div>

@@ -1,0 +1,693 @@
+[
+  {
+    "productId": "PROD-SYM-001",
+    "carrier": "Symetra",
+    "productName": "Symetra Edge Pro 7",
+    "productType": "FIA",
+    "issueYear": 2024,
+    "availableStates": ["GA", "NC", "FL", "TX", "CA", "NY", "NJ", "IL"],
+    "indexOptions": [
+      {
+        "indexName": "S&P 500",
+        "strategy": "Annual Point-to-Point Cap",
+        "currentValue": 5.75,
+        "floor": 0.0
+      },
+      {
+        "indexName": "S&P 500",
+        "strategy": "Monthly Average Cap",
+        "currentValue": 4.25,
+        "floor": 0.0
+      },
+      {
+        "indexName": "Multi-Index Allocation",
+        "strategy": "Participation Rate",
+        "currentValue": 85.0,
+        "floor": 0.0
+      }
+    ],
+    "guaranteedMinimumRate": 1.0,
+    "currentFixedRate": null,
+    "fees": {
+      "m_e_fee": 0.0,
+      "administrativeFee": 0.0,
+      "fundExpenses": null
+    },
+    "availableRiders": [
+      {
+        "riderName": "Symetra Income Edge",
+        "riderType": "Income Rider",
+        "annualFee": 0.95,
+        "features": [
+          "7% annual roll-up for 10 years",
+          "5.5% lifetime income payout at age 65+",
+          "Joint life option available"
+        ],
+        "rollUpRate": 7.0,
+        "payoutRate": 5.5
+      },
+      {
+        "riderName": "Enhanced Death Benefit",
+        "riderType": "Death Benefit",
+        "annualFee": 0.25,
+        "features": [
+          "Return of premium guarantee",
+          "Annual step-up to contract value"
+        ],
+        "rollUpRate": null,
+        "payoutRate": null
+      }
+    ],
+    "surrenderSchedule": {
+      "years": 7,
+      "schedule": [7.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0],
+      "freeWithdrawalPercent": 10.0
+    },
+    "minimumPremium": 25000.0,
+    "maximumPremium": 1000000.0,
+    "ageMin": 0,
+    "ageMax": 85,
+    "bonusRate": null,
+    "liquidityFeatures": [
+      "10% annual free withdrawal",
+      "Waiver for nursing home confinement",
+      "Terminal illness waiver"
+    ],
+    "keyBenefits": [
+      "Competitive 5.75% cap rate",
+      "Strong income rider with 7% roll-up",
+      "No product fees",
+      "7-year surrender period"
+    ],
+    "suitableFor": ["Growth", "Income"],
+    "riskProfile": "Moderate",
+    "isNewProduct": true,
+    "competitiveAdvantages": [
+      "Higher cap rates than market average",
+      "Industry-leading income rider roll-up",
+      "Zero product fees - only rider fees apply",
+      "Shorter surrender schedule than competitors"
+    ]
+  },
+  {
+    "productId": "PROD-SYM-002",
+    "carrier": "Symetra",
+    "productName": "Symetra Secure Income 10",
+    "productType": "Fixed",
+    "issueYear": 2025,
+    "availableStates": ["GA", "NC", "FL", "TX", "CA", "IL", "PA"],
+    "indexOptions": [],
+    "guaranteedMinimumRate": 3.0,
+    "currentFixedRate": 5.4,
+    "fees": {
+      "m_e_fee": 0.0,
+      "administrativeFee": 0.0,
+      "fundExpenses": null
+    },
+    "availableRiders": [
+      {
+        "riderName": "Guaranteed Lifetime Income",
+        "riderType": "Income Rider",
+        "annualFee": 0.85,
+        "features": [
+          "6% annual roll-up for 15 years",
+          "5.0% lifetime payout at age 60+",
+          "Inflation protection option"
+        ],
+        "rollUpRate": 6.0,
+        "payoutRate": 5.0
+      }
+    ],
+    "surrenderSchedule": {
+      "years": 10,
+      "schedule": [9.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0],
+      "freeWithdrawalPercent": 10.0
+    },
+    "minimumPremium": 10000.0,
+    "maximumPremium": 1000000.0,
+    "ageMin": 0,
+    "ageMax": 80,
+    "bonusRate": null,
+    "liquidityFeatures": [
+      "10% annual free withdrawal",
+      "RMD waiver",
+      "Nursing home waiver after year 1"
+    ],
+    "keyBenefits": [
+      "5.4% guaranteed fixed rate",
+      "Strong income rider options",
+      "No fees without riders",
+      "Predictable growth"
+    ],
+    "suitableFor": ["Income", "Preservation"],
+    "riskProfile": "Conservative",
+    "isNewProduct": true,
+    "competitiveAdvantages": [
+      "Among highest fixed rates in market",
+      "6% income base roll-up",
+      "No market risk - guaranteed growth",
+      "Excellent for pre-retirees"
+    ]
+  },
+  {
+    "productId": "PROD-SYM-003",
+    "carrier": "Symetra",
+    "productName": "Symetra Accumulator Plus 5",
+    "productType": "FIA",
+    "issueYear": 2024,
+    "availableStates": ["GA", "NC", "FL", "TX", "CA", "NY", "NJ", "IL", "VA"],
+    "indexOptions": [
+      {
+        "indexName": "S&P 500",
+        "strategy": "Annual Point-to-Point Cap",
+        "currentValue": 6.0,
+        "floor": 0.0
+      },
+      {
+        "indexName": "NASDAQ-100",
+        "strategy": "Annual Point-to-Point Cap",
+        "currentValue": 5.5,
+        "floor": 0.0
+      }
+    ],
+    "guaranteedMinimumRate": 1.0,
+    "currentFixedRate": null,
+    "fees": {
+      "m_e_fee": 0.0,
+      "administrativeFee": 0.0,
+      "fundExpenses": null
+    },
+    "availableRiders": [
+      {
+        "riderName": "Enhanced Death Benefit Plus",
+        "riderType": "Death Benefit",
+        "annualFee": 0.35,
+        "features": [
+          "Annual step-up to highest anniversary value",
+          "Spousal continuation"
+        ],
+        "rollUpRate": null,
+        "payoutRate": null
+      }
+    ],
+    "surrenderSchedule": {
+      "years": 5,
+      "schedule": [8.0, 7.0, 6.0, 4.0, 2.0],
+      "freeWithdrawalPercent": 10.0
+    },
+    "minimumPremium": 15000.0,
+    "maximumPremium": 1000000.0,
+    "ageMin": 0,
+    "ageMax": 85,
+    "bonusRate": 5.0,
+    "liquidityFeatures": [
+      "10% annual free withdrawal",
+      "5% premium bonus",
+      "Early liquidity access"
+    ],
+    "keyBenefits": [
+      "6.0% S&P 500 cap rate",
+      "5% upfront premium bonus",
+      "Short 5-year surrender period",
+      "No product fees"
+    ],
+    "suitableFor": ["Growth", "Preservation"],
+    "riskProfile": "Moderate",
+    "isNewProduct": false,
+    "competitiveAdvantages": [
+      "Premium bonus enhances starting value",
+      "Shorter surrender period for liquidity",
+      "Competitive cap rates",
+      "Simple, transparent structure"
+    ]
+  },
+  {
+    "productId": "PROD-SYM-004",
+    "carrier": "Symetra",
+    "productName": "Symetra Retirement Pro",
+    "productType": "FIA",
+    "issueYear": 2023,
+    "availableStates": ["GA", "NC", "FL", "TX", "CA", "NY"],
+    "indexOptions": [
+      {
+        "indexName": "S&P 500",
+        "strategy": "Annual Point-to-Point Cap",
+        "currentValue": 5.25,
+        "floor": 0.0
+      },
+      {
+        "indexName": "Balanced Index Allocation",
+        "strategy": "Participation Rate",
+        "currentValue": 75.0,
+        "floor": 0.0
+      }
+    ],
+    "guaranteedMinimumRate": 1.0,
+    "currentFixedRate": null,
+    "fees": {
+      "m_e_fee": 0.0,
+      "administrativeFee": 0.0,
+      "fundExpenses": null
+    },
+    "availableRiders": [
+      {
+        "riderName": "Lifetime Income Max",
+        "riderType": "Income Rider",
+        "annualFee": 1.05,
+        "features": [
+          "8% annual roll-up for 10 years",
+          "6.0% lifetime payout at age 65+",
+          "Increasing payout option"
+        ],
+        "rollUpRate": 8.0,
+        "payoutRate": 6.0
+      }
+    ],
+    "surrenderSchedule": {
+      "years": 8,
+      "schedule": [8.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0],
+      "freeWithdrawalPercent": 10.0
+    },
+    "minimumPremium": 50000.0,
+    "maximumPremium": 2000000.0,
+    "ageMin": 45,
+    "ageMax": 75,
+    "bonusRate": null,
+    "liquidityFeatures": [
+      "10% annual free withdrawal",
+      "RMD accommodation",
+      "Nursing home waiver"
+    ],
+    "keyBenefits": [
+      "8% income base roll-up",
+      "6% lifetime income payout",
+      "Designed for retirement planning",
+      "No product fees"
+    ],
+    "suitableFor": ["Income", "Preservation"],
+    "riskProfile": "Conservative",
+    "isNewProduct": false,
+    "competitiveAdvantages": [
+      "Highest income roll-up rate available",
+      "Strong payout percentages",
+      "Specifically designed for retirees",
+      "Robust income guarantees"
+    ]
+  },
+  {
+    "productId": "PROD-BH-001",
+    "carrier": "Brighthouse Financial",
+    "productName": "Brighthouse Shield Level Select 7",
+    "productType": "FIA",
+    "issueYear": 2025,
+    "availableStates": ["GA", "NC", "FL", "TX", "CA", "NY", "NJ", "IL", "PA", "VA"],
+    "indexOptions": [
+      {
+        "indexName": "S&P 500",
+        "strategy": "Shield Buffer (10%)",
+        "currentValue": 13.0,
+        "floor": -10.0
+      },
+      {
+        "indexName": "S&P 500",
+        "strategy": "Shield Buffer (15%)",
+        "currentValue": 11.5,
+        "floor": -15.0
+      },
+      {
+        "indexName": "Russell 2000",
+        "strategy": "Shield Buffer (10%)",
+        "currentValue": 14.5,
+        "floor": -10.0
+      }
+    ],
+    "guaranteedMinimumRate": null,
+    "currentFixedRate": null,
+    "fees": {
+      "m_e_fee": 0.0,
+      "administrativeFee": 30.0,
+      "fundExpenses": null
+    },
+    "availableRiders": [
+      {
+        "riderName": "FlexChoice Income",
+        "riderType": "Income Rider",
+        "annualFee": 0.95,
+        "features": [
+          "7.5% annual roll-up for 10 years",
+          "5.75% lifetime payout at age 65+",
+          "Flexibility to change allocation"
+        ],
+        "rollUpRate": 7.5,
+        "payoutRate": 5.75
+      },
+      {
+        "riderName": "Legacy Protection",
+        "riderType": "Death Benefit",
+        "annualFee": 0.40,
+        "features": [
+          "Annual step-up to contract value",
+          "Earnings lock-in annually"
+        ],
+        "rollUpRate": null,
+        "payoutRate": null
+      }
+    ],
+    "surrenderSchedule": {
+      "years": 7,
+      "schedule": [7.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0],
+      "freeWithdrawalPercent": 10.0
+    },
+    "minimumPremium": 25000.0,
+    "maximumPremium": 1500000.0,
+    "ageMin": 0,
+    "ageMax": 80,
+    "bonusRate": null,
+    "liquidityFeatures": [
+      "10% annual free withdrawal",
+      "Nursing home waiver",
+      "Terminal illness acceleration"
+    ],
+    "keyBenefits": [
+      "Market upside with downside buffer",
+      "13% cap with 10% buffer protection",
+      "Innovative Shield crediting",
+      "Strong income rider"
+    ],
+    "suitableFor": ["Growth", "Income"],
+    "riskProfile": "Moderate",
+    "isNewProduct": true,
+    "competitiveAdvantages": [
+      "Unique Shield technology - buffer against losses",
+      "Higher caps than traditional FIAs",
+      "7.5% income roll-up rate",
+      "Market participation with protection"
+    ]
+  },
+  {
+    "productId": "PROD-BH-002",
+    "carrier": "Brighthouse Financial",
+    "productName": "Brighthouse SmartCare Income",
+    "productType": "FIA",
+    "issueYear": 2024,
+    "availableStates": ["GA", "NC", "FL", "TX", "CA", "NY", "NJ", "IL"],
+    "indexOptions": [
+      {
+        "indexName": "S&P 500",
+        "strategy": "Annual Point-to-Point Cap",
+        "currentValue": 5.5,
+        "floor": 0.0
+      },
+      {
+        "indexName": "Multi-Asset Index",
+        "strategy": "Participation Rate",
+        "currentValue": 80.0,
+        "floor": 0.0
+      }
+    ],
+    "guaranteedMinimumRate": 1.0,
+    "currentFixedRate": null,
+    "fees": {
+      "m_e_fee": 0.0,
+      "administrativeFee": 0.0,
+      "fundExpenses": null
+    },
+    "availableRiders": [
+      {
+        "riderName": "CareChoice Income & LTC",
+        "riderType": "Income Rider",
+        "annualFee": 1.25,
+        "features": [
+          "7% annual roll-up for 15 years",
+          "5.5% lifetime payout",
+          "2x payout for LTC needs",
+          "Hybrid income and long-term care"
+        ],
+        "rollUpRate": 7.0,
+        "payoutRate": 5.5
+      }
+    ],
+    "surrenderSchedule": {
+      "years": 10,
+      "schedule": [9.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0],
+      "freeWithdrawalPercent": 10.0
+    },
+    "minimumPremium": 50000.0,
+    "maximumPremium": 1000000.0,
+    "ageMin": 50,
+    "ageMax": 75,
+    "bonusRate": null,
+    "liquidityFeatures": [
+      "10% annual free withdrawal",
+      "Enhanced LTC liquidity",
+      "RMD waiver"
+    ],
+    "keyBenefits": [
+      "Hybrid income and LTC protection",
+      "2x payout for care needs",
+      "7% income base growth",
+      "Addresses longevity and health risks"
+    ],
+    "suitableFor": ["Income", "Preservation"],
+    "riskProfile": "Conservative",
+    "isNewProduct": true,
+    "competitiveAdvantages": [
+      "Unique LTC doubling feature",
+      "Addresses both income and care needs",
+      "Strong roll-up guarantees",
+      "Comprehensive retirement solution"
+    ]
+  },
+  {
+    "productId": "PROD-BH-003",
+    "carrier": "Brighthouse Financial",
+    "productName": "Brighthouse SecureFoundation 5",
+    "productType": "Fixed",
+    "issueYear": 2025,
+    "availableStates": ["GA", "NC", "FL", "TX", "CA", "IL", "NY", "NJ", "PA"],
+    "indexOptions": [],
+    "guaranteedMinimumRate": 2.5,
+    "currentFixedRate": 5.6,
+    "fees": {
+      "m_e_fee": 0.0,
+      "administrativeFee": 0.0,
+      "fundExpenses": null
+    },
+    "availableRiders": [],
+    "surrenderSchedule": {
+      "years": 5,
+      "schedule": [7.0, 6.0, 5.0, 3.0, 1.0],
+      "freeWithdrawalPercent": 10.0
+    },
+    "minimumPremium": 10000.0,
+    "maximumPremium": 500000.0,
+    "ageMin": 0,
+    "ageMax": 85,
+    "bonusRate": 3.0,
+    "liquidityFeatures": [
+      "10% annual free withdrawal",
+      "3% premium bonus",
+      "Early surrender penalty reduction"
+    ],
+    "keyBenefits": [
+      "5.6% guaranteed rate",
+      "3% upfront premium bonus",
+      "Short 5-year term",
+      "Simple, predictable growth"
+    ],
+    "suitableFor": ["Preservation", "Income"],
+    "riskProfile": "Conservative",
+    "isNewProduct": true,
+    "competitiveAdvantages": [
+      "Premium bonus boosts initial value",
+      "Among highest fixed rates available",
+      "Short commitment period",
+      "Zero fees - pure accumulation"
+    ]
+  },
+  {
+    "productId": "PROD-BH-004",
+    "carrier": "Brighthouse Financial",
+    "productName": "Brighthouse Select Advantage",
+    "productType": "VA",
+    "issueYear": 2024,
+    "availableStates": ["GA", "NC", "FL", "TX", "CA", "NY", "NJ", "IL", "PA", "MA"],
+    "indexOptions": [],
+    "guaranteedMinimumRate": null,
+    "currentFixedRate": null,
+    "fees": {
+      "m_e_fee": 1.25,
+      "administrativeFee": 0.15,
+      "fundExpenses": 0.65
+    },
+    "availableRiders": [
+      {
+        "riderName": "SecureIncome Plus",
+        "riderType": "Income Rider",
+        "annualFee": 1.10,
+        "features": [
+          "6% annual step-up on highest anniversary value",
+          "5.0% lifetime withdrawal at age 60+",
+          "Joint life coverage"
+        ],
+        "rollUpRate": 6.0,
+        "payoutRate": 5.0
+      }
+    ],
+    "surrenderSchedule": {
+      "years": 7,
+      "schedule": [7.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0],
+      "freeWithdrawalPercent": 10.0
+    },
+    "minimumPremium": 25000.0,
+    "maximumPremium": 2000000.0,
+    "ageMin": 0,
+    "ageMax": 80,
+    "bonusRate": null,
+    "liquidityFeatures": [
+      "10% annual free withdrawal",
+      "Wide fund selection",
+      "Asset allocation tools"
+    ],
+    "keyBenefits": [
+      "Full market participation",
+      "Professional investment management",
+      "Strong income guarantees",
+      "100+ fund options"
+    ],
+    "suitableFor": ["Growth", "Income"],
+    "riskProfile": "Moderate",
+    "isNewProduct": false,
+    "competitiveAdvantages": [
+      "True market exposure with guarantees",
+      "Extensive fund lineup",
+      "Flexible investment management",
+      "Proven track record"
+    ]
+  },
+  {
+    "productId": "PROD-PAC-001",
+    "carrier": "Pacific Life",
+    "productName": "Pacific Odyssey Select 7",
+    "productType": "FIA",
+    "issueYear": 2024,
+    "availableStates": ["GA", "NC", "FL", "TX", "CA", "IL"],
+    "indexOptions": [
+      {
+        "indexName": "S&P 500",
+        "strategy": "Annual Point-to-Point Cap",
+        "currentValue": 5.0,
+        "floor": 0.0
+      }
+    ],
+    "guaranteedMinimumRate": 1.0,
+    "currentFixedRate": null,
+    "fees": {
+      "m_e_fee": 0.0,
+      "administrativeFee": 0.0,
+      "fundExpenses": null
+    },
+    "availableRiders": [
+      {
+        "riderName": "Secure Income",
+        "riderType": "Income Rider",
+        "annualFee": 0.95,
+        "features": [
+          "6.5% annual roll-up for 12 years",
+          "5.25% lifetime payout at age 65+"
+        ],
+        "rollUpRate": 6.5,
+        "payoutRate": 5.25
+      }
+    ],
+    "surrenderSchedule": {
+      "years": 7,
+      "schedule": [7.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0],
+      "freeWithdrawalPercent": 10.0
+    },
+    "minimumPremium": 25000.0,
+    "maximumPremium": 1000000.0,
+    "ageMin": 0,
+    "ageMax": 85,
+    "bonusRate": null,
+    "liquidityFeatures": [
+      "10% annual free withdrawal",
+      "Nursing home waiver"
+    ],
+    "keyBenefits": [
+      "Competitive cap rates",
+      "Strong income rider",
+      "Well-established carrier",
+      "No product fees"
+    ],
+    "suitableFor": ["Growth", "Income"],
+    "riskProfile": "Moderate",
+    "isNewProduct": false,
+    "competitiveAdvantages": [
+      "Trusted carrier with strong ratings",
+      "Competitive pricing",
+      "Reliable performance"
+    ]
+  },
+  {
+    "productId": "PROD-LIN-001",
+    "carrier": "Lincoln Financial",
+    "productName": "Lincoln OptiBlend 10",
+    "productType": "FIA",
+    "issueYear": 2023,
+    "availableStates": ["GA", "NC", "FL", "TX"],
+    "indexOptions": [
+      {
+        "indexName": "S&P 500",
+        "strategy": "Annual Point-to-Point Cap",
+        "currentValue": 4.75,
+        "floor": 0.0
+      }
+    ],
+    "guaranteedMinimumRate": 1.0,
+    "currentFixedRate": null,
+    "fees": {
+      "m_e_fee": 0.0,
+      "administrativeFee": 0.0,
+      "fundExpenses": null
+    },
+    "availableRiders": [
+      {
+        "riderName": "Lifetime Income Advantage",
+        "riderType": "Income Rider",
+        "annualFee": 1.0,
+        "features": [
+          "6.25% annual roll-up for 10 years",
+          "5.0% lifetime payout at age 60+"
+        ],
+        "rollUpRate": 6.25,
+        "payoutRate": 5.0
+      }
+    ],
+    "surrenderSchedule": {
+      "years": 10,
+      "schedule": [9.0, 9.0, 8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0],
+      "freeWithdrawalPercent": 10.0
+    },
+    "minimumPremium": 10000.0,
+    "maximumPremium": 1000000.0,
+    "ageMin": 0,
+    "ageMax": 80,
+    "bonusRate": null,
+    "liquidityFeatures": [
+      "10% annual free withdrawal"
+    ],
+    "keyBenefits": [
+      "Established carrier reputation",
+      "Solid income guarantees",
+      "No product fees"
+    ],
+    "suitableFor": ["Income", "Preservation"],
+    "riskProfile": "Conservative",
+    "isNewProduct": false,
+    "competitiveAdvantages": [
+      "Strong financial rating",
+      "Proven product performance"
+    ]
+  }
+]

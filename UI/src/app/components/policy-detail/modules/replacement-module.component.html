@@ -1,0 +1,237 @@
+<mat-card class="replacement-module-card">
+  <div class="module-header">
+    <div class="module-title">
+      <mat-icon class="severity-icon high">sync_alt</mat-icon>
+      <div>
+        <h3>{{ alert.title }}</h3>
+        <p class="alert-reason">{{ alert.reasonShort }}</p>
+      </div>
+    </div>
+    <button mat-icon-button class="ai-assist-btn" (click)="onAskAI()" matTooltip="Ask AI about this alert">
+      <mat-icon>psychology</mat-icon>
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Step Navigation -->
+  <div class="steps-nav">
+    <div class="step-item" [class.active]="currentStep() === 0" [class.completed]="currentStep() > 0">
+      <div class="step-number">1</div>
+      <span class="step-label">Why Flagged</span>
+    </div>
+    <div class="step-connector" [class.completed]="currentStep() > 0"></div>
+    <div class="step-item" [class.active]="currentStep() === 1" [class.completed]="currentStep() > 1">
+      <div class="step-number">2</div>
+      <span class="step-label">Verify Suitability</span>
+    </div>
+    <div class="step-connector" [class.completed]="currentStep() > 1"></div>
+    <div class="step-item" [class.active]="currentStep() === 2" [class.completed]="currentStep() > 2">
+      <div class="step-number">3</div>
+      <span class="step-label">Review Alternatives</span>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Step 1: Why Flagged -->
+  @if (currentStep() === 0) {
+    <div class="step-content">
+      <div class="step-header">
+        <mat-icon>flag</mat-icon>
+        <h4>Why This Is Flagged</h4>
+      </div>
+
+      <div class="reasons-list">
+        @for (reason of alert.reasons; track reason) {
+          <div class="reason-item">
+            <mat-icon class="reason-icon">chevron_right</mat-icon>
+            <span>{{ reason }}</span>
+          </div>
+        }
+      </div>
+
+      <div class="compliance-context">
+        <mat-icon class="info-icon">info</mat-icon>
+        <div class="context-content">
+          <strong>Compliance Context:</strong>
+          <p>Replacement reviews ensure that any recommended change is in the client's best interest and properly documented per regulatory requirements (FINRA Rule 2111, DOL Fiduciary Rule).</p>
+        </div>
+      </div>
+
+      <div class="step-actions">
+        <button mat-raised-button color="primary" (click)="currentStep.set(1)">
+          Review Client Suitability
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Step 2: Verify Client Suitability -->
+  @if (currentStep() === 1) {
+    <div class="step-content">
+      <div class="step-header">
+        <mat-icon>person_search</mat-icon>
+        <h4>Verify Client Suitability</h4>
+      </div>
+
+      <div class="suitability-intro">
+        <p>Review and update the client's suitability profile before viewing alternatives. This ensures recommendations are based on current circumstances.</p>
+        @if (client?.suitability?.lastUpdated) {
+          <p class="last-updated">
+            <mat-icon>update</mat-icon>
+            Last updated: {{ client.suitability!.lastUpdated | date: 'MMM dd, yyyy  h:mm a' }}
+          </p>
+        }
+      </div>
+
+      <app-suitability-form 
+        [client]="client"
+        (suitabilityVerified)="onSuitabilityVerified()">
+      </app-suitability-form>
+
+      <div class="step-actions">
+        <button mat-button (click)="currentStep.set(0)">
+          <mat-icon>arrow_back</mat-icon>
+          Back
+        </button>
+        <button 
+          mat-raised-button 
+          color="primary" 
+          [disabled]="!canProceedToAlternatives()"
+          (click)="onContinueToAlternatives()">
+          Continue to Alternatives
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Step 3: Market Alternatives -->
+  @if (currentStep() === 2) {
+    <div class="step-content">
+      <div class="step-header">
+        <mat-icon>compare_arrows</mat-icon>
+        <h4>Market Alternatives</h4>
+      </div>
+
+      @if (loadingAlternatives()) {
+        <div class="loading-alternatives">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Finding suitable alternatives based on verified suitability profile...</p>
+        </div>
+      } @else {
+        <div class="alternatives-container">
+          <!-- Compliance Disclaimer -->
+          <div class="compliance-disclaimer">
+            <mat-icon class="warning-icon">warning</mat-icon>
+            <div class="disclaimer-content">
+              <strong>Important:</strong> These are illustrative alternatives only — not a recommendation. 
+              Based on suitability profile as of 
+              {{ client?.suitability?.lastUpdated | date: 'MMM dd, yyyy h:mm a' }}.
+              Full suitability analysis required before any recommendation.
+            </div>
+          </div>
+
+          <!-- Side-by-Side Comparison Table -->
+          <div class="comparison-table-wrapper">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th class="feature-col">Feature</th>
+                  <th class="current-col">
+                    <div class="col-header">
+                      <span>Current Policy</span>
+                      <mat-chip class="policy-chip current">Current</mat-chip>
+                    </div>
+                  </th>
+                  @for (alt of alternatives(); track alt.productId; let idx = $index) {
+                    <th class="alt-col">
+                      <div class="col-header">
+                        <span>Alternative {{ idx + 1 }}</span>
+                        <mat-chip class="policy-chip alternative">
+                          {{ alt.suitabilityScore }}% Match
+                        </mat-chip>
+                      </div>
+                    </th>
+                  }
+                </tr>
+              </thead>
+              <tbody>
+                @for (row of getComparisonData(); track row.feature) {
+                  <tr [class.highlight-row]="row.highlight">
+                    <td class="feature-name">{{ row.feature }}</td>
+                    <td class="current-value">{{ row.current }}</td>
+                    @if (row.alt1) {
+                      <td class="alt-value" [class.better]="row.highlight === 'rate' && row.alt1 > row.current">
+                        {{ row.alt1 }}
+                        @if (row.highlight === 'rate' && row.alt1 > row.current) {
+                          <mat-icon class="improvement-icon">trending_up</mat-icon>
+                        }
+                      </td>
+                    }
+                    @if (row.alt2) {
+                      <td class="alt-value" [class.better]="row.highlight === 'rate' && row.alt2 > row.current">
+                        {{ row.alt2 }}
+                        @if (row.highlight === 'rate' && row.alt2 > row.current) {
+                          <mat-icon class="improvement-icon">trending_up</mat-icon>
+                        }
+                      </td>
+                    }
+                    @if (row.alt3) {
+                      <td class="alt-value" [class.better]="row.highlight === 'rate' && row.alt3 > row.current">
+                        {{ row.alt3 }}
+                        @if (row.highlight === 'rate' && row.alt3 > row.current) {
+                          <mat-icon class="improvement-icon">trending_up</mat-icon>
+                        }
+                      </td>
+                    }
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Alternative Highlights -->
+          <div class="alternatives-highlights">
+            @for (alt of alternatives(); track alt.productId; let idx = $index) {
+              <mat-card class="alternative-card">
+                <div class="alt-card-header">
+                  <h5>Alternative {{ idx + 1 }}: {{ alt.productName }}</h5>
+                  <mat-chip class="suitability-badge" [class.high-match]="alt.suitabilityScore >= 90">
+                    {{ alt.suitabilityScore }}% Match
+                  </mat-chip>
+                </div>
+                <p class="carrier-name">{{ alt.carrier }}</p>
+                <div class="highlights-list">
+                  @for (highlight of alt.highlights; track highlight) {
+                    <div class="highlight-item">
+                      <mat-icon>check_circle</mat-icon>
+                      <span>{{ highlight }}</span>
+                    </div>
+                  }
+                </div>
+              </mat-card>
+            }
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button mat-button (click)="currentStep.set(1)">
+            <mat-icon>arrow_back</mat-icon>
+            Back to Suitability
+          </button>
+          <button mat-button (click)="onAskAI()">
+            <mat-icon>psychology</mat-icon>
+            Ask AI to Compare
+          </button>
+          <button mat-raised-button color="primary" (click)="onInitiateReplacementReview()">
+            <mat-icon>assignment</mat-icon>
+            Initiate Replacement Review
+          </button>
+        </div>
+      }
+    </div>
+  }
+</mat-card>

@@ -1,0 +1,192 @@
+<mat-card class="suitability-drift-module-card">
+  <div class="module-header">
+    <div class="module-title">
+      <mat-icon class="severity-icon low">info</mat-icon>
+      <div>
+        <h3>{{ alert.title }}</h3>
+        <p class="alert-reason">{{ alert.reasonShort }}</p>
+      </div>
+    </div>
+    <button mat-icon-button class="ai-assist-btn" (click)="onAskAI()" matTooltip="Ask AI about this alert">
+      <mat-icon>psychology</mat-icon>
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="module-content">
+    <!-- What Changed -->
+    <section class="what-changed-section">
+      <h4 class="section-title">
+        <mat-icon>compare_arrows</mat-icon>
+        What Changed
+      </h4>
+
+      <div class="drift-items">
+        @for (item of driftItems; track item.category) {
+          <div class="drift-item" [class]="getImpactClass(item.impact)">
+            <div class="drift-header">
+              <h5 class="drift-category">{{ item.category }}</h5>
+              <span class="impact-badge" [class]="getImpactClass(item.impact)">
+                {{ getImpactLabel(item.impact) }}
+              </span>
+            </div>
+            <div class="drift-comparison">
+              <div class="comparison-side previous">
+                <span class="comparison-label">Previous</span>
+                <span class="comparison-value">{{ item.previous }}</span>
+              </div>
+              <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+              <div class="comparison-side current">
+                <span class="comparison-label">Current</span>
+                <span class="comparison-value">{{ item.current }}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <!-- Why This Matters -->
+    <section class="why-matters-section">
+      <h4 class="section-title">
+        <mat-icon>lightbulb</mat-icon>
+        Why This Review Is Appropriate
+      </h4>
+
+      <div class="matters-content">
+        <div class="matter-item">
+          <mat-icon class="matter-icon">gavel</mat-icon>
+          <div>
+            <strong>Regulatory Requirement</strong>
+            <p>
+              Material changes to a client's financial situation, objectives, or risk profile 
+              require a suitability review to ensure current holdings remain appropriate 
+              (FINRA Rule 2111, Reg BI).
+            </p>
+          </div>
+        </div>
+
+        <div class="matter-item">
+          <mat-icon class="matter-icon">verified_user</mat-icon>
+          <div>
+            <strong>Best Interest Obligation</strong>
+            <p>
+              The shift from growth to income objectives suggests the client's needs have evolved. 
+              This review ensures the current product features align with updated goals.
+            </p>
+          </div>
+        </div>
+
+        <div class="matter-item">
+          <mat-icon class="matter-icon">analytics</mat-icon>
+          <div>
+            <strong>Product Alignment</strong>
+            <p>
+              The current policy was selected based on previous suitability factors. 
+              Confirming it still matches updated objectives helps prevent misalignment.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <!-- Review Guidance -->
+    <section class="guidance-section">
+      <h4 class="section-title">
+        <mat-icon>checklist</mat-icon>
+        Review Guidance
+      </h4>
+
+      <div class="guidance-list">
+        <div class="guidance-item">
+          <div class="guidance-number">1</div>
+          <div class="guidance-content">
+            <strong>Confirm Changes</strong>
+            <p>Discuss detected changes with client and verify accuracy.</p>
+          </div>
+        </div>
+
+        <div class="guidance-item">
+          <div class="guidance-number">2</div>
+          <div class="guidance-content">
+            <strong>Assess Current Product</strong>
+            <p>Evaluate whether existing policy features meet updated needs (e.g., income riders for income objective).</p>
+          </div>
+        </div>
+
+        <div class="guidance-item">
+          <div class="guidance-number">3</div>
+          <div class="guidance-content">
+            <strong>Document Findings</strong>
+            <p>Record review outcome and any recommended actions or affirmations.</p>
+          </div>
+        </div>
+
+        <div class="guidance-item">
+          <div class="guidance-number">4</div>
+          <div class="guidance-content">
+            <strong>Consider Alternatives</strong>
+            <p>If current policy no longer aligns, consider whether alternatives better serve client needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <mat-divider></mat-divider>
+
+    <!-- Neutral Considerations -->
+    <section class="considerations-section">
+      <h4 class="section-title">
+        <mat-icon>psychology</mat-icon>
+        Key Considerations
+      </h4>
+
+      <div class="considerations-grid">
+        <div class="consideration-card">
+          <mat-icon class="card-icon">question_mark</mat-icon>
+          <h5>Current Product Features</h5>
+          <p>Does the existing policy have features that align with income objectives (e.g., income riders, guaranteed withdrawals)?</p>
+        </div>
+
+        <div class="consideration-card">
+          <mat-icon class="card-icon">timeline</mat-icon>
+          <h5>Time Horizon</h5>
+          <p>When does the client anticipate needing income? Does the policy support their timing requirements?</p>
+        </div>
+
+        <div class="consideration-card">
+          <mat-icon class="card-icon">account_balance</mat-icon>
+          <h5>Overall Portfolio</h5>
+          <p>How does this annuity fit within the client's broader retirement income strategy?</p>
+        </div>
+
+        <div class="consideration-card">
+          <mat-icon class="card-icon">swap_horiz</mat-icon>
+          <h5>Change Costs</h5>
+          <p>If a change is contemplated, what are the costs (surrender charges, taxes, lost benefits)?</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Actions -->
+    <div class="module-actions">
+      <button mat-button (click)="onAskAI()">
+        <mat-icon>psychology</mat-icon>
+        Explain Rationale
+      </button>
+      <button mat-button (click)="onMarkReviewed()">
+        <mat-icon>check</mat-icon>
+        Mark Reviewed
+      </button>
+      <button mat-raised-button color="primary" (click)="onSaveNote()">
+        <mat-icon>save</mat-icon>
+        Save Review Note
+      </button>
+    </div>
+  </div>
+</mat-card>
