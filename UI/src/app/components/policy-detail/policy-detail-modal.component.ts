@@ -78,12 +78,7 @@ export class PolicyDetailModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Auto-expand highest severity alert
-    const highestAlert = this.highestSeverityAlert();
-    if (highestAlert) {
-      this.expandedAlertId.set(highestAlert.alertId);
-      this.activeAlertType.set(highestAlert.type);
-    }
+    // Don't auto-expand - let user click on alerts to view details
   }
 
   // Method to set policy and client data from the dashboard

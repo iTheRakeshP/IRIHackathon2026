@@ -59,3 +59,31 @@ class ClientPoliciesGroup(BaseModel):
     highSeverityCount: int = Field(default=0, description="Count of HIGH severity alerts")
     mediumSeverityCount: int = Field(default=0, description="Count of MEDIUM severity alerts")
     lowSeverityCount: int = Field(default=0, description="Count of LOW severity alerts")
+
+
+class PolicyDetail(BaseModel):
+    """Policy detail for frontend - transformed format"""
+    policyId: str
+    clientAccountNumber: str
+    clientName: str = Field(default="", description="Client name (populated from client data)")
+    carrier: str
+    productType: str
+    productName: Optional[str] = Field(None, description="Product name derived from policyLabel")
+    issueDate: str
+    renewalDate: Optional[str] = None
+    renewalDays: Optional[int] = None
+    daysToRenewal: Optional[int] = None  # Alias for renewalDays
+    contractValue: float = Field(..., description="Contract value (mapped from accountValue)")
+    accountValue: Optional[float] = None
+    cashSurrenderValue: Optional[float] = None
+    deathBenefit: Optional[float] = None
+    currentSurrenderCharge: Optional[float] = None
+    surrenderEndDate: Optional[str] = None
+    currentCapRate: Optional[float] = None
+    projectedRenewalRate: Optional[float] = None  # Mapped from renewalCapRate
+    riders: List[str] = Field(default_factory=list, description="Riders list")
+    annualFee: Optional[float] = None
+    riderFee: Optional[float] = None
+    meFee: Optional[float] = None
+    adminFee: Optional[float] = None
+    alerts: List[Alert] = Field(default_factory=list, description="Active alerts")

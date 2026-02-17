@@ -53,26 +53,59 @@
   <!-- Filter Bar -->
   <mat-card class="filter-bar">
     <div class="filter-controls">
-      <button mat-stroked-button class="filter-btn">
-        <mat-icon>business</mat-icon>
-        All Carriers
-        <mat-icon>arrow_drop_down</mat-icon>
-      </button>
-      
-      <button mat-stroked-button class="filter-btn">
-        <mat-icon>flag</mat-icon>
-        All Priorities
-        <mat-icon>arrow_drop_down</mat-icon>
-      </button>
-      
-      <button mat-stroked-button class="filter-btn">
-        <mat-icon>checklist</mat-icon>
-        All Status
-        <mat-icon>arrow_drop_down</mat-icon>
-      </button>
+      <!-- Search Field -->
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Search Client</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput 
+               [(ngModel)]="searchText" 
+               (ngModelChange)="onSearchTextChange()"
+               placeholder="Name or Account #">
+        @if (searchText) {
+          <button matSuffix mat-icon-button (click)="searchText = ''; onSearchTextChange()">
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+
+      <!-- Carrier Filter -->
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-select [(ngModel)]="selectedCarrier" (ngModelChange)="onCarrierChange()" placeholder="Carrier">
+          <mat-option value="">All Carriers</mat-option>
+          @for (carrier of availableCarriers; track carrier) {
+            <mat-option [value]="carrier">{{ carrier }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Alert Type Filter -->
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-select [(ngModel)]="selectedAlertTypes" (ngModelChange)="onAlertTypeChange()" multiple placeholder="Alert Type">
+          @for (alertType of availableAlertTypes; track alertType.value) {
+            <mat-option [value]="alertType.value">{{ alertType.label }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Priority Filter -->
+      <mat-form-field appearance="outline" class="filter-field">
+        <mat-select [(ngModel)]="selectedPriorities" (ngModelChange)="onPriorityChange()" multiple placeholder="Priority">
+          @for (priority of availablePriorities; track priority.value) {
+            <mat-option [value]="priority.value">{{ priority.label }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Clear Filters Button -->
+      @if (hasActiveFilters()) {
+        <button mat-button class="clear-filters-btn" (click)="clearFilters()">
+          <mat-icon>filter_alt_off</mat-icon>
+          Clear Filters
+        </button>
+      }
       
       <div class="client-summary">
-        {{ groupedPolicies.length }} clients with {{ getTotalAlerts() }} alerts
+        {{ filteredGroupedPolicies.length }} clients with {{ getTotalAlerts() }} alerts
       </div>
       
       <div class="spacer"></div>
@@ -93,7 +126,7 @@
       </div>
     } @else {
       <div class="client-list">
-        @for (group of groupedPolicies; track group.clientAccountNumber) {
+        @for (group of filteredGroupedPolicies; track group.clientAccountNumber) {
           <div class="client-group" [class.expanded]="isClientExpanded(group.clientAccountNumber)">
             <!-- Client Header Row -->
             <div class="client-header-row" (click)="toggleClientExpansion(group.clientAccountNumber)">
@@ -129,8 +162,8 @@
               <div class="table-header-row">
                 <div class="header-spacer"></div>
                 <div class="header-policy">POLICY</div>
-                <div class="header-renewal">RENEWAL</div>
                 <div class="header-alerts">ALERTS</div>
+                <div class="header-renewal">RENEWAL</div>
                 <div class="header-action">ACTION</div>
               </div>
               
@@ -143,20 +176,13 @@
                     <div class="policy-info-section">
                       <div class="policy-carrier">{{ policy.carrier }}</div>
                       <div class="policy-details">
+                        <span class="product-name">{{ getProductName(policy) }}</span>
+                      </div>
+                      <div class="policy-meta">
                         <span class="product-type">{{ policy.productType }}</span>
                         <span class="separator">•</span>
                         <span class="policy-id">{{ policy.policyId }}</span>
                       </div>
-                    </div>
-                    
-                    <div class="policy-renewal">
-                      @if (policy.renewalDays !== undefined && policy.renewalDays !== null) {
-                        <div class="renewal-pill" [ngClass]="getDaysToRenewalClass(policy.renewalDays)">
-                          {{ getDaysToRenewalText(policy.renewalDays) }}
-                        </div>
-                      } @else {
-                        <span class="no-renewal">N/A</span>
-                      }
                     </div>
                     
                     <div class="policy-alerts">
@@ -173,6 +199,16 @@
                       }
                     </div>
                     
+                    <div class="policy-renewal">
+                      @if (policy.renewalDays !== undefined && policy.renewalDays !== null) {
+                        <div class="renewal-pill" [ngClass]="getDaysToRenewalClass(policy.renewalDays)">
+                          {{ getDaysToRenewalText(policy.renewalDays) }}
+                        </div>
+                      } @else {
+                        <span class="no-renewal">N/A</span>
+                      }
+                    </div>
+                    
                     <div class="policy-action">
                       <button mat-raised-button color="primary" (click)="onReviewPolicy(policy); $event.stopPropagation()">
                         Review
@@ -186,10 +222,17 @@
         }
       </div>
 
-      @if (groupedPolicies.length === 0) {
+      @if (filteredGroupedPolicies.length === 0) {
         <div class="empty-state">
           <mat-icon>inbox</mat-icon>
-          <p>No policies found</p>
+          @if (hasActiveFilters()) {
+            <p>No policies match the selected filters</p>
+            <button mat-raised-button color="primary" (click)="clearFilters()">
+              Clear Filters
+            </button>
+          } @else {
+            <p>No policies found</p>
+          }
         </div>
       }
     }

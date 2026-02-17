@@ -94,14 +94,15 @@
 
       <mat-divider></mat-divider>
 
-      <!-- Alert Action & Analysis Section -->
-      <section class="review-modules-section" #reviewModulesSection>
-        <h3 class="section-title">
-          <mat-icon>fact_check</mat-icon>
-          Alert Action & Analysis
-        </h3>
+      <!-- Alert Action & Analysis Section (Only shown when an alert is selected) -->
+      @if (expandedAlertId()) {
+        <section class="review-modules-section" #reviewModulesSection>
+          <h3 class="section-title">
+            <mat-icon>fact_check</mat-icon>
+            Alert Action & Analysis
+          </h3>
 
-        <div class="review-modules-container">
+          <div class="review-modules-container">
           @for (alert of sortedAlerts(); track alert.alertId) {
             <div class="review-module-wrapper" [class.expanded]="isAlertExpanded(alert.alertId)">
               @if (isAlertExpanded(alert.alertId)) {
@@ -141,8 +142,9 @@
               <p>Select an alert to view review details</p>
             </div>
           }
-        </div>
-      </section>
+          </div>
+        </section>
+      }
     }
   </div>
 </div>

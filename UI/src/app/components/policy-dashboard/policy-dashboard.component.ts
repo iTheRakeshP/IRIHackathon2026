@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
@@ -8,9 +9,14 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatMenuModule } from '@angular/material/menu';
 import { ApiService } from '../../services/api.service';
 import { Policy } from '../../models/policy.model';
-import { Alert, AlertBadge } from '../../models/alert.model';
+import { Alert, AlertBadge, AlertType, AlertSeverity } from '../../models/alert.model';
 import { PolicyDetailModalComponent } from '../policy-detail/policy-detail-modal.component';
 
 @Component({
@@ -18,6 +24,7 @@ import { PolicyDetailModalComponent } from '../policy-detail/policy-detail-modal
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     MatTableModule,
     MatButtonModule,
     MatChipsModule,
@@ -26,6 +33,11 @@ import { PolicyDetailModalComponent } from '../policy-detail/policy-detail-modal
     MatCardModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatMenuModule,
     PolicyDetailModalComponent
   ],
   templateUrl: './policy-dashboard.component.html',
@@ -34,10 +46,30 @@ import { PolicyDetailModalComponent } from '../policy-detail/policy-detail-modal
 export class PolicyDashboardComponent implements OnInit {
   policies: Policy[] = [];
   groupedPolicies: any[] = [];
+  filteredGroupedPolicies: any[] = [];
   displayedColumns: string[] = ['clientInfo', 'policy', 'daysToRenewal', 'alerts', 'actions'];
   loading = true;
   expandedClients: Set<string> = new Set(); // Track expanded clients
   allExpanded = true;
+
+  // Filter properties
+  selectedCarrier: string = '';
+  selectedAlertTypes: AlertType[] = [];
+  selectedPriorities: AlertSeverity[] = [];
+  searchText: string = '';
+
+  // Available filter options
+  availableCarriers: string[] = [];
+  availableAlertTypes: { value: AlertType, label: string }[] = [
+    { value: 'REPLACEMENT', label: 'Replacement' },
+    { value: 'INCOME_ACTIVATION', label: 'Income Activation' },
+    { value: 'SUITABILITY_DRIFT', label: 'Suitability Drift' }
+  ];
+  availablePriorities: { value: AlertSeverity, label: string }[] = [
+    { value: 'HIGH', label: 'High Priority' },
+    { value: 'MEDIUM', label: 'Medium Priority' },
+    { value: 'LOW', label: 'Low Priority' }
+  ];
 
   constructor(
     private apiService: ApiService,
@@ -61,8 +93,15 @@ export class PolicyDashboardComponent implements OnInit {
             clientAccountNumber: group.clientAccountNumber
           }))
         }));
+
+        // Extract unique carriers and clients for filter options
+        this.extractFilterOptions();
+
+        // Apply initial filtering
+        this.applyFilters();
+
         // Expand all clients by default
-        this.groupedPolicies.forEach(group => {
+        this.filteredGroupedPolicies.forEach(group => {
           this.expandedClients.add(group.clientAccountNumber);
         });
         this.loading = false;
@@ -72,6 +111,103 @@ export class PolicyDashboardComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  extractFilterOptions(): void {
+    // Extract unique carriers
+    const carrierSet = new Set<string>();
+
+    this.groupedPolicies.forEach(group => {
+      // Extract carriers from policies
+      group.policies.forEach((policy: any) => {
+        if (policy.carrier) {
+          carrierSet.add(policy.carrier);
+        }
+      });
+    });
+
+    this.availableCarriers = Array.from(carrierSet).sort();
+  }
+
+  applyFilters(): void {
+    let filtered = [...this.groupedPolicies];
+
+    // Filter by search text (client name or account number)
+    if (this.searchText) {
+      const searchLower = this.searchText.toLowerCase();
+      filtered = filtered.filter(group => 
+        group.clientName.toLowerCase().includes(searchLower) ||
+        group.clientAccountNumber.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // Filter policies within each group
+    filtered = filtered.map(group => {
+      let filteredPolicies = [...group.policies];
+
+      // Filter by carrier
+      if (this.selectedCarrier) {
+        filteredPolicies = filteredPolicies.filter((policy: any) => 
+          policy.carrier === this.selectedCarrier
+        );
+      }
+
+      // Filter by alert types
+      if (this.selectedAlertTypes.length > 0) {
+        filteredPolicies = filteredPolicies.filter((policy: any) => 
+          policy.alerts && policy.alerts.some((alert: Alert) => 
+            this.selectedAlertTypes.includes(alert.type)
+          )
+        );
+      }
+
+      // Filter by priorities
+      if (this.selectedPriorities.length > 0) {
+        filteredPolicies = filteredPolicies.filter((policy: any) => 
+          policy.alerts && policy.alerts.some((alert: Alert) => 
+            this.selectedPriorities.includes(alert.severity)
+          )
+        );
+      }
+
+      return {
+        ...group,
+        policies: filteredPolicies
+      };
+    }).filter(group => group.policies.length > 0); // Remove groups with no policies
+
+    this.filteredGroupedPolicies = filtered;
+  }
+
+  onCarrierChange(): void {
+    this.applyFilters();
+  }
+
+  onAlertTypeChange(): void {
+    this.applyFilters();
+  }
+
+  onPriorityChange(): void {
+    this.applyFilters();
+  }
+
+  onSearchTextChange(): void {
+    this.applyFilters();
+  }
+
+  clearFilters(): void {
+    this.selectedCarrier = '';
+    this.selectedAlertTypes = [];
+    this.selectedPriorities = [];
+    this.searchText = '';
+    this.applyFilters();
+  }
+
+  hasActiveFilters(): boolean {
+    return !!(this.selectedCarrier || 
+              this.selectedAlertTypes.length > 0 || 
+              this.selectedPriorities.length > 0 ||
+              this.searchText);
   }
 
   toggleClientExpansion(clientAccountNumber: string): void {
@@ -93,7 +229,7 @@ export class PolicyDashboardComponent implements OnInit {
       this.allExpanded = false;
     } else {
       // Expand all
-      this.groupedPolicies.forEach(group => {
+      this.filteredGroupedPolicies.forEach(group => {
         this.expandedClients.add(group.clientAccountNumber);
       });
       this.allExpanded = true;
@@ -102,7 +238,7 @@ export class PolicyDashboardComponent implements OnInit {
 
   // Dashboard stat methods
   getTotalAlerts(): number {
-    return this.groupedPolicies.reduce((total, group) => {
+    return this.filteredGroupedPolicies.reduce((total, group) => {
       return total + group.policies.reduce((sum: number, policy: any) => {
         return sum + (policy.alerts?.length || 0);
       }, 0);
@@ -110,7 +246,7 @@ export class PolicyDashboardComponent implements OnInit {
   }
 
   getHighPriorityCount(): number {
-    return this.groupedPolicies.reduce((total, group) => {
+    return this.filteredGroupedPolicies.reduce((total, group) => {
       return total + group.policies.reduce((sum: number, policy: any) => {
         return sum + (policy.alerts?.filter((a: Alert) => a.severity === 'HIGH').length || 0);
       }, 0);
@@ -118,7 +254,7 @@ export class PolicyDashboardComponent implements OnInit {
   }
 
   getUrgentRenewalsCount(): number {
-    return this.groupedPolicies.reduce((total, group) => {
+    return this.filteredGroupedPolicies.reduce((total, group) => {
       return total + group.policies.filter((policy: any) => 
         policy.renewalDays !== undefined && policy.renewalDays !== null && policy.renewalDays <= 30
       ).length;
@@ -179,6 +315,15 @@ export class PolicyDashboardComponent implements OnInit {
       return `${accountNumber.substring(0, 3)}-${accountNumber.substring(3, 9)}-${accountNumber.substring(9)}`;
     }
     return accountNumber;
+  }
+
+  getProductName(policy: any): string {
+    // Return policyLabel if available, otherwise construct from carrier and type
+    if (policy.policyLabel) {
+      return policy.policyLabel;
+    }
+    // Fallback: construct a readable name
+    return `${policy.carrier} ${policy.productType}`;
   }
 
   getAlertBadges(alerts: Alert[]): AlertBadge[] {
