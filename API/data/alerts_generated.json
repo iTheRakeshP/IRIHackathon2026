@@ -20,6 +20,29 @@
       "m_e_fee": 0.0,
       "riderFee": 0.0
     },
+    "nonFinancialData": {
+      "ownerName": "Jane Smith",
+      "ownerSSN": "***-**-1234",
+      "primaryBeneficiary": {
+        "name": "John M. Smith",
+        "relationship": "Spouse",
+        "ssn": "***-**-5678",
+        "dateOfBirth": "1965-03-15",
+        "allocationPercent": 100.0
+      },
+      "contingentBeneficiary": null,
+      "contactInfo": {
+        "address": "123 Maple Street, Atlanta, GA 30301",
+        "email": "jane.smith@email.com",
+        "phone": "(404) 555-0123"
+      },
+      "taxWithholding": {
+        "federal": 10.0,
+        "state": 5.0
+      },
+      "specialInstructions": "",
+      "lastUpdated": "2024-11-15T10:30:00Z"
+    },
     "notes": "Illustrative policy data for hackathon PoC.",
     "alerts": [
       {
@@ -33,7 +56,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -49,7 +72,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-16T21:56:17.445251",
+          "generated_at": "2026-02-17T21:38:48.506333",
           "algorithm_version": "1.0.0"
         }
       },
@@ -64,7 +87,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -106,7 +129,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.445251",
+          "generated_at": "2026-02-17T21:38:48.506333",
           "algorithm_version": "1.0.0"
         }
       }
@@ -133,6 +156,20 @@
       "m_e_fee": 0.0,
       "riderFee": 0.0
     },
+    "nonFinancialData": {
+      "ownerName": "Jane Smith",
+      "ownerSSN": "***-**-1234",
+      "primaryBeneficiary": null,
+      "contingentBeneficiary": null,
+      "contactInfo": {
+        "address": "123 Maple Street, Atlanta, GA 30301",
+        "email": "jane.smith@email.com",
+        "phone": "(404) 555-0123"
+      },
+      "taxWithholding": null,
+      "specialInstructions": "",
+      "lastUpdated": "2019-06-10T14:20:00Z"
+    },
     "notes": "Illustrative policy data for hackathon PoC.",
     "alerts": [
       {
@@ -146,7 +183,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -162,7 +199,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-16T21:56:17.445752",
+          "generated_at": "2026-02-17T21:38:48.506333",
           "algorithm_version": "1.0.0"
         }
       },
@@ -177,7 +214,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -219,8 +256,73 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.445752",
+          "generated_at": "2026-02-17T21:38:48.506832",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90002-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "2 fields need attention",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 85,
+          "confidence": 0.92,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": []
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 2,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Owner contact information outdated by 6+ years",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.506832",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -246,6 +348,26 @@
       "m_e_fee": 0.0,
       "riderFee": 0.79
     },
+    "nonFinancialData": {
+      "ownerName": "Robert Johnson",
+      "ownerSSN": "***-**-9876",
+      "primaryBeneficiary": {
+        "name": "Sarah Johnson",
+        "relationship": "Spouse",
+        "ssn": null,
+        "dateOfBirth": null,
+        "allocationPercent": 100.0
+      },
+      "contingentBeneficiary": null,
+      "contactInfo": {
+        "address": "789 Old Address, Raleigh, NC 27601",
+        "email": null,
+        "phone": "(919) 555-0199"
+      },
+      "taxWithholding": null,
+      "specialInstructions": "",
+      "lastUpdated": "2018-07-05T09:15:00Z"
+    },
     "notes": "Illustrative policy data for hackathon PoC.",
     "alerts": [
       {
@@ -259,7 +381,7 @@
           "Client age and income needs suggest review timing",
           "Deferral vs. activation tradeoffs warrant discussion"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 48,
           "confidence": 0.75,
@@ -287,7 +409,7 @@
             "Payout rate increases from 5.0% to 5.5% at age 64"
           ],
           "data_points_analyzed": 18,
-          "generated_at": "2026-02-16T21:56:17.445752",
+          "generated_at": "2026-02-17T21:38:48.506832",
           "algorithm_version": "1.0.0"
         }
       },
@@ -302,7 +424,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -347,8 +469,80 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.445752",
+          "generated_at": "2026-02-17T21:38:48.506832",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90003-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary SSN missing",
+          "Primary beneficiary date of birth missing",
+          "Tax withholding elections not selected",
+          "Owner email address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 77,
+          "confidence": 0.92,
+          "missing_fields_analysis": {
+            "critical_missing": [],
+            "important_missing": [
+              {
+                "field": "primary_beneficiary_details",
+                "status": "Incomplete (missing SSN or DOB)",
+                "priority": "HIGH"
+              },
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true,
+                "age_in_years": 7.62217659137577
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 3,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Beneficiary information incomplete (missing SSN or DOB)",
+            "Tax withholding elections never completed",
+            "Owner contact information outdated by 7+ years",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.506832",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -374,6 +568,35 @@
       "m_e_fee": 0.0,
       "riderFee": 0.0
     },
+    "nonFinancialData": {
+      "ownerName": "Robert Johnson",
+      "ownerSSN": "***-**-9876",
+      "primaryBeneficiary": {
+        "name": "Sarah Johnson",
+        "relationship": "Spouse",
+        "ssn": "***-**-4321",
+        "dateOfBirth": "1972-08-22",
+        "allocationPercent": 60.0
+      },
+      "contingentBeneficiary": {
+        "name": "Michael Johnson",
+        "relationship": "Child",
+        "ssn": "***-**-7890",
+        "dateOfBirth": "1995-12-10",
+        "allocationPercent": 40.0
+      },
+      "contactInfo": {
+        "address": "456 Oak Ave, Chapel Hill, NC 27514",
+        "email": "robert.johnson@email.com",
+        "phone": "(919) 555-0199"
+      },
+      "taxWithholding": {
+        "federal": 15.0,
+        "state": 5.5
+      },
+      "specialInstructions": "Contact spouse first for any policy changes",
+      "lastUpdated": "2025-09-20T14:45:00Z"
+    },
     "notes": "Illustrative policy data for hackathon PoC.",
     "alerts": [
       {
@@ -387,7 +610,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -432,7 +655,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.446253",
+          "generated_at": "2026-02-17T21:38:48.507332",
           "algorithm_version": "1.0.0"
         }
       }
@@ -459,6 +682,26 @@
       "m_e_fee": 0.0,
       "riderFee": 0.0
     },
+    "nonFinancialData": {
+      "ownerName": "Maria Garcia",
+      "ownerSSN": "***-**-5555",
+      "primaryBeneficiary": {
+        "name": "Carlos Garcia",
+        "relationship": "Spouse",
+        "ssn": null,
+        "dateOfBirth": "1968-05-18",
+        "allocationPercent": 100.0
+      },
+      "contingentBeneficiary": null,
+      "contactInfo": {
+        "address": "234 Palm Drive, Miami, FL 33101",
+        "email": null,
+        "phone": "(305) 555-0145"
+      },
+      "taxWithholding": null,
+      "specialInstructions": "",
+      "lastUpdated": "2020-03-12T11:00:00Z"
+    },
     "notes": "Illustrative policy data for hackathon PoC.",
     "alerts": [
       {
@@ -472,7 +715,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -488,7 +731,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-16T21:56:17.446253",
+          "generated_at": "2026-02-17T21:38:48.507332",
           "algorithm_version": "1.0.0"
         }
       },
@@ -503,7 +746,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -548,8 +791,80 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.446253",
+          "generated_at": "2026-02-17T21:38:48.507332",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90005-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary SSN missing",
+          "Primary beneficiary date of birth missing",
+          "Tax withholding elections not selected",
+          "Owner email address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 77,
+          "confidence": 0.92,
+          "missing_fields_analysis": {
+            "critical_missing": [],
+            "important_missing": [
+              {
+                "field": "primary_beneficiary_details",
+                "status": "Incomplete (missing SSN or DOB)",
+                "priority": "HIGH"
+              },
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true,
+                "age_in_years": 5.935660506502396
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 3,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Beneficiary information incomplete (missing SSN or DOB)",
+            "Tax withholding elections never completed",
+            "Owner contact information outdated by 5+ years",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.507835",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -588,7 +903,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -630,8 +945,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.446253",
+          "generated_at": "2026-02-17T21:38:48.507835",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90006-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.507835",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -670,7 +1065,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -712,8 +1107,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.446253",
+          "generated_at": "2026-02-17T21:38:48.507835",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90007-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.508332",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -752,7 +1227,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -794,8 +1269,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.446752",
+          "generated_at": "2026-02-17T21:38:48.508332",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90008-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.508332",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -834,7 +1389,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -879,8 +1434,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.446752",
+          "generated_at": "2026-02-17T21:38:48.508332",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90009-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.508332",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -919,7 +1554,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -964,8 +1599,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.446752",
+          "generated_at": "2026-02-17T21:38:48.508833",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90010-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.508833",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -1004,7 +1719,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 45,
           "confidence": 0.72,
@@ -1046,8 +1761,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.446752",
+          "generated_at": "2026-02-17T21:38:48.508833",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90011-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.508833",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -1086,7 +1881,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 45,
           "confidence": 0.72,
@@ -1128,8 +1923,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.447252",
+          "generated_at": "2026-02-17T21:38:48.508833",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90012-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.509332",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -1156,7 +2031,88 @@
       "riderFee": 0.0
     },
     "notes": "Illustrative policy data for hackathon PoC.",
-    "alerts": []
+    "alerts": [
+      {
+        "alertId": "ALT-POL-90013-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.509332",
+          "algorithm_version": "missing_info_v1.0"
+        }
+      }
+    ]
   },
   {
     "policyId": "POL-90014",
@@ -1192,7 +2148,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -1208,7 +2164,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-16T21:56:17.447252",
+          "generated_at": "2026-02-17T21:38:48.509332",
           "algorithm_version": "1.0.0"
         }
       },
@@ -1223,7 +2179,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -1265,8 +2221,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.447754",
+          "generated_at": "2026-02-17T21:38:48.509332",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90014-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.509332",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -1305,7 +2341,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -1347,8 +2383,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.447754",
+          "generated_at": "2026-02-17T21:38:48.509832",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90015-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.509832",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -1387,7 +2503,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -1403,7 +2519,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-16T21:56:17.447754",
+          "generated_at": "2026-02-17T21:38:48.509832",
           "algorithm_version": "1.0.0"
         }
       },
@@ -1418,7 +2534,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -1463,8 +2579,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.447754",
+          "generated_at": "2026-02-17T21:38:48.509832",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90016-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.509832",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -1503,7 +2699,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -1519,7 +2715,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-16T21:56:17.448254",
+          "generated_at": "2026-02-17T21:38:48.510335",
           "algorithm_version": "1.0.0"
         }
       },
@@ -1534,7 +2730,7 @@
           "Client age and income needs suggest review timing",
           "Deferral vs. activation tradeoffs warrant discussion"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 48,
           "confidence": 0.75,
@@ -1562,7 +2758,7 @@
             "Payout rate increases from 5.0% to 5.5% at age 66"
           ],
           "data_points_analyzed": 18,
-          "generated_at": "2026-02-16T21:56:17.448254",
+          "generated_at": "2026-02-17T21:38:48.510335",
           "algorithm_version": "1.0.0"
         }
       },
@@ -1577,7 +2773,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -1622,8 +2818,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.448254",
+          "generated_at": "2026-02-17T21:38:48.510335",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90017-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.510335",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -1662,7 +2938,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -1707,8 +2983,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.448254",
+          "generated_at": "2026-02-17T21:38:48.510335",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90018-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.510335",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -1747,7 +3103,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -1789,8 +3145,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.448752",
+          "generated_at": "2026-02-17T21:38:48.510833",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90019-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.510833",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -1829,7 +3265,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -1871,8 +3307,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.448752",
+          "generated_at": "2026-02-17T21:38:48.510833",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90020-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.510833",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -1911,7 +3427,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -1927,7 +3443,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-16T21:56:17.448752",
+          "generated_at": "2026-02-17T21:38:48.510833",
           "algorithm_version": "1.0.0"
         }
       },
@@ -1942,7 +3458,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -1984,8 +3500,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.448752",
+          "generated_at": "2026-02-17T21:38:48.510833",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90021-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.511334",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -2024,7 +3620,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -2069,8 +3665,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.449252",
+          "generated_at": "2026-02-17T21:38:48.511334",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90022-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.511334",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]
@@ -2109,7 +3785,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-16",
+        "createdAt": "2026-02-17",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -2154,8 +3830,88 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-16T21:56:17.449252",
+          "generated_at": "2026-02-17T21:38:48.511334",
           "algorithm_version": "1.0.0"
+        }
+      },
+      {
+        "alertId": "ALT-POL-90023-MISS",
+        "type": "MISSING_INFO",
+        "severity": "HIGH",
+        "title": "Missing Information",
+        "reasonShort": "4 missing/incomplete fields",
+        "reasons": [
+          "Primary beneficiary not designated",
+          "Tax withholding elections not selected",
+          "Owner email address missing",
+          "Owner mailing address missing"
+        ],
+        "createdAt": "2026-02-17",
+        "ai_analysis": {
+          "ai_score": 83,
+          "confidence": 0.85,
+          "missing_fields_analysis": {
+            "critical_missing": [
+              {
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+              }
+            ],
+            "important_missing": [
+              {
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+              }
+            ],
+            "outdated_fields": [
+              {
+                "field": "email_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              },
+              {
+                "field": "owner_address",
+                "policy_value": null,
+                "priority": "MEDIUM",
+                "auto_update_eligible": true
+              }
+            ]
+          },
+          "dtcc_integration": {
+            "eligible_for_update": true,
+            "carrier_supports_admin_api": true,
+            "estimated_fields_to_update": 4,
+            "auto_apply_from_profile": [
+              "owner_name",
+              "ssn",
+              "address",
+              "email",
+              "phone"
+            ],
+            "requires_advisor_input": [
+              "primary_beneficiary",
+              "tax_withholding_elections"
+            ]
+          },
+          "compliance_notes": [
+            "Beneficiary designation recommended for estate planning",
+            "Tax withholding elections help clients avoid year-end tax surprises",
+            "Contact information updates ensure policy communications reach client"
+          ],
+          "key_factors": [
+            "Primary beneficiary designation missing (required field)",
+            "Tax withholding elections never completed",
+            "Contact information never updated",
+            "Account profile has current information available for auto-update"
+          ],
+          "data_points_analyzed": 8,
+          "generated_at": "2026-02-17T21:38:48.511334",
+          "algorithm_version": "missing_info_v1.0"
         }
       }
     ]

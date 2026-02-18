@@ -12,6 +12,7 @@ class AlertType(str, Enum):
     REPLACEMENT = "REPLACEMENT"
     INCOME_ACTIVATION = "INCOME_ACTIVATION"
     SUITABILITY_DRIFT = "SUITABILITY_DRIFT"
+    MISSING_INFO = "MISSING_INFO"
 
 
 class AlertSeverity(str, Enum):

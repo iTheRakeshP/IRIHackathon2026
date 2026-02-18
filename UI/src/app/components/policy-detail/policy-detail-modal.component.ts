@@ -18,6 +18,7 @@ import { PolicyOverviewComponent } from './components/policy-overview.component'
 import { ReplacementModuleComponent } from './modules/replacement-module.component';
 import { IncomeActivationModuleComponent } from './modules/income-activation-module.component';
 import { SuitabilityDriftModuleComponent } from './modules/suitability-drift-module.component';
+import { MissingInfoModuleComponent } from './modules/missing-info-module.component';
 import { AiChatDrawerComponent } from '../ai-chat-drawer/ai-chat-drawer.component';
 
 @Component({
@@ -38,6 +39,7 @@ import { AiChatDrawerComponent } from '../ai-chat-drawer/ai-chat-drawer.componen
     ReplacementModuleComponent,
     IncomeActivationModuleComponent,
     SuitabilityDriftModuleComponent,
+    MissingInfoModuleComponent,
     AiChatDrawerComponent
   ],
   templateUrl: './policy-detail-modal.component.html',

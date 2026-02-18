@@ -21,6 +21,10 @@ export class ApiService {
     return this.http.get<PolicyOverview>(`${this.API_URL}/policies/${policyId}`);
   }
 
+  updatePolicyNonFinancialData(policyId: string, data: any): Observable<any> {
+    return this.http.post<any>(`${this.API_URL}/policies/${policyId}/update-non-financial`, data);
+  }
+
   // Client endpoints
   getClientById(clientId: string): Observable<Client> {
     return this.http.get<Client>(`${this.API_URL}/clients/${clientId}`);

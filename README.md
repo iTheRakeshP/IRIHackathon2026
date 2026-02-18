@@ -7,7 +7,7 @@ An intelligent platform for in-force annuity policy review, featuring AI-powered
 ## 🎯 Project Overview
 
 This application helps financial advisors review in-force annuity policies with:
-- **Automated Alert Detection** - Flags policies requiring review (Replacement Opportunities, Income Activation, Suitability Drift)
+- **Automated Alert Detection** - Flags policies requiring review (Replacement Opportunities, Income Activation, Missing Info, Suitability Drift)
 - **AI Copilot** - Contextual AI assistance for policy analysis and recommendations
 - **Compliance Tools** - Built-in compliance workflows for suitability verification and replacement reviews
 - **Product Comparison** - Smart product matching with side-by-side comparisons
@@ -120,7 +120,7 @@ UI will be available at: **http://localhost:4200**
 ### Dashboard View
 1. Navigate to http://localhost:4200
 2. View policies grouped by client account
-3. See alert badges (Replacement, Income Activation, Suitability Drift)
+3. See alert badges (Replacement, Income Activation, Missing Info, Suitability Drift)
 4. Click **Review** button to open Policy Detail Modal
 
 ### Policy Detail Modal
@@ -128,6 +128,7 @@ UI will be available at: **http://localhost:4200**
 2. **Alert Review Modules**:
    - **Replacement Opportunity**: 3-step workflow (Why Flagged → Verify Suitability → Review Alternatives)
    - **Income Activation**: Scenario comparison for income activation
+   - **Missing Info**: DTCC Administrative API integration for non-financial updates
    - **Suitability Drift**: Change detection and re-verification
 
 ### AI Copilot

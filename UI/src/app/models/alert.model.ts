@@ -1,4 +1,4 @@
-export type AlertType = 'REPLACEMENT' | 'INCOME_ACTIVATION' | 'SUITABILITY_DRIFT';
+export type AlertType = 'REPLACEMENT' | 'INCOME_ACTIVATION' | 'SUITABILITY_DRIFT' | 'MISSING_INFO';
 export type AlertSeverity = 'HIGH' | 'MEDIUM' | 'LOW';
 
 export interface Alert {

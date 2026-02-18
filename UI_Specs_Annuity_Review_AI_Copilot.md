@@ -41,6 +41,7 @@ Surface policies, show alert signals, and open policy review.
   - 🔴 Replacement Opportunity
   - 🟣 Income Activation
   - 🟡 Suitability Drift
+  - 🔵 Missing Info
 
 ### Interaction
 - Review → opens Policy Detail Modal
@@ -169,13 +170,90 @@ Body
 
 ---
 
+### 5.4 Missing Info (🔵)
+
+#### Purpose
+Identify and update incomplete non-financial policy data using DTCC Administrative API integration.
+
+#### Layout Structure
+
+**Section 1: What's Missing**
+- Bulleted list of incomplete/outdated fields
+- Severity indicators (Required vs. Recommended)
+- Last update timestamp (if available)
+
+**Section 2: Account Profile Information (Read-Only)**
+- Visual distinction (light gray background, disabled appearance)
+- Header: "Information from Account Profile (Auto-Applied on Submit)"
+- Display fields:
+  - Owner Name
+  - Social Security Number / Tax ID (masked: ***-**-1234)
+  - Registered Address
+  - Email Address
+  - Phone Number
+  - Last Profile Update Date
+- Info icon with tooltip: "This information comes from the client's account profile and will be automatically applied to the policy upon submission."
+
+**Section 3: Policy-Specific Missing Information (Editable)**
+- Header: "Update Policy Information"
+- Form fields with validation:
+  - **Primary Beneficiary**
+    - Full Name (required)
+    - Relationship (dropdown)
+    - SSN / Tax ID
+    - Date of Birth
+    - Allocation Percentage (must total 100% with contingent)
+  - **Contingent Beneficiary** (optional, but if entered must be complete)
+    - Same fields as primary
+    - Allocation Percentage
+  - **Contact Information** (if different from account)
+    - Mailing Address (checkbox: "Same as account")
+    - Phone (checkbox: "Same as account")
+  - **Tax Withholding Elections**
+    - Federal withholding percentage
+    - State withholding (if applicable)
+  - **Special Instructions** (optional text area)
+
+**Validation Rules:**
+- Primary beneficiary required
+- Total allocation percentages must equal 100%
+- Valid SSN/Tax ID formats
+- Valid date formats
+- Required field indicators (*)
+
+**Section 4: DTCC Submission**
+- Compliance note: "Updates will be submitted via DTCC Administrative API for non-financial changes."
+- Summary of changes before submit
+- Actions:
+  - **Submit to DTCC** (primary button)
+    - Shows loading state: "Submitting to DTCC Administrative API..."
+    - Success: "Policy updated successfully. Changes processed via DTCC."
+    - Removes alert from policy
+  - **Save Draft** (secondary button - saves locally, doesn't submit)
+  - **Cancel** (returns to collapsed state)
+
+**AI Quick Actions:**
+- "Explain beneficiary designation best practices"
+- "What information is required by regulation?"
+- "Help me understand tax withholding options"
+
+**Mock Behavior (Hackathon):**
+- Simulates 1-2 second API call delay
+- Logs would-be DTCC payload to console
+- Updates in-memory data store
+- Shows success notification
+- Removes alert from policy
+
+---
+
 ## 6. Alert Severity & Default Focus
 
 ### Severity Order
 1. 🔴 Replacement / Renewal critical
 2. 🟣 Income Activation
-3. 🟡 Suitability Drift
-4. Informational
+3. � Missing Info
+4. 🟡 Suitability Drift
+5. Informational
 
 ### Default Behavior
 - Overview always visible

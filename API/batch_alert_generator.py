@@ -443,6 +443,278 @@ class AIAlertGenerator:
             "ai_analysis": ai_analysis
         }
     
+    def _calculate_missing_info_score(self, policy: Dict, client: Dict) -> Dict[str, Any]:
+        """
+        Calculate MISSING_INFO alert AI score
+        
+        Algorithm:
+        - Data Completeness (40%): Required fields missing/incomplete
+        - Data Recency (30%): Age of last update
+        - Regulatory Importance (20%): Critical required fields
+        - DTCC Eligibility (10%): Updateable via DTCC Administrative API
+        """
+        non_financial = policy.get("nonFinancialData", {})
+        if not non_financial:
+            non_financial = {}
+        
+        primary_ben = non_financial.get("primaryBeneficiary")
+        contingent_ben = non_financial.get("contingentBeneficiary")
+        contact_info = non_financial.get("contactInfo", {})
+        tax_withholding = non_financial.get("taxWithholding")
+        last_updated_str = non_financial.get("lastUpdated")
+        
+        # Track missing and incomplete fields
+        critical_missing = []
+        important_missing = []
+        outdated_fields = []
+        
+        # A) Data Completeness Score (0-40)
+        completeness_score = 0
+        
+        # Primary beneficiary (CRITICAL - 15 points if missing/incomplete)
+        if not primary_ben:
+            critical_missing.append({
+                "field": "primary_beneficiary",
+                "status": "NULL",
+                "regulatory_requirement": "Required by state law",
+                "priority": "CRITICAL"
+            })
+            completeness_score += 15
+        elif not primary_ben.get("ssn") or not primary_ben.get("dateOfBirth"):
+            important_missing.append({
+                "field": "primary_beneficiary_details",
+                "status": "Incomplete (missing SSN or DOB)",
+                "priority": "HIGH"
+            })
+            completeness_score += 10
+        
+        # Tax withholding (HIGH - 8 points if missing)
+        if not tax_withholding or (tax_withholding.get("federal") is None and tax_withholding.get("state") is None):
+            important_missing.append({
+                "field": "tax_withholding_federal",
+                "status": "Not elected",
+                "regulatory_requirement": "IRS recommended",
+                "priority": "HIGH"
+            })
+            completeness_score += 8
+        
+        # Email (MEDIUM - 5 points if missing)
+        if not contact_info.get("email"):
+            outdated_fields.append({
+                "field": "email_address",
+                "policy_value": None,
+                "priority": "MEDIUM",
+                "auto_update_eligible": True
+            })
+            completeness_score += 5
+        
+        # Address (MEDIUM - 3 points if missing)
+        if not contact_info.get("address"):
+            outdated_fields.append({
+                "field": "owner_address",
+                "policy_value": None,
+                "priority": "MEDIUM",
+                "auto_update_eligible": True
+            })
+            completeness_score += 3
+        
+        # Contingent beneficiary (RECOMMENDED - 2 points)
+        if not contingent_ben:
+            completeness_score += 2
+        
+        # B) Data Recency Score (0-30)
+        recency_score = 0
+        if last_updated_str:
+            try:
+                last_updated = datetime.fromisoformat(last_updated_str.replace('Z', '+00:00'))
+                age_years = (datetime.now(last_updated.tzinfo) - last_updated).days / 365.25
+                if age_years > 5:
+                    recency_score = 30
+                    for field in outdated_fields:
+                        field["age_in_years"] = age_years
+                elif age_years > 3:
+                    recency_score = 18
+                elif age_years > 1:
+                    recency_score = 9
+            except:
+                recency_score = 15  # Unknown age = moderate score
+        else:
+            recency_score = 20  # Never updated = high score
+        
+        # C) Regulatory Importance Score (0-20)
+        regulatory_score = len(critical_missing) * 20  # Critical field missing = full score
+        if len(important_missing) > 0:
+            regulatory_score = max(regulatory_score, 12)
+        
+        # D) DTCC Eligibility Score (0-10)
+        dtcc_score = 10  # All fields are DTCC updateable in this scenario
+        
+        # Total AI Score
+        ai_score = min(100, int(completeness_score + recency_score + regulatory_score + dtcc_score))
+        
+        # Confidence based on data quality
+        confidence = 0.92 if last_updated_str else 0.85
+        
+        # Auto-apply fields from client profile
+        auto_apply_from_profile = [
+            "owner_name",
+            "ssn",
+            "address",
+            "email",
+            "phone"
+        ]
+        
+        requires_advisor_input = []
+        if not primary_ben:
+            requires_advisor_input.append("primary_beneficiary")
+        if not tax_withholding:
+            requires_advisor_input.append("tax_withholding_elections")
+        
+        # Build key factors
+        key_factors = []
+        if critical_missing:
+            key_factors.append("Primary beneficiary designation missing (required field)")
+        if important_missing:
+            for item in important_missing:
+                if "tax_withholding" in item["field"]:
+                    key_factors.append("Tax withholding elections never completed")
+                elif "beneficiary" in item["field"]:
+                    key_factors.append("Beneficiary information incomplete (missing SSN or DOB)")
+        if recency_score >= 18:
+            key_factors.append(f"Owner contact information outdated by {int(age_years)}+ years" if last_updated_str else "Contact information never updated")
+        if len(auto_apply_from_profile) > 0:
+            key_factors.append("Account profile has current information available for auto-update")
+        
+        return {
+            "ai_score": ai_score,
+            "confidence": confidence,
+            "missing_fields_analysis": {
+                "critical_missing": critical_missing,
+                "important_missing": important_missing,
+                "outdated_fields": outdated_fields
+            },
+            "dtcc_integration": {
+                "eligible_for_update": True,
+                "carrier_supports_admin_api": True,
+                "estimated_fields_to_update": len(critical_missing) + len(important_missing) + len(outdated_fields),
+                "auto_apply_from_profile": auto_apply_from_profile,
+                "requires_advisor_input": requires_advisor_input
+            },
+            "compliance_notes": [
+                "Beneficiary designation recommended for estate planning",
+                "Tax withholding elections help clients avoid year-end tax surprises",
+                "Contact information updates ensure policy communications reach client"
+            ],
+            "key_factors": key_factors,
+            "data_points_analyzed": 8,
+            "generated_at": datetime.now().isoformat(),
+            "algorithm_version": "missing_info_v1.0"
+        }
+    
+    def _should_generate_missing_info_alert(self, policy: Dict, client: Dict) -> bool:
+        """Check if MISSING_INFO alert should be generated"""
+        non_financial = policy.get("nonFinancialData")
+        
+        # If no nonFinancialData at all, definitely needs alert
+        if not non_financial:
+            return True
+        
+        # Check for critical missing fields
+        primary_ben = non_financial.get("primaryBeneficiary")
+        tax_withholding = non_financial.get("taxWithholding")
+        contact_info = non_financial.get("contactInfo", {})
+        
+        # Trigger if primary beneficiary missing
+        if not primary_ben:
+            return True
+        
+        # Trigger if beneficiary incomplete (missing SSN or DOB)
+        if primary_ben and (not primary_ben.get("ssn") or not primary_ben.get("dateOfBirth")):
+            return True
+        
+        # Trigger if no tax withholding
+        if not tax_withholding or (tax_withholding.get("federal") is None and tax_withholding.get("state") is None):
+            return True
+        
+        # Trigger if email missing
+        if not contact_info.get("email"):
+            return True
+        
+        # Trigger if data is very old (>3 years)
+        last_updated_str = non_financial.get("lastUpdated")
+        if last_updated_str:
+            try:
+                last_updated = datetime.fromisoformat(last_updated_str.replace('Z', '+00:00'))
+                age_years = (datetime.now(last_updated.tzinfo) - last_updated).days / 365.25
+                if age_years > 3:
+                    return True
+            except:
+                pass
+        
+        return False
+    
+    def _create_missing_info_alert(self, policy: Dict, client: Dict, ai_analysis: Dict) -> Dict:
+        """Create MISSING_INFO alert object"""
+        if ai_analysis["ai_score"] >= 75:
+            severity = "HIGH"
+        elif ai_analysis["ai_score"] >= 50:
+            severity = "MEDIUM"
+        else:
+            severity = "LOW"
+        
+        # Build SPECIFIC reason list from missing items
+        reasons = []
+        missing_analysis = ai_analysis.get("missing_fields_analysis", {})
+        
+        # Critical missing fields
+        for item in missing_analysis.get("critical_missing", []):
+            if item["field"] == "primary_beneficiary":
+                reasons.append("Primary beneficiary not designated")
+        
+        # Important missing fields - be specific
+        for item in missing_analysis.get("important_missing", []):
+            if "primary_beneficiary_details" in item["field"]:
+                if "SSN" in item.get("status", ""):
+                    reasons.append("Primary beneficiary SSN missing")
+                if "DOB" in item.get("status", ""):
+                    reasons.append("Primary beneficiary date of birth missing")
+                if not any(x in item.get("status", "") for x in ["SSN", "DOB"]):
+                    reasons.append("Primary beneficiary details incomplete")
+            elif "tax_withholding" in item["field"]:
+                reasons.append("Tax withholding elections not selected")
+        
+        # Outdated/missing fields - show which specific fields
+        for item in missing_analysis.get("outdated_fields", []):
+            if item["field"] == "email_address":
+                reasons.append("Owner email address missing")
+            elif item["field"] == "owner_address":
+                reasons.append("Owner mailing address missing")
+            elif item["field"] == "phone":
+                reasons.append("Owner phone number missing")
+        
+        if not reasons:
+            reasons = ["Administrative data requires update"]
+        
+        # Create a concise summary for reasonShort
+        count = len(reasons)
+        if count == 1:
+            reason_short = reasons[0]
+        elif count <= 3:
+            reason_short = f"{count} fields need attention"
+        else:
+            reason_short = f"{count} missing/incomplete fields"
+        
+        return {
+            "alertId": f"ALT-{policy['policyId']}-MISS",
+            "type": "MISSING_INFO",
+            "severity": severity,
+            "title": "Missing Information",
+            "reasonShort": reason_short,
+            "reasons": reasons,
+            "createdAt": datetime.now().strftime("%Y-%m-%d"),
+            "ai_analysis": ai_analysis
+        }
+    
     def generate_alerts(self):
         """
         Main batch process: Analyze policies and generate alerts with AI scoring
@@ -496,6 +768,13 @@ class AIAlertGenerator:
                 alert = self._create_suitability_drift_alert(policy, client, ai_analysis)
                 generated_alerts.append(alert)
                 print(f"   ✓ SUITABILITY_DRIFT alert generated (Score: {ai_analysis['ai_score']}, Confidence: {ai_analysis['confidence']:.2f})")
+            
+            # Check MISSING_INFO
+            if self._should_generate_missing_info_alert(policy, client):
+                ai_analysis = self._calculate_missing_info_score(policy, client)
+                alert = self._create_missing_info_alert(policy, client, ai_analysis)
+                generated_alerts.append(alert)
+                print(f"   ✓ MISSING_INFO alert generated (Score: {ai_analysis['ai_score']}, Confidence: {ai_analysis['confidence']:.2f})")
             
             if not generated_alerts:
                 print(f"   ℹ️  No alerts generated (all conditions below threshold)")

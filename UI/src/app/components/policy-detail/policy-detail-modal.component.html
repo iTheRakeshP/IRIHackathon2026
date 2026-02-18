@@ -135,6 +135,16 @@
                     (actionComplete)="onModuleActionComplete($event)">
                   </app-suitability-drift-module>
                 }
+
+                <!-- Missing Info Module -->
+                @if (alert.type === 'MISSING_INFO') {
+                  <app-missing-info-module
+                    [alert]="alert"
+                    [policy]="policy()!"
+                    [client]="client()!"
+                    (actionComplete)="onModuleActionComplete($event)">
+                  </app-missing-info-module>
+                }
               }
             </div>
           } @empty {

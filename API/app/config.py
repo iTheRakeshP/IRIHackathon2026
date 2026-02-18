@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     BASE_DIR: Path = Path(__file__).resolve().parent.parent
     DATA_DIR: Path = BASE_DIR / "data"
     CLIENTS_DATA_FILE: Path = DATA_DIR / "clients_profile.json"
-    POLICIES_DATA_FILE: Path = DATA_DIR / "policies.json"
+    POLICIES_DATA_FILE: Path = DATA_DIR / "alerts_generated.json"  # Use AI-generated alerts
     PRODUCTS_DATA_FILE: Path = DATA_DIR / "products.json"
     
     # AI Settings (for future implementation)

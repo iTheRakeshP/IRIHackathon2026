@@ -7,6 +7,40 @@ from decimal import Decimal
 from app.models.alert import Alert, AlertSummary
 
 
+class Beneficiary(BaseModel):
+    """Beneficiary information"""
+    name: Optional[str] = Field(None, description="Beneficiary full name")
+    relationship: Optional[str] = Field(None, description="Relationship to owner")
+    ssn: Optional[str] = Field(None, description="Social Security Number")
+    dateOfBirth: Optional[str] = Field(None, description="Date of birth")
+    allocationPercent: Optional[float] = Field(None, description="Allocation percentage")
+
+
+class TaxWithholding(BaseModel):
+    """Tax withholding elections"""
+    federal: Optional[float] = Field(None, description="Federal withholding percentage")
+    state: Optional[float] = Field(None, description="State withholding percentage")
+
+
+class ContactInfo(BaseModel):
+    """Contact information"""
+    address: Optional[str] = Field(None, description="Mailing address")
+    email: Optional[str] = Field(None, description="Email address")
+    phone: Optional[str] = Field(None, description="Phone number")
+
+
+class NonFinancialData(BaseModel):
+    """Non-financial policy data (DTCC Administrative API eligible)"""
+    ownerName: Optional[str] = Field(None, description="Policy owner name")
+    ownerSSN: Optional[str] = Field(None, description="Owner SSN (masked)")
+    primaryBeneficiary: Optional[Beneficiary] = Field(None, description="Primary beneficiary")
+    contingentBeneficiary: Optional[Beneficiary] = Field(None, description="Contingent beneficiary")
+    contactInfo: Optional[ContactInfo] = Field(None, description="Contact information on file")
+    taxWithholding: Optional[TaxWithholding] = Field(None, description="Tax withholding elections")
+    specialInstructions: Optional[str] = Field(None, description="Special instructions or notes")
+    lastUpdated: Optional[str] = Field(None, description="Last update timestamp")
+
+
 class PolicyFees(BaseModel):
     """Policy fee structure"""
     m_e_fee: float = Field(default=0.0, description="Mortality & Expense fee")
@@ -32,6 +66,7 @@ class Policy(BaseModel):
     renewalDays: Optional[int] = Field(None, description="Days until renewal")
     renewalCapRate: Optional[float] = Field(None, description="Renewal cap rate")
     fees: PolicyFees = Field(..., description="Fee structure")
+    nonFinancialData: Optional[NonFinancialData] = Field(None, description="Non-financial data (beneficiaries, contact, tax)")
     notes: str = Field(default="", description="Additional notes")
     alerts: List[Alert] = Field(default_factory=list, description="Active alerts for this policy")
 
@@ -86,4 +121,5 @@ class PolicyDetail(BaseModel):
     riderFee: Optional[float] = None
     meFee: Optional[float] = None
     adminFee: Optional[float] = None
+    nonFinancialData: Optional[NonFinancialData] = Field(None, description="Non-financial data")
     alerts: List[Alert] = Field(default_factory=list, description="Active alerts")

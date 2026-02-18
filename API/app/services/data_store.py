@@ -97,6 +97,14 @@ class DataStore:
                 return client
         return None
     
+    def update_policy(self, updated_policy: Policy) -> Optional[Policy]:
+        """Update a policy in the data store"""
+        for idx, policy in enumerate(self._policies):
+            if policy.policyId == updated_policy.policyId:
+                self._policies[idx] = updated_policy
+                return updated_policy
+        return None
+    
     
     def get_all_products(self) -> List[Product]:
         """Get all products in catalog"""

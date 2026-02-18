@@ -1,5 +1,35 @@
 import { Alert } from './alert.model';
 
+export interface Beneficiary {
+  name: string | null;
+  relationship: string | null;
+  ssn: string | null;
+  dateOfBirth: string | null;
+  allocationPercent: number | null;
+}
+
+export interface TaxWithholding {
+  federal: number | null;
+  state: number | null;
+}
+
+export interface ContactInfo {
+  address: string | null;
+  email: string | null;
+  phone: string | null;
+}
+
+export interface NonFinancialData {
+  ownerName: string | null;
+  ownerSSN: string | null;
+  primaryBeneficiary: Beneficiary | null;
+  contingentBeneficiary: Beneficiary | null;
+  contactInfo: ContactInfo | null;
+  taxWithholding: TaxWithholding | null;
+  specialInstructions: string | null;
+  lastUpdated: string | null;
+}
+
 export interface Policy {
   policyId: string;
   clientAccountNumber: string;
@@ -24,6 +54,7 @@ export interface Policy {
   riderFee?: number;
   meFee?: number;
   adminFee?: number;
+  nonFinancialData?: NonFinancialData;
   alerts: Alert[];
 }
 

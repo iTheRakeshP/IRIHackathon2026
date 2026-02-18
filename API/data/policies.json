@@ -20,6 +20,29 @@
       "m_e_fee": 0.0,
       "riderFee": 0.0
     },
+    "nonFinancialData": {
+      "ownerName": "Jane Smith",
+      "ownerSSN": "***-**-1234",
+      "primaryBeneficiary": {
+        "name": "John M. Smith",
+        "relationship": "Spouse",
+        "ssn": "***-**-5678",
+        "dateOfBirth": "1965-03-15",
+        "allocationPercent": 100.0
+      },
+      "contingentBeneficiary": null,
+      "contactInfo": {
+        "address": "123 Maple Street, Atlanta, GA 30301",
+        "email": "jane.smith@email.com",
+        "phone": "(404) 555-0123"
+      },
+      "taxWithholding": {
+        "federal": 10.0,
+        "state": 5.0
+      },
+      "specialInstructions": "",
+      "lastUpdated": "2024-11-15T10:30:00Z"
+    },
     "notes": "Illustrative policy data for hackathon PoC.",
     "alerts": [
       {
@@ -133,6 +156,20 @@
       "m_e_fee": 0.0,
       "riderFee": 0.0
     },
+    "nonFinancialData": {
+      "ownerName": "Jane Smith",
+      "ownerSSN": "***-**-1234",
+      "primaryBeneficiary": null,
+      "contingentBeneficiary": null,
+      "contactInfo": {
+        "address": "123 Maple Street, Atlanta, GA 30301",
+        "email": "jane.smith@email.com",
+        "phone": "(404) 555-0123"
+      },
+      "taxWithholding": null,
+      "specialInstructions": "",
+      "lastUpdated": "2019-06-10T14:20:00Z"
+    },
     "notes": "Illustrative policy data for hackathon PoC.",
     "alerts": [
       {
@@ -245,6 +282,26 @@
     "fees": {
       "m_e_fee": 0.0,
       "riderFee": 0.79
+    },
+    "nonFinancialData": {
+      "ownerName": "Robert Johnson",
+      "ownerSSN": "***-**-9876",
+      "primaryBeneficiary": {
+        "name": "Sarah Johnson",
+        "relationship": "Spouse",
+        "ssn": null,
+        "dateOfBirth": null,
+        "allocationPercent": 100.0
+      },
+      "contingentBeneficiary": null,
+      "contactInfo": {
+        "address": "789 Old Address, Raleigh, NC 27601",
+        "email": null,
+        "phone": "(919) 555-0199"
+      },
+      "taxWithholding": null,
+      "specialInstructions": "",
+      "lastUpdated": "2018-07-05T09:15:00Z"
     },
     "notes": "Illustrative policy data for hackathon PoC.",
     "alerts": [
@@ -374,6 +431,35 @@
       "m_e_fee": 0.0,
       "riderFee": 0.0
     },
+    "nonFinancialData": {
+      "ownerName": "Robert Johnson",
+      "ownerSSN": "***-**-9876",
+      "primaryBeneficiary": {
+        "name": "Sarah Johnson",
+        "relationship": "Spouse",
+        "ssn": "***-**-4321",
+        "dateOfBirth": "1972-08-22",
+        "allocationPercent": 60.0
+      },
+      "contingentBeneficiary": {
+        "name": "Michael Johnson",
+        "relationship": "Child",
+        "ssn": "***-**-7890",
+        "dateOfBirth": "1995-12-10",
+        "allocationPercent": 40.0
+      },
+      "contactInfo": {
+        "address": "456 Oak Ave, Chapel Hill, NC 27514",
+        "email": "robert.johnson@email.com",
+        "phone": "(919) 555-0199"
+      },
+      "taxWithholding": {
+        "federal": 15.0,
+        "state": 5.5
+      },
+      "specialInstructions": "Contact spouse first for any policy changes",
+      "lastUpdated": "2025-09-20T14:45:00Z"
+    },
     "notes": "Illustrative policy data for hackathon PoC.",
     "alerts": [
       {
@@ -458,6 +544,26 @@
     "fees": {
       "m_e_fee": 0.0,
       "riderFee": 0.0
+    },
+    "nonFinancialData": {
+      "ownerName": "Maria Garcia",
+      "ownerSSN": "***-**-5555",
+      "primaryBeneficiary": {
+        "name": "Carlos Garcia",
+        "relationship": "Spouse",
+        "ssn": null,
+        "dateOfBirth": "1968-05-18",
+        "allocationPercent": 100.0
+      },
+      "contingentBeneficiary": null,
+      "contactInfo": {
+        "address": "234 Palm Drive, Miami, FL 33101",
+        "email": null,
+        "phone": "(305) 555-0145"
+      },
+      "taxWithholding": null,
+      "specialInstructions": "",
+      "lastUpdated": "2020-03-12T11:00:00Z"
     },
     "notes": "Illustrative policy data for hackathon PoC.",
     "alerts": [

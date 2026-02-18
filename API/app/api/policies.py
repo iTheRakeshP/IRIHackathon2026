@@ -1,10 +1,11 @@
 """
 Policy API endpoints
 """
-from fastapi import APIRouter, HTTPException, Path, Query
-from typing import List, Optional
+from fastapi import APIRouter, HTTPException, Path, Query, Body
+from typing import List, Optional, Dict, Any
 from datetime import datetime, timedelta
-from app.models.policy import Policy, PolicySummary, ClientPoliciesGroup, PolicyDetail
+import asyncio
+from app.models.policy import Policy, PolicySummary, ClientPoliciesGroup, PolicyDetail, NonFinancialData
 from app.models.alert import AlertSummary, AlertSeverity
 from app.services.data_store import data_store
 
@@ -85,6 +86,7 @@ def transform_policy_to_detail(policy: Policy, client_name: str = "") -> PolicyD
         riderFee=policy.fees.riderFee if policy.fees else None,
         meFee=policy.fees.m_e_fee if policy.fees else None,
         adminFee=None,  # Not in source data
+        nonFinancialData=policy.nonFinancialData,
         alerts=policy.alerts
     )
 
@@ -239,3 +241,122 @@ async def get_client_policies(
         summaries.append(summary)
     
     return summaries
+
+
+@router.post("/policies/{policy_id}/update-non-financial")
+async def update_policy_non_financial_data(
+    policy_id: str = Path(..., description="Policy ID"),
+    update_data: Dict[str, Any] = Body(..., description="Non-financial data update payload")
+):
+    """
+    Update policy non-financial data via DTCC Administrative API (Mock for hackathon).
+    
+    This endpoint simulates DTCC Administrative API integration for updating:
+    - Beneficiary designations
+    - Contact information (auto-applied from account profile)
+    - Tax withholding elections
+    - Special instructions
+    
+    For hackathon purposes, this is a mock implementation that:
+    1. Simulates 1-2 second API delay
+    2. Logs the would-be DTCC payload
+    3. Updates in-memory data store
+    4. Removes MISSING_INFO alert from the policy
+    5. Returns success with mock transaction ID
+    """
+    # Get the policy
+    policy = data_store.get_policy_by_id(policy_id)
+    if not policy:
+        raise HTTPException(status_code=404, detail=f"Policy {policy_id} not found")
+    
+    # Simulate DTCC API processing delay (1-2 seconds)
+    await asyncio.sleep(1.5)
+    
+    # Extract data from request
+    account_profile_data = update_data.get("accountProfileData", {})
+    policy_specific_data = update_data.get("policySpecificData", {})
+    
+    # Build DTCC payload (for logging/demonstration)
+    dtcc_payload = {
+        "policy_id": policy_id,
+        "carrier": policy.carrier,
+        "transaction_type": "ADMINISTRATIVE_UPDATE",
+        "timestamp": datetime.now().isoformat(),
+        "updates": {
+            "owner_name": account_profile_data.get("ownerName"),
+            "owner_ssn": account_profile_data.get("ssn"),
+            "contact_address": account_profile_data.get("address"),
+            "contact_email": account_profile_data.get("email"),
+            "contact_phone": account_profile_data.get("phone"),
+            "primary_beneficiary": policy_specific_data.get("primaryBeneficiary"),
+            "contingent_beneficiary": policy_specific_data.get("contingentBeneficiary"),
+            "tax_withholding": policy_specific_data.get("taxWithholding"),
+            "special_instructions": policy_specific_data.get("specialInstructions")
+        }
+    }
+    
+    # Log the DTCC payload (for hackathon demonstration)
+    print("\n" + "=" * 60)
+    print("🔵 DTCC ADMINISTRATIVE API - MOCK SUBMISSION")
+    print("=" * 60)
+    print(f"Policy ID: {policy_id}")
+    print(f"Carrier: {policy.carrier}")
+    print(f"Transaction Type: Administrative Update (Non-Financial)")
+    print("\nPayload that would be sent to DTCC:")
+    import json
+    print(json.dumps(dtcc_payload, indent=2))
+    print("=" * 60 + "\n")
+    
+    # Update policy's nonFinancialData
+    from app.models.policy import Beneficiary, ContactInfo, TaxWithholding
+    
+    primary_ben_data = policy_specific_data.get("primaryBeneficiary")
+    contingent_ben_data = policy_specific_data.get("contingentBeneficiary")
+    tax_data = policy_specific_data.get("taxWithholding")
+    
+    # Build NonFinancialData object
+    updated_non_financial = NonFinancialData(
+        ownerName=account_profile_data.get("ownerName"),
+        ownerSSN=account_profile_data.get("ssn"),
+        primaryBeneficiary=Beneficiary(**primary_ben_data) if primary_ben_data else None,
+        contingentBeneficiary=Beneficiary(**contingent_ben_data) if contingent_ben_data else None,
+        contactInfo=ContactInfo(
+            address=account_profile_data.get("address"),
+            email=account_profile_data.get("email"),
+            phone=account_profile_data.get("phone")
+        ),
+        taxWithholding=TaxWithholding(**tax_data) if tax_data else None,
+        specialInstructions=policy_specific_data.get("specialInstructions", ""),
+        lastUpdated=datetime.now().isoformat()
+    )
+    
+    # Update the policy
+    policy.nonFinancialData = updated_non_financial
+    
+    # Remove MISSING_INFO alert from policy
+    policy.alerts = [alert for alert in policy.alerts if alert.type != "MISSING_INFO"]
+    
+    # Update in data store
+    data_store.update_policy(policy)
+    
+    # Generate mock DTCC transaction ID
+    mock_transaction_id = f"DTCC-{datetime.now().strftime('%Y%m%d')}-{policy_id[-6:]}"
+    
+    # Track which fields were updated
+    updated_fields = []
+    if primary_ben_data:
+        updated_fields.append("beneficiaries")
+    if tax_data:
+        updated_fields.append("taxWithholding")
+    if account_profile_data.get("address") or account_profile_data.get("email"):
+        updated_fields.append("contactInfo")
+    
+    # Return success response
+    return {
+        "success": True,
+        "dtccTransactionId": mock_transaction_id,
+        "message": "Policy updated successfully via DTCC Administrative API",
+        "updatedFields": updated_fields,
+        "timestamp": datetime.now().isoformat(),
+        "mockNote": "This is a simulated DTCC integration for hackathon purposes"
+    }

@@ -63,7 +63,8 @@ export class PolicyDashboardComponent implements OnInit {
   availableAlertTypes: { value: AlertType, label: string }[] = [
     { value: 'REPLACEMENT', label: 'Replacement' },
     { value: 'INCOME_ACTIVATION', label: 'Income Activation' },
-    { value: 'SUITABILITY_DRIFT', label: 'Suitability Drift' }
+    { value: 'SUITABILITY_DRIFT', label: 'Suitability Drift' },
+    { value: 'MISSING_INFO', label: 'Missing Info' }
   ];
   availablePriorities: { value: AlertSeverity, label: string }[] = [
     { value: 'HIGH', label: 'High Priority' },
@@ -348,6 +349,11 @@ export class PolicyDashboardComponent implements OnInit {
           icon = 'info';
           color = 'primary';
           label = 'Suitability';
+          break;
+        case 'MISSING_INFO':
+          icon = 'assignment_late';
+          color = 'accent';
+          label = 'Missing Info';
           break;
       }
 

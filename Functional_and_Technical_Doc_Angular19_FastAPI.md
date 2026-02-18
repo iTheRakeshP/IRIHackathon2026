@@ -45,7 +45,20 @@
 2. Module shows neutral “what changed” bullets and “why review is appropriate.”
 3. Advisor requests AI: “Draft a review note.”
 4. Advisor saves note and marks reviewed.
-
+#### Journey E — Missing Info Update (DTCC Administrative API)
+1. Advisor expands **Missing Info** module.
+2. Module displays:
+   - Summary of missing/incomplete fields with severity indicators.
+   - **Account Profile Information** (read-only, prefilled): owner name, SSN, address, contact details marked as "Auto-Applied on Submit."
+   - **Policy-Specific Information** (editable form): beneficiary designations, tax withholding elections, special instructions.
+3. Advisor fills in required fields (beneficiary name, relationship, allocation percentages, tax elections).
+4. System validates entries (percentages total 100%, required fields complete, valid formats).
+5. Advisor optionally requests AI: "Explain beneficiary designation best practices" or "What tax withholding should I recommend?"
+6. Advisor clicks **Submit to DTCC**.
+7. System shows loading state: "Submitting to DTCC Administrative API..." (mock 1-2 second delay).
+8. System displays success message and logs DTCC payload (console for hackathon).
+9. Policy data updated in-memory, alert removed from policy.
+10. Advisor sees confirmation: "Policy updated successfully via DTCC Administrative API."
 ---
 
 ### 1.3 Functional Requirements
@@ -69,15 +82,18 @@
   - only one module expanded at a time,
   - module includes: why flagged, suitability verification (Replacement only), risks, comparison/scenarios (if applicable), next actions, Ask AI.
   - **Replacement Opportunity modules** require suitability review/edit before displaying alternatives.
+  - **Missing Info modules** display read-only account data and editable policy fields with DTCC submission workflow.
 - Allow:
   - mark module reviewed (per-alert state),
   - save note (manual or AI drafted),
-  - update client suitability (Replacement module).
+  - update client suitability (Replacement module),
+  - submit non-financial updates via DTCC API (Missing Info module).
 
 #### Alert Types (PoC)
 - **Replacement Opportunity** (HIGH)
 - **Income Activation** (MEDIUM)
 - **Suitability Drift** (LOW/MEDIUM)
+- **Missing Info** (MEDIUM)
 
 #### AI Copilot Drawer
 - Opens from Policy Detail modal without closing it.
@@ -119,6 +135,16 @@ Trigger if mismatch between:
 
 **AI Scoring:** Weighted drift detection: risk tolerance (35%), primary objective (30%), financial situation (20%), time horizon (15%). Flags critical mismatches (e.g., income objective but no income rider).
 
+#### Missing Info (examples)
+Trigger if:
+- Required non-financial data is incomplete or outdated (beneficiary designation, contact information, tax withholding elections),
+- Regulatory-required fields are missing,
+- Account profile information changed but not reflected in policy records.
+
+**AI Scoring:** Evaluates data completeness (40%), recency (30%), regulatory importance (20%), and DTCC update eligibility (10%). Flags MEDIUM severity when critical non-financial data is missing or outdated beyond acceptable thresholds.
+
+**DTCC Integration:** Uses DTCC Administrative API for non-financial updates. System auto-applies verified account/client profile data (name, SSN, address, contact details) and prompts advisor to complete policy-specific missing fields (beneficiary designations, percentages, tax elections). Mock implementation for hackathon.
+
 _For comprehensive AI algorithm details, data points analyzed, and scoring formulas, see Section 2.5._
 
 ---
@@ -153,6 +179,7 @@ _For comprehensive AI algorithm details, data points analyzed, and scoring formu
 5. Update suitability (if needed) → `PATCH /clients/{acct}/suitability`
 6. Fetch alternatives → `GET /policies/{policyId}/alternatives` (with updated suitability)
 7. AI prompt → `POST /ai/chat` with context payload
+8. Missing Info module → `POST /policies/{policyId}/update-non-financial` (mock DTCC API call)
 
 ---
 
@@ -288,6 +315,45 @@ backend/
 - `GET /clients/{clientAccountNumber}/policies` → summaries + alert summaries
 - `GET /policies/{policyId}` → overview + full alerts
 - `GET /policies/{policyId}/alternatives` → 2–3 illustrative alternatives
+- `POST /policies/{policyId}/update-non-financial` → DTCC Administrative API integration (mock)
+  - request:
+    ```json
+    {
+      "accountProfileData": {
+        "ownerName": "Jane Smith",
+        "ssn": "***-**-1234",
+        "address": "123 Main St, Boston, MA 02101",
+        "email": "jane.smith@email.com",
+        "phone": "(617) 555-0123"
+      },
+      "policySpecificData": {
+        "primaryBeneficiary": {
+          "name": "John Smith",
+          "relationship": "Spouse",
+          "ssn": "123-45-6789",
+          "dateOfBirth": "1965-03-15",
+          "allocationPercent": 100
+        },
+        "contingentBeneficiary": null,
+        "taxWithholding": {
+          "federal": 10,
+          "state": 5
+        },
+        "specialInstructions": ""
+      }
+    }
+    ```
+  - response:
+    ```json
+    {
+      "success": true,
+      "dtccTransactionId": "DTCC-2026-0217-1234567",
+      "message": "Policy updated successfully via DTCC Administrative API",
+      "updatedFields": ["beneficiaries", "taxWithholding", "contactInfo"],
+      "timestamp": "2026-02-17T20:45:30Z"
+    }
+    ```
+  - **Mock Behavior**: Simulates 1-2 second delay, logs payload, updates in-memory data, removes alert
 
 #### AI
 - `POST /ai/chat`
@@ -607,6 +673,188 @@ Trigger Conditions:
   "last_profile_update": "2026-01-15T10:30:00Z"
 }
 ```
+
+---
+
+### 2.5.4 Alert Type 4: MISSING INFO Detection (DTCC Administrative API)
+
+**AI Matching Algorithm:**
+
+The Missing Info alert identifies incomplete or outdated non-financial policy data that can be updated via DTCC Administrative API:
+
+**A) Data Completeness Analysis (40% weight)**
+- **Required Fields:** Beneficiary designation, owner contact information, tax withholding elections
+- **Recommended Fields:** Contingent beneficiary, special instructions, distribution preferences
+- **Field Status:**
+  - Empty/null = 100% incomplete
+  - Partial data = 50% incomplete (e.g., beneficiary name but no SSN)
+  - Complete = 0% incomplete
+
+**B) Data Recency Check (30% weight)**
+- Last update timestamp vs. current date
+- Account profile changes vs. policy records
+- Regulatory update cycles (annual review recommended)
+- Age thresholds:
+  - < 1 year: 0 points
+  - 1-3 years: 30 points
+  - 3-5 years: 60 points
+  - > 5 years: 100 points
+
+**C) Regulatory Importance (20% weight)**
+- Beneficiary designation: CRITICAL (required by regulation)
+- Tax withholding: HIGH (IRS requirement)
+- Contact information: MEDIUM (administrative best practice)
+- Special instructions: LOW (optional)
+
+**D) DTCC Update Eligibility (10% weight)**
+- Field is eligible for DTCC Administrative API update
+- No pending transactions that would block update
+- Policy active and in good standing
+- Carrier accepts DTCC administrative updates
+
+**Missing Info Score Formula:**
+```
+Component_Scores:
+  Completeness_Score = Σ(missing_required_fields × importance) / total_required × 0.40
+  Recency_Score = age_score × field_importance × 0.30
+  Regulatory_Score = Σ(missing_regulatory_fields) × severity × 0.20
+  DTCC_Eligible_Score = updateable_fields_count / total_fields × 0.10
+
+AI_Missing_Info_Score = Σ(Component_Scores)
+
+Trigger Conditions:
+- HIGH severity:   Score > 75 OR critical regulatory field missing
+- MEDIUM severity: Score > 50 OR 2+ important fields missing/outdated
+- LOW severity:    Score > 30 OR recommended field updates available
+- Confidence: Based on data quality and last verification date
+```
+
+**Key Data Points Analyzed:**
+
+**From Policy Record:**
+- Beneficiary designation status (complete/incomplete)
+- Beneficiary allocation percentages
+- Tax withholding elections (federal/state)
+- Last non-financial update timestamp
+- Owner contact information on file
+- Special instructions/preferences
+- DTCC eligibility flags
+
+**From Account/Client Profile:**
+- Current owner name
+- Current SSN/Tax ID
+- Current registered address
+- Current email address
+- Current phone number
+- Last profile update timestamp
+- Profile verification status
+
+**Field Comparison Matrix:**
+| Field | Policy Record | Account Profile | Status | Action |
+|-------|--------------|-----------------|--------|--------|
+| Owner Name | Jane Smith | Jane M. Smith | Mismatch | Auto-update from profile |
+| Address | 123 Main St (2020) | 456 Oak Ave (2025) | Outdated | Auto-update from profile |
+| Email | NULL | jane@email.com | Missing | Auto-populate from profile |
+| Beneficiary | NULL | N/A | Missing | Requires advisor input |
+| Tax Withholding | 0% | N/A | Incomplete | Requires advisor input |
+
+**AI Outputs:**
+```json
+{
+  "alert_type": "MISSING_INFO",
+  "severity": "MEDIUM",
+  "ai_score": 68,
+  "confidence": 0.92,
+  "missing_fields_analysis": {
+    "critical_missing": [
+      {
+        "field": "primary_beneficiary",
+        "status": "NULL",
+        "regulatory_requirement": "Required by state law",
+        "last_verified": null,
+        "priority": "CRITICAL"
+      }
+    ],
+    "important_missing": [
+      {
+        "field": "tax_withholding_federal",
+        "status": "Not elected",
+        "regulatory_requirement": "IRS recommended",
+        "last_verified": null,
+        "priority": "HIGH"
+      }
+    ],
+    "outdated_fields": [
+      {
+        "field": "owner_address",
+        "policy_value": "123 Main St, Boston, MA 02101",
+        "policy_last_updated": "2020-05-15",
+        "profile_value": "456 Oak Ave, Cambridge, MA 02139",
+        "profile_last_updated": "2025-11-20",
+        "age_in_years": 5.8,
+        "priority": "MEDIUM",
+        "auto_update_eligible": true
+      },
+      {
+        "field": "email_address",
+        "policy_value": null,
+        "profile_value": "jane.smith@email.com",
+        "auto_update_eligible": true
+      }
+    ]
+  },
+  "dtcc_integration": {
+    "eligible_for_update": true,
+    "carrier_supports_admin_api": true,
+    "estimated_fields_to_update": 5,
+    "auto_apply_from_profile": [
+      "owner_name",
+      "ssn",
+      "address",
+      "email",
+      "phone"
+    ],
+    "requires_advisor_input": [
+      "primary_beneficiary",
+      "contingent_beneficiary",
+      "tax_withholding_elections"
+    ]
+  },
+  "compliance_notes": [
+    "Beneficiary designation recommended for estate planning",
+    "Tax withholding elections help clients avoid year-end tax surprises",
+    "Contact information updates ensure policy communications reach client"
+  ],
+  "key_factors": [
+    "Primary beneficiary designation missing (required field)",
+    "Owner contact information outdated by 5+ years",
+    "Tax withholding elections never completed",
+    "Account profile has current information available for auto-update"
+  ],
+  "generated_at": "2026-02-17T03:00:00Z",
+  "algorithm_version": "missing_info_v1.0"
+}
+```
+
+**DTCC Administrative API Mock Behavior:**
+For hackathon purposes, the system simulates DTCC API integration:
+1. Validates field completeness and formats
+2. Creates DTCC payload with transaction ID
+3. Simulates 1-2 second API call delay
+4. Logs payload to console for demonstration
+5. Updates in-memory policy data store
+6. Removes alert from policy
+7. Returns success response with mock transaction details
+
+**Real-World Implementation Notes:**
+In production, this would:
+- Authenticate with DTCC using carrier credentials
+- Submit non-financial updates via DTCC Administrative API
+- Receive acknowledgment and transaction tracking ID
+- Poll for completion status
+- Handle errors and validations from DTCC
+- Update policy system of record
+- Audit log all DTCC transactions
 
 ---
 

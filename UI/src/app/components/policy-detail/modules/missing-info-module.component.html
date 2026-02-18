@@ -1,0 +1,277 @@
+<div class="missing-info-module">
+  <!-- Header -->
+  <div class="module-header">
+    <div class="header-content">
+      <mat-icon color="accent">assignment_late</mat-icon>
+      <div class="header-text">
+        <h3>{{ alert.title }}</h3>
+        <p class="reason-short">{{ alert.reasonShort }}</p>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- What's Missing Section -->
+  <div class="section">
+    <h4><mat-icon>error_outline</mat-icon> What's Missing or Incomplete</h4>
+    <div class="missing-fields-list">
+      <div *ngFor="let field of getMissingFields()" class="missing-field-item">
+        <mat-icon [color]="getPriorityColor(field.priority)">
+          {{ getPriorityIcon(field.priority) }}
+        </mat-icon>
+        <div class="field-info">
+          <span class="field-label">{{ field.label }}</span>
+          <span class="field-status">{{ field.status }}</span>
+          <mat-chip [color]="getPriorityColor(field.priority)" selected>
+            {{ field.priority }}
+          </mat-chip>
+        </div>
+      </div>
+    </div>
+    <p class="last-updated">
+      <mat-icon>schedule</mat-icon>
+      {{ getLastUpdatedText() }}
+    </p>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Account Profile Information (Read-Only) -->
+  <div class="section account-profile-section">
+    <h4>
+      <mat-icon>account_circle</mat-icon>
+      Information from Account Profile (Auto-Applied on Submit)
+      <mat-icon 
+        class="info-icon" 
+        matTooltip="This information comes from the client's account profile and will be automatically applied to the policy upon submission."
+        matTooltipPosition="right">
+        info
+      </mat-icon>
+    </h4>
+    <div class="readonly-fields">
+      <div class="field-row">
+        <label>Owner Name:</label>
+        <span>{{ accountProfileData.ownerName }}</span>
+      </div>
+      <div class="field-row">
+        <label>Social Security Number:</label>
+        <span>{{ accountProfileData.ssn }}</span>
+      </div>
+      <div class="field-row">
+        <label>Registered Address:</label>
+        <span>{{ accountProfileData.address }}</span>
+      </div>
+      <div class="field-row">
+        <label>Email Address:</label>
+        <span>{{ accountProfileData.email || 'Not on file' }}</span>
+      </div>
+      <div class="field-row">
+        <label>Phone Number:</label>
+        <span>{{ accountProfileData.phone || 'Not on file' }}</span>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Editable Form Section -->
+  <div class="section editable-section">
+    <h4><mat-icon>edit</mat-icon> Update Policy Information</h4>
+
+    <form [formGroup]="updateForm" class="update-form">
+      <!-- Primary Beneficiary -->
+      <div class="form-section">
+        <h5>Primary Beneficiary <span class="required">*</span></h5>
+        <div formGroupName="primaryBeneficiary" class="beneficiary-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="name" required>
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Relationship</mat-label>
+            <mat-select formControlName="relationship" required>
+              <mat-option *ngFor="let rel of relationshipOptions" [value]="rel">
+                {{ rel }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>SSN / Tax ID</mat-label>
+            <input matInput formControlName="ssn" placeholder="XXX-XX-XXXX">
+            <mat-icon matSuffix>badge</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput type="date" formControlName="dateOfBirth">
+            <mat-icon matSuffix>cake</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Allocation %</mat-label>
+            <input matInput type="number" formControlName="allocationPercent" required min="0" max="100">
+            <span matSuffix>%</span>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Contingent Beneficiary -->
+      <div class="form-section">
+        <h5>Contingent Beneficiary <span class="optional">(Optional)</span></h5>
+        <div formGroupName="contingentBeneficiary" class="beneficiary-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="name">
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Relationship</mat-label>
+            <mat-select formControlName="relationship">
+              <mat-option *ngFor="let rel of relationshipOptions" [value]="rel">
+                {{ rel }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>SSN / Tax ID</mat-label>
+            <input matInput formControlName="ssn" placeholder="XXX-XX-XXXX">
+            <mat-icon matSuffix>badge</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Date of Birth</mat-label>
+            <input matInput type="date" formControlName="dateOfBirth">
+            <mat-icon matSuffix>cake</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Allocation %</mat-label>
+            <input matInput type="number" formControlName="allocationPercent" min="0" max="100">
+            <span matSuffix>%</span>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Tax Withholding -->
+      <div class="form-section">
+        <h5>Tax Withholding Elections</h5>
+        <div formGroupName="taxWithholding" class="tax-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Federal Withholding</mat-label>
+            <input matInput type="number" formControlName="federal" min="0" max="100">
+            <span matSuffix>%</span>
+            <mat-hint>IRS recommended withholding for distributions</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>State Withholding</mat-label>
+            <input matInput type="number" formControlName="state" min="0" max="100">
+            <span matSuffix>%</span>
+            <mat-hint>State tax withholding if applicable</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="form-section" formGroupName="contactInfo">
+        <h5>Contact Information 
+          <mat-icon 
+            class="info-icon" 
+            matTooltip="Pre-filled from account profile if not already on policy"
+            matTooltipPosition="right">
+            info
+          </mat-icon>
+        </h5>
+        <div class="contact-form">
+          <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input matInput type="email" formControlName="email">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-hint>From account profile if missing on policy</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <input matInput type="tel" formControlName="phone">
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-hint>From account profile if missing on policy</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Mailing Address</mat-label>
+            <input matInput formControlName="address">
+            <mat-icon matSuffix>home</mat-icon>
+            <mat-hint>From account profile if missing on policy</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Special Instructions -->
+      <div class="form-section">
+        <h5>Special Instructions <span class="optional">(Optional)</span></h5>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Special instructions or notes</mat-label>
+          <textarea matInput formControlName="specialInstructions" rows="3"></textarea>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <!-- Submission Section -->
+  <div class="section submission-section">
+    <div class="compliance-note">
+      <mat-icon>verified_user</mat-icon>
+      <p>Updates will be submitted for non-financial policy changes.</p>
+    </div>
+
+    <!-- Success Message -->
+    <div *ngIf="submitSuccess" class="success-message">
+      <mat-icon>check_circle</mat-icon>
+      <div>
+        <h4>Policy Updated Successfully!</h4>
+        <p>Changes have been recorded and will be processed.</p>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="submitError" class="error-message">
+      <mat-icon>error</mat-icon>
+      <p>{{ submitError }}</p>
+    </div>
+
+    <!-- Form Validation Warning -->
+    <div *ngIf="updateForm.invalid && !validateAllocations()" class="validation-warning">
+      <mat-icon>warning</mat-icon>
+      <p>Please fill in all required fields. Allocation percentages must total 100%.</p>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions">
+      <button 
+        mat-stroked-button 
+        (click)="onSaveDraft()"
+        [disabled]="isSubmitting || submitSuccess">
+        <mat-icon>save</mat-icon>
+        Save Draft
+      </button>
+
+      <button 
+        mat-raised-button 
+        color="primary"
+        (click)="onSubmit()"
+        [disabled]="isSubmitting || submitSuccess || updateForm.invalid || !validateAllocations()">
+        <mat-spinner *ngIf="isSubmitting" diameter="20" class="button-spinner"></mat-spinner>
+        <mat-icon *ngIf="!isSubmitting">send</mat-icon>
+        {{ isSubmitting ? 'Submitting...' : 'Submit' }}
+      </button>
+    </div>
+  </div>
+</div>
