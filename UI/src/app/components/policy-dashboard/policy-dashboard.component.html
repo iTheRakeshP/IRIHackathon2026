@@ -142,13 +142,13 @@
                 <div class="client-account">{{ formatAccountNumber(group.clientAccountNumber) }}</div>
               </div>
               
-              @if (!isClientExpanded(group.clientAccountNumber)) {
-                <div class="client-summary-stats">
+              <div class="client-summary-stats">
+                @if (!isClientExpanded(group.clientAccountNumber)) {
                   <span class="policy-count-summary">{{ group.policies.length }} {{ group.policies.length === 1 ? 'policy' : 'policies' }}</span>
                   <span class="separator">•</span>
                   <span class="renewal-summary">{{ getClientRenewalSummary(group) }}</span>
-                </div>
-              }
+                }
+              </div>
               
               <div class="client-priority">
                 <span [class]="'priority-chip ' + getClientPriority(group).toLowerCase()">
