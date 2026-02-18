@@ -5,19 +5,25 @@
   max-height: 900px;
   width: 95vw;
   max-width: 1400px;
-  background: #ffffff;
-  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
   overflow: hidden;
+  box-shadow: var(--shadow-2xl);
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
-  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+  padding: 20px 28px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  min-height: 60px;
+  min-height: 70px;
+  box-shadow: 
+    0 4px 12px rgba(102, 126, 234, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 
   .header-content {
     flex: 1;
@@ -27,34 +33,36 @@
     .info-row {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 18px;
       flex-wrap: wrap;
 
       .client-section,
       .policy-section {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
       }
 
       .client-name {
-        font-size: 18px;
-        font-weight: 600;
+        font-size: 20px;
+        font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
 
       .client-account {
         font-size: 14px;
-        opacity: 0.9;
+        opacity: 0.95;
+        font-weight: 500;
       }
 
       .policy-name {
-        font-size: 16px;
-        font-weight: 500;
+        font-size: 17px;
+        font-weight: 600;
       }
 
       .policy-id {
         font-size: 13px;
-        opacity: 0.85;
+        opacity: 0.9;
       }
 
       .separator {
@@ -63,9 +71,9 @@
       }
 
       .divider {
-        font-size: 18px;
+        font-size: 20px;
         opacity: 0.5;
-        margin: 0 4px;
+        margin: 0 6px;
       }
     }
   }
@@ -73,16 +81,34 @@
   .header-actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
 
     .ai-button {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      color: white !important;
+      
       mat-icon {
         margin-right: 8px;
+        color: white !important;
+      }
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       }
     }
 
     button[mat-icon-button] {
       color: white;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+      }
     }
   }
 }

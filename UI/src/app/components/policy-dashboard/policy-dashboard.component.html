@@ -151,9 +151,9 @@
               }
               
               <div class="client-priority">
-                <mat-chip [class]="'priority-chip ' + getClientPriority(group).toLowerCase()">
+                <span [class]="'priority-chip ' + getClientPriority(group).toLowerCase()">
                   {{ getClientPriority(group) }}
-                </mat-chip>
+                </span>
               </div>
             </div>
             
@@ -201,9 +201,9 @@
                     
                     <div class="policy-renewal">
                       @if (policy.renewalDays !== undefined && policy.renewalDays !== null) {
-                        <div class="renewal-pill" [ngClass]="getDaysToRenewalClass(policy.renewalDays)">
+                        <span class="renewal-pill" [ngClass]="getDaysToRenewalClass(policy.renewalDays)">
                           {{ getDaysToRenewalText(policy.renewalDays) }}
-                        </div>
+                        </span>
                       } @else {
                         <span class="no-renewal">N/A</span>
                       }

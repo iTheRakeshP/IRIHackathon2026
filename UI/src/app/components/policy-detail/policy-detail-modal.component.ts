@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, computed, effect, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, computed, effect, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,7 +43,7 @@ import { AiChatDrawerComponent } from '../ai-chat-drawer/ai-chat-drawer.componen
   templateUrl: './policy-detail-modal.component.html',
   styleUrls: ['./policy-detail-modal.component.scss']
 })
-export class PolicyDetailModalComponent implements OnInit {
+export class PolicyDetailModalComponent implements OnInit, OnDestroy {
   // ViewChild for scroll target
   @ViewChild('reviewModulesSection', { read: ElementRef }) reviewModulesSection?: ElementRef;
   
@@ -75,10 +75,24 @@ export class PolicyDetailModalComponent implements OnInit {
     private dialogRef: MatDialogRef<PolicyDetailModalComponent>,
     private apiService: ApiService,
     public chatService: AiChatService
-  ) {}
+  ) {
+    // Immediately close chat in constructor before anything else
+    this.chatService.closeChat();
+    this.chatService.clearChat();
+  }
 
   ngOnInit(): void {
-    // Don't auto-expand - let user click on alerts to view details
+    // Double-check chat is closed when modal opens
+    setTimeout(() => {
+      this.chatService.closeChat();
+      this.chatService.clearChat();
+    }, 0);
+  }
+
+  ngOnDestroy(): void {
+    // Always close and clear chat when modal is destroyed
+    this.chatService.closeChat();
+    this.chatService.clearChat();
   }
 
   // Method to set policy and client data from the dashboard
@@ -179,6 +193,8 @@ export class PolicyDetailModalComponent implements OnInit {
   }
 
   onClose(): void {
+    // Close chat drawer when modal closes
+    this.chatService.closeChat();
     this.dialogRef.close();
   }
 
