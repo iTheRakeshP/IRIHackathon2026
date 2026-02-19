@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { Alert } from '../../../models/alert.model';
 import { Policy, Beneficiary } from '../../../models/policy.model';
 import { Client } from '../../../models/client.model';
@@ -39,7 +40,8 @@ interface MissingField {
     MatSelectModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatExpansionModule
   ],
   templateUrl: './missing-info-module.component.html',
   styleUrls: ['./missing-info-module.component.scss']
@@ -287,5 +289,51 @@ export class MissingInfoModuleComponent implements OnInit {
       case 'MEDIUM': return 'primary';
       default: return '';
     }
+  }
+
+  getCriticalMissingFields(): MissingField[] {
+    return this.getMissingFields().filter(f => f.priority === 'CRITICAL' || f.priority === 'HIGH');
+  }
+
+  isPrimaryBeneficiaryMissing(): boolean {
+    return !this.policy.nonFinancialData?.primaryBeneficiary ||
+           !this.policy.nonFinancialData?.primaryBeneficiary.name;
+  }
+
+  isTaxWithholdingMissing(): boolean {
+    const taxWith = this.policy.nonFinancialData?.taxWithholding;
+    return !taxWith || (taxWith.federal === null && taxWith.state === null);
+  }
+
+  getPrimaryBeneficiaryStatus(): string {
+    if (this.isPrimaryBeneficiaryMissing()) {
+      return 'Not designated';
+    }
+    const primaryBen = this.policy.nonFinancialData?.primaryBeneficiary;
+    return `${primaryBen?.name || 'Unknown'} - ${primaryBen?.allocationPercent || 0}%`;
+  }
+
+  getContingentBeneficiaryStatus(): string {
+    const contingentBen = this.policy.nonFinancialData?.contingentBeneficiary;
+    if (!contingentBen || !contingentBen.name) {
+      return 'Not designated';
+    }
+    return `${contingentBen.name} - ${contingentBen.allocationPercent || 0}%`;
+  }
+
+  getTaxWithholdingStatus(): string {
+    if (this.isTaxWithholdingMissing()) {
+      return 'Not specified';
+    }
+    const taxWith = this.policy.nonFinancialData?.taxWithholding;
+    return `Federal: ${taxWith?.federal || 0}%, State: ${taxWith?.state || 0}%`;
+  }
+
+  onAskAI(): void {
+    this.actionComplete.emit({
+      action: 'ask_ai',
+      alertId: this.alert.alertId,
+      context: 'missing_info'
+    });
   }
 }
