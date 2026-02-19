@@ -1,0 +1,107 @@
+@startuml
+title Advisor Review Journey - Business Workflow (UI + API)
+
+!define PRIMARY_BLUE #1E40AF
+!define SECONDARY_TEAL #0891B2
+!define BG_LIGHT #F8FAFC
+!define SURFACE_WHITE #FFFFFF
+!define BORDER_DARK #334155
+!define TEXT_DARK #0F172A
+!define ACCENT_PURPLE #7C3AED
+!define SEVERITY_HIGH #DC2626
+!define SEVERITY_MEDIUM #F59E0B
+!define SEVERITY_LOW #10B981
+
+skinparam backgroundColor BG_LIGHT
+skinparam shadowing true
+skinparam roundcorner 15
+skinparam defaultFontName Segoe UI
+skinparam defaultFontSize 12
+skinparam defaultFontStyle bold
+skinparam ArrowColor BORDER_DARK
+skinparam ArrowThickness 2
+skinparam activity {
+  BackgroundColor SURFACE_WHITE
+  BorderColor PRIMARY_BLUE
+  BorderThickness 2
+  FontColor TEXT_DARK
+  DiamondBackgroundColor #E0E7FF
+  DiamondBorderColor PRIMARY_BLUE
+  DiamondFontColor TEXT_DARK
+  StartColor PRIMARY_BLUE
+  EndColor SECONDARY_TEAL
+}
+
+start
+
+partition "Advisor" #DBEFFE {
+  :#DBEFFE;Open Policy Dashboard;
+}
+
+partition "Dashboard (Angular)" #E0F2FE {
+  :#E0F2FE;Load grouped policies + alert badges;
+  :#E0F2FE;Advisor filters/prioritizes workload;
+  :#E0F2FE;Advisor clicks Review;
+}
+
+partition "Backend (FastAPI)" #F1F5F9 {
+  :#F1F5F9;GET /api/policies/{policyId};
+  :#F1F5F9;GET /api/clients/{account};
+}
+
+partition "Policy Detail Modal" #EDE9FE {
+  :#EDE9FE;Show policy facts + active alerts\n(priority ordered);
+  :#EDE9FE;Advisor selects alert module;
+}
+
+if (Alert Type?) then (REPLACEMENT)
+  partition "Replacement Module" #FEE2E2 {
+    :#FEE2E2;Review why flagged;
+    :#FEE2E2;Verify or update suitability;
+  }
+  partition "Backend (FastAPI)" #F1F5F9 {
+    :#F1F5F9;PATCH /api/clients/{account}/suitability;
+    :#F1F5F9;GET /api/policies/{policyId}/alternatives;
+  }
+  partition "Replacement Module" #FCA5A5 {
+    :#FCA5A5;Compare alternatives;
+    :#FCA5A5;Initiate replacement review (mock);
+  }
+elseif (INCOME_ACTIVATION)
+  partition "Income Activation Module" #FEF3C7 {
+    :#FEF3C7;Compare Activate Now vs Delay scenarios;
+    :#FEF3C7;Capture advisor review note;
+  }
+elseif (SUITABILITY_DRIFT)
+  partition "Suitability Drift Module" #D1FAE5 {
+    :#D1FAE5;Review what changed;
+    :#D1FAE5;Capture suitability rationale;
+  }
+else (MISSING_INFO)
+  partition "Missing Info Module" #FDEDD3 {
+    :#FDEDD3;Show missing/non-current fields;
+    :#FDEDD3;Auto-apply account profile data;
+    :#FDEDD3;Advisor completes policy-specific fields;
+  }
+  partition "Backend (FastAPI)" #F1F5F9 {
+    :#F1F5F9;POST /api/policies/{policyId}/update-non-financial;
+    :#F1F5F9;Simulate DTCC admin update;
+  }
+  partition "Missing Info Module" #FDBA74 {
+    :#FDBA74;Confirm success and clear MISSING_INFO alert;
+  }
+endif
+
+partition "AI Copilot Drawer" #CFFAFE {
+  :#CFFAFE;Advisor asks contextual questions;
+  :#CFFAFE;POST /api/ai/chat with policy/client/module context;
+  :#CFFAFE;Use neutral explanation for notes\n(decision support, not recommendation);
+}
+
+partition "Advisor" #DBEFFE {
+  :#DBEFFE;Mark module reviewed;
+  :#DBEFFE;Save note;
+}
+
+stop
+@enduml

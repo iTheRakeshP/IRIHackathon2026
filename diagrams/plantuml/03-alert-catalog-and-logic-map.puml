@@ -1,0 +1,56 @@
+@startuml
+title AI Alert Catalog and Business Logic Map
+
+!define PRIMARY_BLUE #1E40AF
+!define SECONDARY_TEAL #0891B2
+!define BG_LIGHT #F8FAFC
+!define SURFACE_WHITE #FFFFFF
+!define BORDER_DARK #334155
+!define TEXT_DARK #0F172A
+!define ACCENT_PURPLE #7C3AED
+!define SEVERITY_HIGH #DC2626
+!define SEVERITY_MEDIUM #F59E0B
+!define SEVERITY_LOW #10B981
+
+skinparam backgroundColor BG_LIGHT
+skinparam shadowing true
+skinparam roundcorner 15
+skinparam defaultFontName Segoe UI
+skinparam defaultFontSize 11
+skinparam defaultFontStyle bold
+skinparam rectangle {
+  BorderColor PRIMARY_BLUE
+  BorderThickness 2
+  FontColor TEXT_DARK
+  FontStyle bold
+}
+skinparam arrow {
+  Color BORDER_DARK
+  Thickness 2
+}
+
+rectangle "AI Alert Engine" as CORE #DBEFFE
+
+rectangle "REPLACEMENT\n\nTrigger Gates:\n• Current cap rate exists\n• Market cap gap > 2.0%\n• OR surrender <= 365 days with gap > 1.0%\n\nScoring Model:\n• Performance 40%\n• Suitability 30%\n• Cost 20%\n• Features 10%\n\nSeverity:\n• HIGH if score >= 75\n• MEDIUM otherwise" as REP #FEE2E2
+
+rectangle "INCOME_ACTIVATION\n\nTrigger Gates:\n• Income rider exists\n• Income not activated\n• Client age >= 59\n• Income need = Now/Soon\n\nScoring Logic:\n• Timing urgency\n• Rollup vs foregone income\n• Deferral and payout shift\n\nSeverity:\n• MEDIUM if score >= 60\n• LOW otherwise" as INC #FEF3C7
+
+rectangle "SUITABILITY_DRIFT\n\nTrigger Gates:\n• Age-objective mismatch\n• OR policy age >= 5 years\n\nScoring Model:\n• Risk drift 35%\n• Objective drift 30%\n• Financial change 20%\n• Horizon drift 15%\n\nSeverity:\n• HIGH if critical mismatch or >= 75\n• MEDIUM if >= 50\n• LOW otherwise" as SUIT #D1FAE5
+
+rectangle "MISSING_INFO\n\nTrigger Gates:\n• Missing primary beneficiary\n• Beneficiary SSN/DOB incomplete\n• Missing tax withholding election\n• Missing email\n• Data older than 3 years\n\nScoring Model:\n• Completeness 40%\n• Recency 30%\n• Regulatory 20%\n• DTCC fit 10%\n\nSeverity:\n• HIGH if score >= 75\n• MEDIUM if >= 50\n• LOW otherwise\n\nWorkflow Fit:\n• Auto-apply owner profile fields\n• Advisor adds policy-specific fields\n• Submit update and clear alert" as MISS #FDEDD3
+
+CORE -down-> REP : <color:#DC2626>High Priority
+CORE -left-> INC : <color:#F59E0B>Medium Priority
+CORE -right-> SUIT : <color:#10B981>Periodic Review
+CORE -up-> MISS : <color:#F97316>Data Quality
+
+note bottom of CORE #E0E7FF
+  <b>Alert Type Legend</b>
+  ———————————————————
+  <color:#DC2626>■</color> Replacement
+  <color:#F59E0B>■</color> Income Activation
+  <color:#10B981>■</color> Suitability Drift
+  <color:#F97316>■</color> Missing Info
+end note
+
+@enduml

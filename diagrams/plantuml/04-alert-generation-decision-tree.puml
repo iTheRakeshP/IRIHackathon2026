@@ -1,0 +1,89 @@
+@startuml
+title Alert Generation Decision Tree (Per Policy)
+
+!define PRIMARY_BLUE #1E40AF
+!define SECONDARY_TEAL #0891B2
+!define BG_LIGHT #F8FAFC
+!define SURFACE_WHITE #FFFFFF
+!define BORDER_DARK #334155
+!define TEXT_DARK #0F172A
+!define ACCENT_PURPLE #7C3AED
+!define SEVERITY_HIGH #DC2626
+!define SEVERITY_MEDIUM #F59E0B
+!define SEVERITY_LOW #10B981
+
+skinparam backgroundColor BG_LIGHT
+skinparam shadowing true
+skinparam roundcorner 15
+skinparam defaultFontName Segoe UI
+skinparam defaultFontSize 12
+skinparam defaultFontStyle bold
+skinparam ArrowColor BORDER_DARK
+skinparam ArrowThickness 2
+skinparam activity {
+  BackgroundColor SURFACE_WHITE
+  BorderColor PRIMARY_BLUE
+  BorderThickness 2
+  FontColor TEXT_DARK
+  DiamondBackgroundColor #E0E7FF
+  DiamondBorderColor PRIMARY_BLUE
+  DiamondFontColor TEXT_DARK
+  StartColor PRIMARY_BLUE
+  EndColor SECONDARY_TEAL
+}
+
+start
+:#DBEFFE;Select policy + linked client profile;
+
+if (Replacement trigger?) then (Yes)
+  :#FEE2E2;Compute replacement AI score;
+  if (Score >= 75) then (Yes)
+    :#DC2626;Create REPLACEMENT (HIGH);
+  else (No)
+    :#FCA5A5;Create REPLACEMENT (MEDIUM);
+  endif
+else (No)
+  :#E0E7FF;No replacement alert;
+endif
+
+if (Income activation trigger?) then (Yes)
+  :#FEF3C7;Compute income timing score;
+  if (Score >= 60) then (Yes)
+    :#F59E0B;Create INCOME_ACTIVATION (MEDIUM);
+  else (No)
+    :#FCD34D;Create INCOME_ACTIVATION (LOW);
+  endif
+else (No)
+  :#E0E7FF;No income activation alert;
+endif
+
+if (Suitability drift trigger?) then (Yes)
+  :#D1FAE5;Compute drift score;
+  if (Critical mismatch OR score >= 75) then (Yes)
+    :#10B981;Create SUITABILITY_DRIFT (HIGH);
+  elseif (score >= 50)
+    :#34D399;Create SUITABILITY_DRIFT (MEDIUM);
+  else
+    :#6EE7B7;Create SUITABILITY_DRIFT (LOW);
+  endif
+else (No)
+  :#E0E7FF;No suitability drift alert;
+endif
+
+if (Missing info trigger?) then (Yes)
+  :#FDEDD3;Compute missing-info score;
+  if (Score >= 75) then (Yes)
+    :#F97316;Create MISSING_INFO (HIGH);
+  elseif (score >= 50)
+    :#FB923C;Create MISSING_INFO (MEDIUM);
+  else
+    :#FDBA74;Create MISSING_INFO (LOW);
+  endif
+else (No)
+  :#E0E7FF;No missing-info alert;
+endif
+
+:#EDE9FE;Attach all generated alerts to policy;
+:#EDE9FE;Persist policy result to alerts_generated.json;
+stop
+@enduml

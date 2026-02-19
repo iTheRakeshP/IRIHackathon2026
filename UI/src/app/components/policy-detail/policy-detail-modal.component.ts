@@ -153,6 +153,12 @@ export class PolicyDetailModalComponent implements OnInit, OnDestroy {
     }
   }
 
+  onCloseModule(): void {
+    // Close the currently expanded alert module and return to alerts overview
+    this.expandedAlertId.set(null);
+    this.activeAlertType.set(null);
+  }
+
   private scrollToReviewModule(): void {
     if (this.reviewModulesSection) {
       this.reviewModulesSection.nativeElement.scrollIntoView({ 

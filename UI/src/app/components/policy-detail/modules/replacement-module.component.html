@@ -59,11 +59,48 @@
         </div>
       </div>
 
+      <mat-divider style="margin: 20px 0;"></mat-divider>
+
+      <!-- Next Step Preview -->
+      <div class="next-step-preview">
+        <div class="preview-header">
+          <mat-icon class="step-icon">lightbulb</mat-icon>
+          <h5>Next Step: Suitability Verification</h5>
+        </div>
+        <div class="preview-content">
+          <p class="preview-text">
+            Before we show you alternative products, we need to <strong>verify your client's current suitability profile</strong>. 
+            This ensures that:
+          </p>
+          <div class="benefit-list">
+            <div class="benefit-item">
+              <mat-icon class="check-icon">check_circle</mat-icon>
+              <span>Product recommendations match current client objectives and risk tolerance</span>
+            </div>
+            <div class="benefit-item">
+              <mat-icon class="check-icon">check_circle</mat-icon>
+              <span>AI scoring is based on up-to-date financial situation</span>
+            </div>
+            <div class="benefit-item">
+              <mat-icon class="check-icon">check_circle</mat-icon>
+              <span>Compliance requirements are met with documented suitability</span>
+            </div>
+          </div>
+          @if (client?.suitability?.lastUpdated) {
+            <div class="profile-age-warning">
+              <mat-icon>schedule</mat-icon>
+              <span>Client profile last updated: <strong>{{ client.suitability!.lastUpdated | date: 'MMM dd, yyyy' }}</strong></span>
+            </div>
+          }
+        </div>
+      </div>
+
       <div class="step-actions">
-        <button mat-raised-button color="primary" (click)="currentStep.set(1)">
-          Review Client Suitability
-          <mat-icon>arrow_forward</mat-icon>
+        <button mat-raised-button color="primary" class="primary-cta" (click)="currentStep.set(1)">
+          <mat-icon>fact_check</mat-icon>
+          Review & Verify Suitability
         </button>
+        <p class="helper-text">This will take ~2 minutes to review and confirm</p>
       </div>
     </div>
   }
@@ -76,14 +113,24 @@
         <h4>Verify Client Suitability</h4>
       </div>
 
-      <div class="suitability-intro">
-        <p>Review and update the client's suitability profile before viewing alternatives. This ensures recommendations are based on current circumstances.</p>
-        @if (client?.suitability?.lastUpdated) {
-          <p class="last-updated">
-            <mat-icon>update</mat-icon>
-            Last updated: {{ client.suitability!.lastUpdated | date: 'MMM dd, yyyy  h:mm a' }}
-          </p>
-        }
+      <div class="suitability-intro-card">
+        <div class="intro-icon">
+          <mat-icon>how_to_reg</mat-icon>
+        </div>
+        <div class="intro-content">
+          <h5>Review Current Profile</h5>
+          <p>Please review and update the client's suitability profile below. Our AI will use this information to identify the most suitable replacement products.</p>
+          @if (client?.suitability?.lastUpdated) {
+            <p class="last-updated">
+              <mat-icon>schedule</mat-icon>
+              Last updated: <strong>{{ client.suitability!.lastUpdated | date: 'MMM dd, yyyy' }}</strong>
+            </p>
+          }
+          <div class="action-required">
+            <mat-icon>error_outline</mat-icon>
+            <span>Action Required: Click "Verify Profile" below after reviewing</span>
+          </div>
+        </div>
       </div>
 
       <app-suitability-form 
@@ -94,16 +141,25 @@
       <div class="step-actions">
         <button mat-button (click)="currentStep.set(0)">
           <mat-icon>arrow_back</mat-icon>
-          Back
+          Back to Why Flagged
         </button>
-        <button 
-          mat-raised-button 
-          color="primary" 
-          [disabled]="!canProceedToAlternatives()"
-          (click)="onContinueToAlternatives()">
-          Continue to Alternatives
-          <mat-icon>arrow_forward</mat-icon>
-        </button>
+        <div class="primary-action-group">
+          @if (!canProceedToAlternatives()) {
+            <div class="verification-reminder">
+              <mat-icon>info</mat-icon>
+              <span>Please verify the profile to continue</span>
+            </div>
+          }
+          <button 
+            mat-raised-button 
+            color="primary"
+            class="primary-cta"
+            [disabled]="!canProceedToAlternatives()"
+            (click)="onContinueToAlternatives()">
+            <mat-icon>{{canProceedToAlternatives() ? 'analytics' : 'lock'}}</mat-icon>
+            {{canProceedToAlternatives() ? 'Show AI-Matched Alternatives' : 'Verify Profile to Continue'}}
+          </button>
+        </div>
       </div>
     </div>
   }
