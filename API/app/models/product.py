@@ -76,6 +76,13 @@ class Product(BaseModel):
     # Marketing
     isNewProduct: bool = Field(default=False, description="Highlight as new product")
     competitiveAdvantages: List[str] = Field(default_factory=list, description="Key selling points")
+    
+    # Advisor Licensing & Compliance
+    hasLicense: bool = Field(default=True, description="Advisor has required license")
+    hasAppointment: bool = Field(default=True, description="Advisor has carrier appointment")
+    hasTraining: bool = Field(default=True, description="Advisor has completed product training")
+    canSell: bool = Field(default=True, description="Advisor can sell this product")
+    complianceNotes: Optional[str] = Field(None, description="Compliance notes if cannot sell")
 
 
 class ProductSummary(BaseModel):

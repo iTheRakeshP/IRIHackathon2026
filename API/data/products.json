@@ -87,7 +87,12 @@
       "Industry-leading income rider roll-up",
       "Zero product fees - only rider fees apply",
       "Shorter surrender schedule than competitors"
-    ]
+    ],
+    "hasLicense": true,
+    "hasAppointment": true,
+    "hasTraining": true,
+    "canSell": true,
+    "complianceNotes": null
   },
   {
     "productId": "PROD-SYM-002",
@@ -147,7 +152,12 @@
       "6% income base roll-up",
       "No market risk - guaranteed growth",
       "Excellent for pre-retirees"
-    ]
+    ],
+    "hasLicense": true,
+    "hasAppointment": false,
+    "hasTraining": false,
+    "canSell": false,
+    "complianceNotes": "Carrier appointment pending. Product training required. Contact compliance@yourfirm.com to request Symetra onboarding and certification."
   },
   {
     "productId": "PROD-SYM-003",
@@ -219,7 +229,12 @@
       "Shorter surrender period for liquidity",
       "Competitive cap rates",
       "Simple, transparent structure"
-    ]
+    ],
+    "hasLicense": true,
+    "hasAppointment": true,
+    "hasTraining": false,
+    "canSell": false,
+    "complianceNotes": "Product training required. Contact compliance@yourfirm.com to request Symetra Accumulator Plus 5 certification."
   },
   {
     "productId": "PROD-SYM-004",
@@ -292,7 +307,12 @@
       "Strong payout percentages",
       "Specifically designed for retirees",
       "Robust income guarantees"
-    ]
+    ],
+    "hasLicense": true,
+    "hasAppointment": true,
+    "hasTraining": true,
+    "canSell": true,
+    "complianceNotes": null
   },
   {
     "productId": "PROD-BH-001",
@@ -382,7 +402,12 @@
       "Higher caps than traditional FIAs",
       "7.5% income roll-up rate",
       "Market participation with protection"
-    ]
+    ],
+    "hasLicense": true,
+    "hasAppointment": false,
+    "hasTraining": false,
+    "canSell": false,
+    "complianceNotes": "Carrier appointment pending. Product training required. Contact compliance@yourfirm.com to request Brighthouse Shield certification."
   },
   {
     "productId": "PROD-BH-002",
@@ -456,7 +481,12 @@
       "Addresses both income and care needs",
       "Strong roll-up guarantees",
       "Comprehensive retirement solution"
-    ]
+    ],
+    "hasLicense": true,
+    "hasAppointment": true,
+    "hasTraining": false,
+    "canSell": false,
+    "complianceNotes": "Product training required. Contact compliance@yourfirm.com to request Brighthouse SmartCare certification."
   },
   {
     "productId": "PROD-BH-003",
@@ -503,7 +533,12 @@
       "Among highest fixed rates available",
       "Short commitment period",
       "Zero fees - pure accumulation"
-    ]
+    ],
+    "hasLicense": true,
+    "hasAppointment": true,
+    "hasTraining": true,
+    "canSell": true,
+    "complianceNotes": null
   },
   {
     "productId": "PROD-BH-004",
@@ -563,7 +598,12 @@
       "Extensive fund lineup",
       "Flexible investment management",
       "Proven track record"
-    ]
+    ],
+    "hasLicense": true,
+    "hasAppointment": true,
+    "hasTraining": true,
+    "canSell": true,
+    "complianceNotes": null
   },
   {
     "productId": "PROD-PAC-001",
@@ -627,7 +667,12 @@
       "Trusted carrier with strong ratings",
       "Competitive pricing",
       "Reliable performance"
-    ]
+    ],
+    "hasLicense": true,
+    "hasAppointment": true,
+    "hasTraining": true,
+    "canSell": true,
+    "complianceNotes": null
   },
   {
     "productId": "PROD-LIN-001",
@@ -688,6 +733,11 @@
     "competitiveAdvantages": [
       "Strong financial rating",
       "Proven product performance"
-    ]
+    ],
+    "hasLicense": true,
+    "hasAppointment": true,
+    "hasTraining": true,
+    "canSell": true,
+    "complianceNotes": null
   }
 ]

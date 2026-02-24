@@ -1,0 +1,46 @@
+<div class="performance-section">
+  <!-- Section Header -->
+  <div class="section-header">
+    <mat-icon>trending_up</mat-icon>
+    <h3>Performance & Rates</h3>
+  </div>
+  <p class="section-subtitle">Projected account values and interest rate scenarios</p>
+
+  <!-- Account Value Projections -->
+  <div class="chart-container account-value-chart">
+    <h4>
+      <mat-icon class="chart-icon">show_chart</mat-icon>
+      Account Value Projections
+    </h4>
+    <p class="chart-description">
+      Projected account values based on current rates and product features • Income starts at age 70
+    </p>
+    <div class="chart-wrapper">
+      <canvas 
+        baseChart
+        [data]="accountValueChartData"
+        [options]="accountValueChartOptions"
+        [type]="accountValueChartType">
+      </canvas>
+    </div>
+  </div>
+
+  <!-- Interest Rate Projections -->
+  <div class="chart-container rate-chart">
+    <h4>
+      <mat-icon class="chart-icon">timeline</mat-icon>
+      Interest Rate Projections
+    </h4>
+    <p class="chart-description">
+      Conservative, expected, and optimistic rate scenarios for the first 10 years
+    </p>
+    <div class="chart-wrapper">
+      <canvas 
+        baseChart
+        [data]="rateChartData"
+        [options]="rateChartOptions"
+        [type]="rateChartType">
+      </canvas>
+    </div>
+  </div>
+</div>

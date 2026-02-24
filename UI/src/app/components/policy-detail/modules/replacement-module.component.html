@@ -7,9 +7,25 @@
         <p class="alert-reason">{{ alert.reasonShort }}</p>
       </div>
     </div>
-    <button mat-icon-button class="ai-assist-btn" (click)="onAskAI()" matTooltip="Ask PolicyPilot">
-      <mat-icon>psychology</mat-icon>
-    </button>
+    <div class="header-actions">
+      <button 
+        mat-raised-button 
+        color="accent" 
+        class="export-pdf-btn"
+        (click)="exportToPDF()"
+        [disabled]="exportingPDF() || currentStep() !== 2 || alternatives().length === 0"
+        matTooltip="Export complete analysis to PDF">
+        <mat-icon>picture_as_pdf</mat-icon>
+        @if (exportingPDF()) {
+          <span>Generating PDF...</span>
+        } @else {
+          <span>Export to PDF</span>
+        }
+      </button>
+      <button mat-icon-button class="ai-assist-btn" (click)="onAskAI()" matTooltip="Ask PolicyPilot">
+        <mat-icon>psychology</mat-icon>
+      </button>
+    </div>
   </div>
 
   <mat-divider></mat-divider>
@@ -233,20 +249,72 @@
             </table>
           </div>
 
+          <!-- Performance & Rates Charts -->
+          <app-performance-charts
+            [currentPolicyName]="policy.productName || (policy.carrier + ' ' + policy.productType)"
+            [currentCapRate]="policy.currentCapRate || 0"
+            [currentAccountValue]="policy.accountValue || 150000"
+            [alternatives]="alternatives()"
+            [incomeGoal]="70000">
+          </app-performance-charts>
+
           <!-- Alternative Highlights -->
           <div class="alternatives-highlights">
             @for (alt of alternatives(); track alt.productId; let idx = $index) {
               <mat-card 
                 class="alternative-card"
+                [class.cannot-sell]="alt.canSell === false"
                 (mouseenter)="onAlternativeHover(alt)"
                 (mouseleave)="onAlternativeLeave()">
                 <div class="alt-card-header">
-                  <h5>Alternative {{ idx + 1 }}: {{ alt.productName }}</h5>
+                  <div class="header-left">
+                    <h5>{{ alt.productName }}</h5>
+                    <p class="carrier-name">{{ alt.carrier }}</p>
+                  </div>
+                  <div class="header-right">
+                    <div class="license-badges">
+                      <mat-chip class="license-badge" [class.badge-active]="alt.hasLicense" 
+                                matTooltip="License {{ alt.hasLicense ? 'Active' : 'Required' }}">
+                        L
+                      </mat-chip>
+                      <mat-chip class="license-badge" [class.badge-active]="alt.hasAppointment"
+                                matTooltip="Appointment {{ alt.hasAppointment ? 'Active' : 'Required' }}">
+                        A
+                      </mat-chip>
+                      <mat-chip class="license-badge" [class.badge-active]="alt.hasTraining"
+                                matTooltip="Training {{ alt.hasTraining ? 'Complete' : 'Required' }}">
+                        T
+                      </mat-chip>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Can Sell / Cannot Sell Badge -->
+                <div class="sell-status">
+                  @if (alt.canSell !== false) {
+                    <div class="can-sell-badge">
+                      <mat-icon>check_circle</mat-icon>
+                      <span>Can Sell</span>
+                    </div>
+                  } @else {
+                    <div class="cannot-sell-badge">
+                      <mat-icon>cancel</mat-icon>
+                      <span>Cannot Sell</span>
+                    </div>
+                  }
                   <mat-chip class="suitability-badge" [class.high-match]="alt.suitabilityScore >= 90">
                     {{ alt.suitabilityScore }}% Match
                   </mat-chip>
                 </div>
-                <p class="carrier-name">{{ alt.carrier }}</p>
+
+                <!-- Compliance Notes -->
+                @if (alt.complianceNotes && alt.canSell === false) {
+                  <div class="compliance-notes">
+                    <mat-icon class="warning-icon">warning</mat-icon>
+                    <p>{{ alt.complianceNotes }}</p>
+                  </div>
+                }
+
                 <div class="highlights-list">
                   @for (highlight of alt.highlights; track highlight) {
                     <div class="highlight-item">
@@ -256,7 +324,9 @@
                   }
                 </div>
                 <div class="card-actions">
-                  <button mat-raised-button color="primary" (click)="onInitiateReplacementReviewForProduct(alt)">
+                  <button mat-raised-button color="primary" 
+                          [disabled]="alt.canSell === false"
+                          (click)="onInitiateReplacementReviewForProduct(alt)">
                     <mat-icon>assignment</mat-icon>
                     Initiate Replacement Review
                   </button>
@@ -270,6 +340,20 @@
           <button mat-button (click)="currentStep.set(1)">
             <mat-icon>arrow_back</mat-icon>
             Back to Suitability
+          </button>
+          <button 
+            mat-raised-button 
+            color="accent" 
+            class="export-pdf-btn"
+            (click)="exportToPDF()"
+            [disabled]="exportingPDF()"
+            matTooltip="Export complete replacement analysis to PDF">
+            <mat-icon>picture_as_pdf</mat-icon>
+            @if (exportingPDF()) {
+              <span>Generating PDF...</span>
+            } @else {
+              <span>Export Analysis to PDF</span>
+            }
           </button>
         </div>
       }
