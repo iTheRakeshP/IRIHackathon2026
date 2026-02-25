@@ -1,80 +1,92 @@
-<div class="alert-detail-modal">
-  <div class="modal-header">
-    <div class="header-content">
-      <div class="alert-icon" [ngClass]="getSeverityClass()">
-        <mat-icon>notifications_active</mat-icon>
+<div class="flex max-h-[85vh] flex-col bg-slate-50">
+  <!-- Header -->
+  <div class="flex items-start justify-between bg-gradient-to-br from-indigo-500 to-purple-600 px-6 py-5 text-white shadow-lg">
+    <div class="flex flex-1 gap-4">
+      <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-white/20">
+        <mat-icon class="!text-[32px] !w-8 !h-8 text-white">notifications_active</mat-icon>
       </div>
-      <div class="header-text">
-        <h2>{{ data.alert.title }}</h2>
-        <p class="client-info">
-          <strong>{{ data.clientName }}</strong> • 
-          Account {{ data.clientAccountNumber }} • 
+      <div>
+        <h2 class="mb-1 text-xl font-semibold !text-white !bg-none !bg-clip-border [-webkit-text-fill-color:white]">{{ data.alert.title }}</h2>
+        <p class="text-sm text-white/90">
+          <strong>{{ data.clientName }}</strong> &bull;
+          Account {{ data.clientAccountNumber }} &bull;
           Portfolio Value: {{ formatCurrency(data.totalPortfolioValue) }}
         </p>
       </div>
     </div>
-    <button mat-icon-button (click)="close()" class="close-button">
+    <button mat-icon-button (click)="close()" class="!text-white">
       <mat-icon>close</mat-icon>
     </button>
   </div>
 
-  <div class="modal-body">
+  <!-- Body -->
+  <div class="flex-1 space-y-5 overflow-y-auto px-6 py-5">
     <!-- Alert Metadata -->
-    <div class="alert-metadata">
-      <mat-chip-set>
-        <mat-chip [ngClass]="getSeverityClass()">
-          {{ data.alert.severity }} Priority
-        </mat-chip>
-        <mat-chip class="type-chip">
-          {{ getAlertTypeLabel() }}
-        </mat-chip>
-        <mat-chip class="date-chip">
-          <mat-icon>calendar_today</mat-icon>
-          {{ data.alert.createdAt }}
-        </mat-chip>
-      </mat-chip-set>
+    <div class="flex flex-wrap gap-2">
+      <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide"
+            [ngClass]="{
+              'bg-red-100 text-red-700': data.alert.severity === 'HIGH',
+              'bg-amber-100 text-amber-700': data.alert.severity === 'MEDIUM',
+              'bg-green-100 text-green-700': data.alert.severity === 'LOW'
+            }">
+        {{ data.alert.severity }} Priority
+      </span>
+      <span class="inline-flex items-center rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-600">
+        {{ getAlertTypeLabel() }}
+      </span>
+      <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-500">
+        <mat-icon class="!text-[14px] !w-3.5 !h-3.5">calendar_today</mat-icon>
+        {{ data.alert.createdAt }}
+      </span>
     </div>
 
-    <!-- Alert Summary -->
-    <div class="alert-section">
-      <h3>
-        <mat-icon>info</mat-icon>
+    <!-- Summary -->
+    <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+      <h3 class="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-slate-400">
+        <mat-icon class="!text-[18px] !w-[18px] !h-[18px] text-indigo-500">info</mat-icon>
         Summary
       </h3>
-      <p class="summary-text">{{ data.alert.reasonShort }}</p>
+      <p class="text-sm leading-relaxed text-slate-600">{{ data.alert.reasonShort }}</p>
     </div>
 
-    <!-- Detailed Reasons -->
-    <div class="alert-section">
-      <h3>
-        <mat-icon>list</mat-icon>
+    <!-- Key Details -->
+    <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+      <h3 class="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-slate-400">
+        <mat-icon class="!text-[18px] !w-[18px] !h-[18px] text-indigo-500">list</mat-icon>
         Key Details
       </h3>
-      <div class="reasons-list">
+      <div class="space-y-2">
         @for (reason of data.alert.reasons; track $index) {
-          <div class="reason-item">{{ reason }}</div>
+          <div class="flex items-start gap-2.5 rounded-lg bg-slate-50 px-4 py-3 text-sm leading-relaxed text-slate-700">
+            <span class="mt-0.5 shrink-0 text-indigo-400">&#8226;</span>
+            {{ reason }}
+          </div>
         }
       </div>
     </div>
 
     <!-- Recommended Action -->
-    <div class="alert-section action-section">
-      <h3>
-        <mat-icon>trending_up</mat-icon>
+    <div class="rounded-xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-5 shadow-sm">
+      <h3 class="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-emerald-600">
+        <mat-icon class="!text-[18px] !w-[18px] !h-[18px] text-emerald-500">trending_up</mat-icon>
         Recommended Action
       </h3>
-      <p class="action-text">
-        Review this portfolio opportunity with the client to explore annuity solutions 
-        that address the identified need. Consider scheduling a consultation to discuss 
+      <p class="text-sm leading-relaxed text-emerald-800">
+        Review this portfolio opportunity with the client to explore annuity solutions
+        that address the identified need. Consider scheduling a consultation to discuss
         how annuity products can enhance their financial strategy.
       </p>
     </div>
   </div>
 
-  <div class="modal-footer">
-    <button mat-button (click)="close()">Close</button>
-    <button mat-raised-button color="primary">
-      <mat-icon>event</mat-icon>
+  <!-- Footer -->
+  <div class="flex items-center justify-end gap-3 border-t border-slate-200 bg-white px-6 py-4">
+    <button (click)="close()"
+            class="rounded-lg border border-slate-300 bg-white px-5 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50">
+      Close
+    </button>
+    <button class="inline-flex items-center gap-2 rounded-lg bg-indigo-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700">
+      <mat-icon class="!text-[18px] !w-[18px] !h-[18px]">event</mat-icon>
       Schedule Consultation
     </button>
   </div>

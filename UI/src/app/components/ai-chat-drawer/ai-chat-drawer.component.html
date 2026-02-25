@@ -1,48 +1,54 @@
-<div class="ai-chat-drawer" [class.open]="chatService.isOpen()">
+<div class="absolute right-0 top-0 z-[1001] flex h-full w-[420px] translate-x-full flex-col border-l border-slate-200 bg-white shadow-2xl transition-transform duration-300 ease-in-out"
+     [class.!translate-x-0]="chatService.isOpen()">
   <!-- Chat Header -->
-  <div class="chat-header">
-    <div class="header-title">
-      <mat-icon class="ai-icon">psychology</mat-icon>
+  <div class="flex items-center justify-between bg-gradient-to-r from-indigo-600 to-purple-600 px-5 py-4 text-white">
+    <div class="flex items-center gap-3">
+      <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-white/20">
+        <mat-icon class="!text-[24px] !w-6 !h-6 text-white">psychology</mat-icon>
+      </div>
       <div>
-        <h3>PolicyPilot</h3>
-        <p class="subtitle">Your intelligent in-force policy guide</p>
+        <h3 class="text-base font-semibold leading-tight !text-white !bg-none !bg-clip-border [-webkit-text-fill-color:white]">PolicyPilot</h3>
+        <p class="text-xs text-white/75">Your intelligent in-force policy guide</p>
       </div>
     </div>
-    <div class="header-actions">
-      <button mat-icon-button (click)="onClearChat()" matTooltip="Clear chat">
+    <div class="flex gap-1">
+      <button mat-icon-button (click)="onClearChat()" matTooltip="Clear chat" class="!text-white/80 hover:!text-white">
         <mat-icon>delete_outline</mat-icon>
       </button>
-      <button mat-icon-button (click)="onClose()" matTooltip="Close chat">
+      <button mat-icon-button (click)="onClose()" matTooltip="Close chat" class="!text-white/80 hover:!text-white">
         <mat-icon>close</mat-icon>
       </button>
     </div>
   </div>
 
-  <mat-divider></mat-divider>
-
   <!-- Context Badge -->
-  <div class="context-badge">
-    <mat-icon>info_outline</mat-icon>
-    <span>{{ getContextLabel() }}</span>
+  <div class="flex items-center gap-2 border-b border-slate-200 bg-indigo-50 px-4 py-2.5">
+    <mat-icon class="!text-[16px] !w-4 !h-4 text-indigo-500">info_outline</mat-icon>
+    <span class="text-xs font-medium text-indigo-600">{{ getContextLabel() }}</span>
   </div>
 
-  <mat-divider></mat-divider>
-
   <!-- Messages Container -->
-  <div class="messages-container" #messagesContainer>
+  <div class="flex-1 space-y-4 overflow-y-auto scroll-smooth px-4 py-4" #messagesContainer>
     @for (message of chatService.messages(); track $index) {
-      <div class="message" [class.user]="message.role === 'user'" [class.assistant]="message.role === 'assistant'">
-        <div class="message-avatar">
+      <div class="flex gap-3" [class.flex-row-reverse]="message.role === 'user'">
+        <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
+             [ngClass]="message.role === 'user' ? 'bg-indigo-600' : 'bg-slate-200'">
           @if (message.role === 'user') {
-            <mat-icon>person</mat-icon>
+            <mat-icon class="!text-[16px] !w-4 !h-4 text-white">person</mat-icon>
           } @else {
-            <mat-icon>smart_toy</mat-icon>
+            <mat-icon class="!text-[16px] !w-4 !h-4 text-slate-600">smart_toy</mat-icon>
           }
         </div>
-        <div class="message-content">
-          <div class="message-text">{{ message.content }}</div>
+        <div class="max-w-[80%]">
+          <div class="rounded-2xl px-4 py-2.5 text-sm leading-relaxed"
+               [ngClass]="message.role === 'user'
+                 ? 'bg-indigo-600 text-white rounded-tr-sm'
+                 : 'bg-slate-100 text-slate-700 rounded-tl-sm'">
+            {{ message.content }}
+          </div>
           @if (message.timestamp) {
-            <div class="message-time">
+            <div class="mt-1 text-[10px] text-slate-400"
+                 [class.text-right]="message.role === 'user'">
               {{ message.timestamp | date: 'shortTime' }}
             </div>
           }
@@ -52,15 +58,15 @@
 
     <!-- Loading indicator -->
     @if (chatService.isLoading()) {
-      <div class="message assistant loading">
-        <div class="message-avatar">
-          <mat-icon>smart_toy</mat-icon>
+      <div class="flex gap-3">
+        <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-200">
+          <mat-icon class="!text-[16px] !w-4 !h-4 text-slate-600">smart_toy</mat-icon>
         </div>
-        <div class="message-content">
-          <div class="typing-indicator">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="rounded-2xl rounded-tl-sm bg-slate-100 px-4 py-3">
+          <div class="flex gap-1.5">
+            <span class="inline-block h-2 w-2 animate-bounce rounded-full bg-slate-400 [animation-delay:0ms]"></span>
+            <span class="inline-block h-2 w-2 animate-bounce rounded-full bg-slate-400 [animation-delay:150ms]"></span>
+            <span class="inline-block h-2 w-2 animate-bounce rounded-full bg-slate-400 [animation-delay:300ms]"></span>
           </div>
         </div>
       </div>
@@ -68,54 +74,49 @@
   </div>
 
   <!-- Input Area -->
-  <div class="input-area">
+  <div class="border-t border-slate-200 bg-white">
     <!-- Suggested Questions -->
-    <div class="suggested-questions">
-      <div class="suggestions-header">
-        <mat-icon>lightbulb</mat-icon>
-        <p class="suggestions-label">Try asking:</p>
+    <div class="border-b border-slate-100 px-4 py-3">
+      <div class="mb-2 flex items-center gap-1.5 text-xs font-medium text-slate-400">
+        <mat-icon class="!text-[14px] !w-3.5 !h-3.5 text-amber-400">lightbulb</mat-icon>
+        Try asking:
       </div>
-      <div class="suggestions-chips">
+      <div class="flex flex-wrap gap-1.5">
         @for (action of getQuickActions(); track action) {
-          <button 
-            mat-stroked-button 
-            class="suggestion-chip"
+          <button
             (click)="onQuickActionClick(action)"
-            [disabled]="chatService.isLoading()">
+            [disabled]="chatService.isLoading()"
+            class="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs text-slate-600 transition hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600 disabled:opacity-50">
             {{ action }}
           </button>
         }
       </div>
     </div>
-    
-    <mat-divider></mat-divider>
-    
-    <div class="input-container">
+
+    <div class="flex items-end gap-2 p-3">
       <textarea
         [(ngModel)]="userInput"
         (keypress)="onKeyPress($event)"
         placeholder="Ask me anything about this policy..."
         rows="2"
         [disabled]="chatService.isLoading()"
-        class="chat-input">
+        class="flex-1 resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-700 placeholder-slate-400 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100">
       </textarea>
-      <button 
-        mat-fab 
-        color="primary" 
+      <button
         (click)="onSendMessage()"
         [disabled]="!userInput.trim() || chatService.isLoading()"
-        class="send-button">
-        <mat-icon>send</mat-icon>
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-white shadow-md transition hover:bg-indigo-700 disabled:bg-slate-300 disabled:shadow-none">
+        <mat-icon class="!text-[20px] !w-5 !h-5">send</mat-icon>
       </button>
     </div>
-    <div class="input-hint">
-      <mat-icon>lightbulb_outline</mat-icon>
+    <div class="flex items-center gap-1.5 px-4 pb-3 text-[10px] text-slate-400">
+      <mat-icon class="!text-[12px] !w-3 !h-3">lightbulb_outline</mat-icon>
       <span>Press Enter to send, Shift+Enter for new line</span>
     </div>
   </div>
 </div>
 
-<!-- Overlay backdrop -->
+<!-- Overlay backdrop (click to close, no blur) -->
 @if (chatService.isOpen()) {
-  <div class="chat-overlay" (click)="onClose()"></div>
+  <div class="absolute inset-0 z-[1000] transition-opacity" (click)="onClose()"></div>
 }

@@ -1,18 +1,14 @@
-<div class="missing-info-module">
+<div class="overflow-hidden rounded-xl bg-white shadow-md">
   <!-- Header -->
-  <div class="module-header">
-    <div class="header-content">
-      <mat-icon color="accent">assignment_late</mat-icon>
-      <div class="header-text">
-        <h3>{{ alert.title }}</h3>
-        <p class="reason-short">{{ alert.reasonShort }}</p>
+  <div class="flex items-start justify-between bg-gradient-to-br from-indigo-500 to-purple-600 px-6 py-5 text-white">
+    <div class="flex items-start gap-4">
+      <mat-icon class="text-white !text-[32px] !w-8 !h-8">assignment_late</mat-icon>
+      <div>
+        <h3 class="m-0 mb-1 text-xl font-semibold">{{ alert.title }}</h3>
+        <p class="m-0 text-sm opacity-95">{{ alert.reasonShort }}</p>
       </div>
     </div>
-    <button 
-      mat-icon-button 
-      class="ai-assist-btn" 
-      (click)="onAskAI()" 
-      matTooltip="Ask PolicyPilot">
+    <button mat-icon-button class="!text-white" (click)="onAskAI()" matTooltip="Ask PolicyPilot">
       <mat-icon>psychology</mat-icon>
     </button>
   </div>
@@ -20,16 +16,19 @@
   <mat-divider></mat-divider>
 
   <!-- Critical Missing Fields Summary -->
-  <div class="critical-fields-summary">
-    <h4><mat-icon>priority_high</mat-icon> Critical Missing Information</h4>
-    <div class="field-chips">
-      <mat-chip *ngFor="let field of getCriticalMissingFields()" class="missing-chip">
-        <mat-icon>error_outline</mat-icon>
+  <div class="bg-red-50/50 px-8 py-6">
+    <h4 class="mb-4 flex items-center gap-2 text-base font-semibold text-slate-800">
+      <mat-icon class="text-red-600 !text-xl !w-5 !h-5">priority_high</mat-icon>
+      Critical Missing Information
+    </h4>
+    <div class="mb-3 flex flex-wrap gap-2">
+      <mat-chip *ngFor="let field of getCriticalMissingFields()" class="!bg-red-100 !text-red-800 !text-sm !font-medium">
+        <mat-icon class="!text-red-500 !text-lg !w-[18px] !h-[18px]">error_outline</mat-icon>
         {{ field.label }}
       </mat-chip>
     </div>
-    <p class="last-updated">
-      <mat-icon>schedule</mat-icon>
+    <p class="m-0 flex items-center gap-1.5 text-sm text-slate-500">
+      <mat-icon class="!text-lg !w-[18px] !h-[18px]">schedule</mat-icon>
       {{ getLastUpdatedText() }}
     </p>
   </div>
@@ -37,34 +36,34 @@
   <mat-divider></mat-divider>
 
   <!-- Auto-Applied Information Banner -->
-  <div class="auto-apply-banner">
-    <mat-icon>cloud_done</mat-icon>
+  <div class="mx-8 my-5 flex gap-3 rounded-lg border border-blue-200 bg-blue-50 px-5 py-4">
+    <mat-icon class="flex-shrink-0 text-blue-600 !text-2xl !w-6 !h-6">cloud_done</mat-icon>
     <div>
-      <strong>Owner information will be auto-applied from account profile</strong>
-      <p>Name, SSN, Address, Email, and Phone will be synchronized automatically upon submission.</p>
+      <strong class="mb-1 block text-sm text-blue-900">Owner information will be auto-applied from account profile</strong>
+      <p class="m-0 text-[13px] leading-relaxed text-blue-700">Name, SSN, Address, Email, and Phone will be synchronized automatically upon submission.</p>
     </div>
   </div>
 
   <!-- Update Form with Expansion Panels -->
-  <form [formGroup]="updateForm" class="update-form-accordion">
-    
+  <form [formGroup]="updateForm" class="px-8 pb-4">
+
     <mat-accordion [multi]="true">
-      
+
       <!-- Primary Beneficiary Section -->
-      <mat-expansion-panel [expanded]="isPrimaryBeneficiaryMissing()" class="form-panel">
+      <mat-expansion-panel [expanded]="isPrimaryBeneficiaryMissing()" class="!mb-3 !rounded-lg !shadow-sm">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <mat-icon [color]="isPrimaryBeneficiaryMissing() ? 'warn' : 'primary'">person</mat-icon>
-            <span>Primary Beneficiary</span>
-            <mat-chip *ngIf="isPrimaryBeneficiaryMissing()" class="required-badge">Required</mat-chip>
+            <span class="ml-2 font-semibold">Primary Beneficiary</span>
+            <mat-chip *ngIf="isPrimaryBeneficiaryMissing()" class="!ml-3 !bg-red-500 !text-white !text-xs !font-semibold">Required</mat-chip>
           </mat-panel-title>
           <mat-panel-description>
             {{ getPrimaryBeneficiaryStatus() }}
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div formGroupName="primaryBeneficiary" class="panel-content">
-          <div class="form-grid">
+        <div formGroupName="primaryBeneficiary" class="pt-4">
+          <div class="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4">
             <mat-form-field appearance="outline">
               <mat-label>Full Name</mat-label>
               <input matInput formControlName="name" required>
@@ -102,20 +101,20 @@
       </mat-expansion-panel>
 
       <!-- Contingent Beneficiary Section -->
-      <mat-expansion-panel class="form-panel">
+      <mat-expansion-panel class="!mb-3 !rounded-lg !shadow-sm">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <mat-icon>people</mat-icon>
-            <span>Contingent Beneficiary</span>
-            <mat-chip class="optional-badge">Optional</mat-chip>
+            <span class="ml-2 font-semibold">Contingent Beneficiary</span>
+            <mat-chip class="!ml-3 !bg-slate-200 !text-slate-600 !text-xs !font-semibold">Optional</mat-chip>
           </mat-panel-title>
           <mat-panel-description>
             {{ getContingentBeneficiaryStatus() }}
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div formGroupName="contingentBeneficiary" class="panel-content">
-          <div class="form-grid">
+        <div formGroupName="contingentBeneficiary" class="pt-4">
+          <div class="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4">
             <mat-form-field appearance="outline">
               <mat-label>Full Name</mat-label>
               <input matInput formControlName="name">
@@ -153,20 +152,20 @@
       </mat-expansion-panel>
 
       <!-- Tax Withholding Section -->
-      <mat-expansion-panel [expanded]="isTaxWithholdingMissing()" class="form-panel">
+      <mat-expansion-panel [expanded]="isTaxWithholdingMissing()" class="!mb-3 !rounded-lg !shadow-sm">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <mat-icon [color]="isTaxWithholdingMissing() ? 'warn' : 'primary'">receipt_long</mat-icon>
-            <span>Tax Withholding Elections</span>
-            <mat-chip *ngIf="isTaxWithholdingMissing()" class="required-badge">Required</mat-chip>
+            <span class="ml-2 font-semibold">Tax Withholding Elections</span>
+            <mat-chip *ngIf="isTaxWithholdingMissing()" class="!ml-3 !bg-red-500 !text-white !text-xs !font-semibold">Required</mat-chip>
           </mat-panel-title>
           <mat-panel-description>
             {{ getTaxWithholdingStatus() }}
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div formGroupName="taxWithholding" class="panel-content">
-          <div class="form-grid-2col">
+        <div formGroupName="taxWithholding" class="pt-4">
+          <div class="grid grid-cols-2 gap-4">
             <mat-form-field appearance="outline">
               <mat-label>Federal Withholding</mat-label>
               <input matInput type="number" formControlName="federal" min="0" max="100">
@@ -185,26 +184,26 @@
       </mat-expansion-panel>
 
       <!-- Contact Information Section -->
-      <mat-expansion-panel class="form-panel">
+      <mat-expansion-panel class="!mb-3 !rounded-lg !shadow-sm">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <mat-icon>contact_mail</mat-icon>
-            <span>Contact Information</span>
-            <mat-chip class="auto-badge">Auto-Applied</mat-chip>
+            <span class="ml-2 font-semibold">Contact Information</span>
+            <mat-chip class="!ml-3 !bg-blue-100 !text-blue-700 !text-xs !font-semibold">Auto-Applied</mat-chip>
           </mat-panel-title>
           <mat-panel-description>
             Pre-filled from account profile
           </mat-panel-description>
         </mat-expansion-panel-header>
 
-        <div formGroupName="contactInfo" class="panel-content">
-          <p class="info-note">
-            <mat-icon>info</mat-icon>
+        <div formGroupName="contactInfo" class="pt-4">
+          <p class="mb-4 flex items-center gap-2 rounded-lg bg-blue-50 px-4 py-3 text-sm text-blue-700">
+            <mat-icon class="!text-lg !w-[18px] !h-[18px]">info</mat-icon>
             These fields are pre-filled from your account profile and will be automatically synchronized.
             You can update them if needed.
           </p>
-          
-          <div class="form-grid-2col">
+
+          <div class="grid grid-cols-2 gap-4">
             <mat-form-field appearance="outline">
               <mat-label>Email Address</mat-label>
               <input matInput type="email" formControlName="email">
@@ -217,7 +216,7 @@
               <mat-icon matSuffix>phone</mat-icon>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="full-width">
+            <mat-form-field appearance="outline" class="col-span-2">
               <mat-label>Mailing Address</mat-label>
               <input matInput formControlName="address">
               <mat-icon matSuffix>home</mat-icon>
@@ -229,8 +228,8 @@
     </mat-accordion>
 
     <!-- Special Instructions -->
-    <div class="special-instructions-section">
-      <mat-form-field appearance="outline" class="full-width">
+    <div class="mt-5">
+      <mat-form-field appearance="outline" class="!w-full">
         <mat-label>Special Instructions (Optional)</mat-label>
         <textarea matInput formControlName="specialInstructions" rows="2" placeholder="Add any special notes or instructions..."></textarea>
         <mat-icon matSuffix>note</mat-icon>
@@ -241,52 +240,52 @@
   <mat-divider></mat-divider>
 
   <!-- Submission Section -->
-  <div class="submission-section">
+  <div class="px-8 py-6">
     <!-- Success Message -->
-    <div *ngIf="submitSuccess" class="success-message">
-      <mat-icon>check_circle</mat-icon>
+    <div *ngIf="submitSuccess" class="mb-4 flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 px-5 py-4">
+      <mat-icon class="flex-shrink-0 text-green-600 !text-2xl !w-6 !h-6">check_circle</mat-icon>
       <div>
-        <h4>Policy Updated Successfully!</h4>
-        <p>Changes have been recorded and will be processed.</p>
+        <h4 class="m-0 mb-1 text-sm font-semibold text-green-900">Policy Updated Successfully!</h4>
+        <p class="m-0 text-[13px] text-green-700">Changes have been recorded and will be processed.</p>
       </div>
     </div>
 
     <!-- Error Message -->
-    <div *ngIf="submitError" class="error-message">
-      <mat-icon>error</mat-icon>
-      <p>{{ submitError }}</p>
+    <div *ngIf="submitError" class="mb-4 flex items-center gap-3 rounded-lg border border-red-200 bg-red-50 px-5 py-4">
+      <mat-icon class="flex-shrink-0 text-red-600 !text-2xl !w-6 !h-6">error</mat-icon>
+      <p class="m-0 text-sm text-red-700">{{ submitError }}</p>
     </div>
 
     <!-- Form Validation Warning -->
-    <div *ngIf="updateForm.invalid && !validateAllocations()" class="validation-warning">
-      <mat-icon>warning</mat-icon>
-      <p>Please fill in all required fields. Allocation percentages must total 100%.</p>
+    <div *ngIf="updateForm.invalid && !validateAllocations()" class="mb-4 flex items-center gap-3 rounded-lg border border-amber-200 bg-amber-50 px-5 py-4">
+      <mat-icon class="flex-shrink-0 text-amber-600 !text-2xl !w-6 !h-6">warning</mat-icon>
+      <p class="m-0 text-sm text-amber-700">Please fill in all required fields. Allocation percentages must total 100%.</p>
     </div>
 
     <!-- Actions -->
-    <div class="actions">
-      <button 
-        mat-stroked-button 
+    <div class="flex justify-end gap-3">
+      <button
+        mat-stroked-button
         (click)="onSaveDraft()"
         [disabled]="isSubmitting || submitSuccess">
         <mat-icon>save</mat-icon>
         Save Draft
       </button>
 
-      <button 
-        mat-raised-button 
+      <button
+        mat-raised-button
         color="primary"
         (click)="onSubmit()"
         [disabled]="isSubmitting || submitSuccess || updateForm.invalid || !validateAllocations()">
-        <mat-spinner *ngIf="isSubmitting" diameter="20" class="button-spinner"></mat-spinner>
+        <mat-spinner *ngIf="isSubmitting" diameter="20" class="!inline-block"></mat-spinner>
         <mat-icon *ngIf="!isSubmitting">send</mat-icon>
         {{ isSubmitting ? 'Submitting...' : 'Submit Updates' }}
       </button>
     </div>
 
-    <div class="compliance-note">
-      <mat-icon>verified_user</mat-icon>
-      <p>Updates will be submitted via DTCC Administrative API for non-financial policy changes.</p>
+    <div class="mt-4 flex items-center gap-2 text-[13px] text-slate-500">
+      <mat-icon class="!text-lg !w-[18px] !h-[18px]">verified_user</mat-icon>
+      <p class="m-0">Updates will be submitted via DTCC Administrative API for non-financial policy changes.</p>
     </div>
   </div>
 </div>

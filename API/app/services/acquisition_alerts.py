@@ -265,12 +265,12 @@ class AcquisitionAlertGenerator:
                 "alertId": f"ACQ-CDM-{positions['clientAccountNumber'].replace('-', '')}",
                 "type": "CD_MATURITY",
                 "severity": severity,
-                "title": f"${cd_amount:,.0f} CD Maturing in {days_remaining} Days at {cd_rate*100}%",
-                "reasonShort": f"Multi-year guaranteed annuity (MYGA) offering {myga_rate*100}%",
+                "title": f"${cd_amount:,.0f} CD Maturing in {days_remaining} Days at {round(cd_rate*100, 2)}%",
+                "reasonShort": f"Multi-year guaranteed annuity (MYGA) offering {round(myga_rate*100, 2)}%",
                 "reasons": [
                     f"CD matures on {cd_pos.get('maturityDate')} ({days_remaining} days)",
-                    f"Current CD rate: {cd_rate*100}%",
-                    f"Best MYGA rate: {myga_rate*100}% ({rate_differential*100:.1f}% improvement)",
+                    f"Current CD rate: {round(cd_rate*100, 2)}%",
+                    f"Best MYGA rate: {round(myga_rate*100, 2)}% ({rate_differential*100:.1f}% improvement)",
                     f"Estimated gain: ${annual_improvement:,.0f}/year",
                     "MYGA offers comparable safety with better yield"
                 ],

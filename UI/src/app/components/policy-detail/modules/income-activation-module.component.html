@@ -1,31 +1,31 @@
-<mat-card class="income-activation-module-card">
-  <div class="module-header">
-    <div class="module-title">
-      <mat-icon class="severity-icon medium">payments</mat-icon>
+<div class="overflow-hidden rounded-xl bg-white shadow-md">
+  <div class="flex items-start justify-between bg-gradient-to-br from-purple-600 to-purple-800 px-6 py-5 text-white">
+    <div class="flex items-start gap-4">
+      <mat-icon class="text-white !text-[32px] !w-8 !h-8">payments</mat-icon>
       <div>
-        <h3>{{ alert.title }}</h3>
-        <p class="alert-reason">{{ alert.reasonShort }}</p>
+        <h3 class="m-0 mb-1 text-xl font-semibold">{{ alert.title }}</h3>
+        <p class="m-0 text-sm opacity-95">{{ alert.reasonShort }}</p>
       </div>
     </div>
-    <button mat-icon-button class="ai-assist-btn" (click)="onAskAI()" matTooltip="Ask PolicyPilot">
+    <button mat-icon-button class="!text-white" (click)="onAskAI()" matTooltip="Ask PolicyPilot">
       <mat-icon>psychology</mat-icon>
     </button>
   </div>
 
   <mat-divider></mat-divider>
 
-  <div class="module-content">
+  <div>
     <!-- Why Flagged -->
-    <section class="why-flagged-section">
-      <h4 class="section-title">
-        <mat-icon>info</mat-icon>
+    <section class="bg-purple-50/50 px-8 py-6">
+      <h4 class="mb-5 flex items-center gap-2 text-base font-semibold text-slate-800">
+        <mat-icon class="text-indigo-600 !text-xl !w-5 !h-5">info</mat-icon>
         Why This Is Flagged
       </h4>
-      <div class="reasons-list">
+      <div>
         @for (reason of alert.reasons; track reason) {
-          <div class="reason-item">
-            <mat-icon class="reason-icon">chevron_right</mat-icon>
-            <span>{{ reason }}</span>
+          <div class="mb-3 flex items-start gap-2 last:mb-0">
+            <mat-icon class="mt-0.5 flex-shrink-0 text-purple-600 !text-xl !w-5 !h-5">chevron_right</mat-icon>
+            <span class="flex-1 leading-relaxed text-slate-700">{{ reason }}</span>
           </div>
         }
       </div>
@@ -34,79 +34,80 @@
     <mat-divider></mat-divider>
 
     <!-- Income Timing Scenarios -->
-    <section class="scenarios-section">
-      <h4 class="section-title">
-        <mat-icon>compare</mat-icon>
+    <section class="px-8 py-6">
+      <h4 class="mb-5 flex items-center gap-2 text-base font-semibold text-slate-800">
+        <mat-icon class="text-indigo-600 !text-xl !w-5 !h-5">compare</mat-icon>
         Income Timing Analysis
       </h4>
 
-      <div class="scenarios-grid">
+      <div class="mb-6 grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-5">
         @for (scenario of scenarios; track scenario.option) {
-          <mat-card class="scenario-card" [class.recommended]="scenario.option === 'Delay Income (2 Years)'">
+          <div class="relative rounded-xl border-2 p-5 transition-all duration-200"
+               [ngClass]="scenario.option === 'Delay Income (2 Years)' ? 'border-green-500 bg-green-50/40 hover:shadow-lg' : 'border-slate-200 hover:border-purple-500 hover:shadow-lg'">
             @if (scenario.option === 'Delay Income (2 Years)') {
-              <div class="recommended-badge">
-                <mat-icon>star</mat-icon>
+              <div class="absolute -top-3 right-4 flex items-center gap-1 rounded-xl bg-green-500 px-3 py-1 text-xs font-semibold text-white">
+                <mat-icon class="!text-sm !w-3.5 !h-3.5">star</mat-icon>
                 Higher Lifetime Value
               </div>
             }
             
-            <div class="scenario-header">
-              <h5>{{ scenario.option }}</h5>
-              <p class="scenario-description">{{ scenario.description }}</p>
+            <div class="mb-5">
+              <h5 class="m-0 mb-2 text-lg font-semibold text-slate-800">{{ scenario.option }}</h5>
+              <p class="m-0 text-sm leading-relaxed text-slate-500">{{ scenario.description }}</p>
             </div>
 
-            <div class="income-amounts">
-              <div class="amount-item primary">
-                <span class="amount-label">Monthly Income</span>
-                <span class="amount-value">{{ formatCurrency(scenario.monthlyIncome) }}</span>
+            <div class="mb-5 flex flex-col gap-3">
+              <div class="flex items-baseline justify-between rounded-lg border-2 border-indigo-600 bg-indigo-50 p-3">
+                <span class="text-[13px] font-semibold uppercase tracking-wider text-indigo-700">Monthly Income</span>
+                <span class="text-2xl font-bold text-indigo-600">{{ formatCurrency(scenario.monthlyIncome) }}</span>
               </div>
-              <div class="amount-item">
-                <span class="amount-label">Annual Income</span>
-                <span class="amount-value">{{ formatCurrency(scenario.annualIncome) }}</span>
+              <div class="flex items-baseline justify-between rounded-lg bg-white p-3">
+                <span class="text-[13px] uppercase tracking-wider text-slate-500">Annual Income</span>
+                <span class="text-lg font-semibold text-slate-700">{{ formatCurrency(scenario.annualIncome) }}</span>
               </div>
-              <div class="amount-item">
-                <span class="amount-label">25-Year Projection</span>
-                <span class="amount-value">{{ formatCurrency(scenario.lifetimeProjection) }}</span>
+              <div class="flex items-baseline justify-between rounded-lg bg-white p-3">
+                <span class="text-[13px] uppercase tracking-wider text-slate-500">25-Year Projection</span>
+                <span class="text-lg font-semibold text-slate-700">{{ formatCurrency(scenario.lifetimeProjection) }}</span>
               </div>
             </div>
 
             <mat-divider></mat-divider>
 
-            <div class="trade-offs">
-              <div class="pros">
-                <h6 class="trade-off-title">
-                  <mat-icon>check_circle</mat-icon>
+            <div class="mt-5 flex flex-col gap-4">
+              <div>
+                <h6 class="m-0 mb-2 flex items-center gap-1.5 text-sm font-semibold text-green-700">
+                  <mat-icon class="text-green-500 !text-lg !w-[18px] !h-[18px]">check_circle</mat-icon>
                   Advantages
                 </h6>
-                <ul>
+                <ul class="m-0 list-none p-0">
                   @for (pro of scenario.pros; track pro) {
-                    <li>{{ pro }}</li>
+                    <li class="relative mb-1.5 pl-5 text-[13px] leading-relaxed text-slate-700 before:absolute before:left-0 before:font-bold before:text-green-500 before:content-['✓']">{{ pro }}</li>
                   }
                 </ul>
               </div>
 
-              <div class="cons">
-                <h6 class="trade-off-title">
-                  <mat-icon>warning</mat-icon>
+              <div>
+                <h6 class="m-0 mb-2 flex items-center gap-1.5 text-sm font-semibold text-orange-700">
+                  <mat-icon class="text-orange-500 !text-lg !w-[18px] !h-[18px]">warning</mat-icon>
                   Considerations
                 </h6>
-                <ul>
+                <ul class="m-0 list-none p-0">
                   @for (con of scenario.cons; track con) {
-                    <li>{{ con }}</li>
+                    <li class="relative mb-1.5 pl-5 text-[13px] leading-relaxed text-slate-700 before:absolute before:left-1 before:font-bold before:text-orange-500 before:content-['!']">{{ con }}</li>
                   }
                 </ul>
               </div>
             </div>
-          </mat-card>
+          </div>
         }
       </div>
 
       <!-- Comparison Summary -->
-      <div class="comparison-summary">
-        <mat-icon class="summary-icon">insights</mat-icon>
-        <div class="summary-content">
-          <strong>Key Insight:</strong>
-          <p>
+      <div class="flex gap-4 rounded-lg border-l-4 border-green-500 bg-green-50 px-6 py-5">
+        <mat-icon class="flex-shrink-0 text-green-700 !text-[32px] !w-8 !h-8">insights</mat-icon>
+        <div class="flex-1">
+          <strong class="mb-2 block text-[15px] text-green-900">Key Insight:</strong>
+          <p class="m-0 text-sm leading-relaxed text-slate-700">
             Delaying income activation by 2 years would result in $211/month more income (25% increase) 
             and an additional $63,300 over a 25-year period. This assumes the client can defer  income needs for 2 years.
           </p>
@@ -117,45 +118,45 @@
     <mat-divider></mat-divider>
 
     <!-- Client Considerations -->
-    <section class="considerations-section">
-      <h4 class="section-title">
-        <mat-icon>psychology</mat-icon>
+    <section class="bg-slate-50/60 px-8 py-6">
+      <h4 class="mb-5 flex items-center gap-2 text-base font-semibold text-slate-800">
+        <mat-icon class="text-indigo-600 !text-xl !w-5 !h-5">psychology</mat-icon>
         Key Client Considerations
       </h4>
-      <div class="considerations-list">
-        <div class="consideration-item">
-          <mat-icon class="consideration-icon">attach_money</mat-icon>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
+        <div class="flex gap-3 rounded-lg border border-slate-200 bg-white p-4">
+          <mat-icon class="mt-0.5 flex-shrink-0 text-indigo-600 !text-2xl !w-6 !h-6">attach_money</mat-icon>
           <div>
-            <strong>Current Income Need:</strong>
-            <p>Does the client need income immediately or can they wait for higher payouts?</p>
+            <strong class="mb-1 block text-sm text-slate-800">Current Income Need:</strong>
+            <p class="m-0 text-[13px] leading-relaxed text-slate-500">Does the client need income immediately or can they wait for higher payouts?</p>
           </div>
         </div>
-        <div class="consideration-item">
-          <mat-icon class="consideration-icon">savings</mat-icon>
+        <div class="flex gap-3 rounded-lg border border-slate-200 bg-white p-4">
+          <mat-icon class="mt-0.5 flex-shrink-0 text-indigo-600 !text-2xl !w-6 !h-6">savings</mat-icon>
           <div>
-            <strong>Other Income Sources:</strong>
-            <p>Are there other retirement income sources available during the deferral period?</p>
+            <strong class="mb-1 block text-sm text-slate-800">Other Income Sources:</strong>
+            <p class="m-0 text-[13px] leading-relaxed text-slate-500">Are there other retirement income sources available during the deferral period?</p>
           </div>
         </div>
-        <div class="consideration-item">
-          <mat-icon class="consideration-icon">favorite</mat-icon>
+        <div class="flex gap-3 rounded-lg border border-slate-200 bg-white p-4">
+          <mat-icon class="mt-0.5 flex-shrink-0 text-indigo-600 !text-2xl !w-6 !h-6">favorite</mat-icon>
           <div>
-            <strong>Health & Longevity:</strong>
-            <p>Client's health status and expected longevity impact optimal activation timing.</p>
+            <strong class="mb-1 block text-sm text-slate-800">Health & Longevity:</strong>
+            <p class="m-0 text-[13px] leading-relaxed text-slate-500">Client's health status and expected longevity impact optimal activation timing.</p>
           </div>
         </div>
-        <div class="consideration-item">
-          <mat-icon class="consideration-icon">timeline</mat-icon>
+        <div class="flex gap-3 rounded-lg border border-slate-200 bg-white p-4">
+          <mat-icon class="mt-0.5 flex-shrink-0 text-indigo-600 !text-2xl !w-6 !h-6">timeline</mat-icon>
           <div>
-            <strong>Investment Horizon:</strong>
-            <p>Longer deferral periods typically result in higher lifetime income.</p>
+            <strong class="mb-1 block text-sm text-slate-800">Investment Horizon:</strong>
+            <p class="m-0 text-[13px] leading-relaxed text-slate-500">Longer deferral periods typically result in higher lifetime income.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Actions -->
-    <div class="module-actions">
+    <div class="flex justify-end gap-3 border-t border-slate-200 px-8 py-6">
       <button mat-button (click)="onAskAI()">
         <mat-icon>psychology</mat-icon>
         Explain Timing Trade-offs
@@ -170,4 +171,4 @@
       </button>
     </div>
   </div>
-</mat-card>
+</div>

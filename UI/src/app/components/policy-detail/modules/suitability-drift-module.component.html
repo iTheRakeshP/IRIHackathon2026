@@ -1,45 +1,47 @@
-<mat-card class="suitability-drift-module-card">
-  <div class="module-header">
-    <div class="module-title">
-      <mat-icon class="severity-icon low">info</mat-icon>
+<div class="overflow-hidden rounded-xl bg-white shadow-md">
+  <div class="flex items-start justify-between bg-gradient-to-br from-amber-500 to-orange-600 px-6 py-5 text-white">
+    <div class="flex items-start gap-4">
+      <mat-icon class="text-white !text-[32px] !w-8 !h-8">info</mat-icon>
       <div>
-        <h3>{{ alert.title }}</h3>
-        <p class="alert-reason">{{ alert.reasonShort }}</p>
+        <h3 class="m-0 mb-1 text-xl font-semibold">{{ alert.title }}</h3>
+        <p class="m-0 text-sm opacity-90">{{ alert.reasonShort }}</p>
       </div>
     </div>
-    <button mat-icon-button class="ai-assist-btn" (click)="onAskAI()" matTooltip="Ask PolicyPilot">
+    <button mat-icon-button class="!text-white" (click)="onAskAI()" matTooltip="Ask PolicyPilot">
       <mat-icon>psychology</mat-icon>
     </button>
   </div>
 
   <mat-divider></mat-divider>
 
-  <div class="module-content">
+  <div>
     <!-- What Changed -->
-    <section class="what-changed-section">
-      <h4 class="section-title">
-        <mat-icon>compare_arrows</mat-icon>
+    <section class="bg-amber-50/50 px-8 py-6">
+      <h4 class="mb-5 flex items-center gap-2 text-base font-semibold text-slate-800">
+        <mat-icon class="text-indigo-600 !text-xl !w-5 !h-5">compare_arrows</mat-icon>
         What Changed
       </h4>
 
-      <div class="drift-items">
+      <div class="flex flex-col gap-4">
         @for (item of driftItems; track item.category) {
-          <div class="drift-item" [class]="getImpactClass(item.impact)">
-            <div class="drift-header">
-              <h5 class="drift-category">{{ item.category }}</h5>
-              <span class="impact-badge" [class]="getImpactClass(item.impact)">
+          <div class="rounded-lg border-l-4 bg-white px-5 py-4"
+               [ngClass]="getImpactClass(item.impact) === 'impact-high' ? 'border-red-500' : getImpactClass(item.impact) === 'impact-medium' ? 'border-orange-500' : 'border-green-500'">
+            <div class="mb-3 flex items-center justify-between">
+              <h5 class="m-0 text-base font-semibold text-slate-800">{{ item.category }}</h5>
+              <span class="rounded-xl px-3 py-1 text-[11px] font-semibold uppercase tracking-wider"
+                    [ngClass]="getImpactClass(item.impact) === 'impact-high' ? 'bg-red-50 text-red-700' : getImpactClass(item.impact) === 'impact-medium' ? 'bg-orange-50 text-orange-700' : 'bg-green-50 text-green-700'">
                 {{ getImpactLabel(item.impact) }}
               </span>
             </div>
-            <div class="drift-comparison">
-              <div class="comparison-side previous">
-                <span class="comparison-label">Previous</span>
-                <span class="comparison-value">{{ item.previous }}</span>
+            <div class="flex items-center gap-4">
+              <div class="flex flex-1 flex-col gap-1 rounded-lg bg-slate-100 p-3">
+                <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Previous</span>
+                <span class="text-[15px] text-slate-500">{{ item.previous }}</span>
               </div>
-              <mat-icon class="arrow-icon">arrow_forward</mat-icon>
-              <div class="comparison-side current">
-                <span class="comparison-label">Current</span>
-                <span class="comparison-value">{{ item.current }}</span>
+              <mat-icon class="flex-shrink-0 text-indigo-600 !text-2xl !w-6 !h-6">arrow_forward</mat-icon>
+              <div class="flex flex-1 flex-col gap-1 rounded-lg bg-indigo-50 p-3">
+                <span class="text-[11px] font-semibold uppercase tracking-wider text-indigo-700">Current</span>
+                <span class="text-[15px] font-semibold text-indigo-600">{{ item.current }}</span>
               </div>
             </div>
           </div>
@@ -50,18 +52,18 @@
     <mat-divider></mat-divider>
 
     <!-- Why This Matters -->
-    <section class="why-matters-section">
-      <h4 class="section-title">
-        <mat-icon>lightbulb</mat-icon>
+    <section class="px-8 py-6">
+      <h4 class="mb-5 flex items-center gap-2 text-base font-semibold text-slate-800">
+        <mat-icon class="text-indigo-600 !text-xl !w-5 !h-5">lightbulb</mat-icon>
         Why This Review Is Appropriate
       </h4>
 
-      <div class="matters-content">
-        <div class="matter-item">
-          <mat-icon class="matter-icon">gavel</mat-icon>
+      <div class="flex flex-col gap-4">
+        <div class="flex gap-4 rounded-lg bg-slate-50 p-4">
+          <mat-icon class="flex-shrink-0 text-indigo-600 !text-[28px] !w-7 !h-7">gavel</mat-icon>
           <div>
-            <strong>Regulatory Requirement</strong>
-            <p>
+            <strong class="mb-1.5 block text-[15px] text-slate-800">Regulatory Requirement</strong>
+            <p class="m-0 text-sm leading-relaxed text-slate-500">
               Material changes to a client's financial situation, objectives, or risk profile 
               require a suitability review to ensure current holdings remain appropriate 
               (FINRA Rule 2111, Reg BI).
@@ -69,22 +71,22 @@
           </div>
         </div>
 
-        <div class="matter-item">
-          <mat-icon class="matter-icon">verified_user</mat-icon>
+        <div class="flex gap-4 rounded-lg bg-slate-50 p-4">
+          <mat-icon class="flex-shrink-0 text-indigo-600 !text-[28px] !w-7 !h-7">verified_user</mat-icon>
           <div>
-            <strong>Best Interest Obligation</strong>
-            <p>
+            <strong class="mb-1.5 block text-[15px] text-slate-800">Best Interest Obligation</strong>
+            <p class="m-0 text-sm leading-relaxed text-slate-500">
               The shift from growth to income objectives suggests the client's needs have evolved. 
               This review ensures the current product features align with updated goals.
             </p>
           </div>
         </div>
 
-        <div class="matter-item">
-          <mat-icon class="matter-icon">analytics</mat-icon>
+        <div class="flex gap-4 rounded-lg bg-slate-50 p-4">
+          <mat-icon class="flex-shrink-0 text-indigo-600 !text-[28px] !w-7 !h-7">analytics</mat-icon>
           <div>
-            <strong>Product Alignment</strong>
-            <p>
+            <strong class="mb-1.5 block text-[15px] text-slate-800">Product Alignment</strong>
+            <p class="m-0 text-sm leading-relaxed text-slate-500">
               The current policy was selected based on previous suitability factors. 
               Confirming it still matches updated objectives helps prevent misalignment.
             </p>
@@ -96,42 +98,42 @@
     <mat-divider></mat-divider>
 
     <!-- Review Guidance -->
-    <section class="guidance-section">
-      <h4 class="section-title">
-        <mat-icon>checklist</mat-icon>
+    <section class="bg-slate-50/60 px-8 py-6">
+      <h4 class="mb-5 flex items-center gap-2 text-base font-semibold text-slate-800">
+        <mat-icon class="text-indigo-600 !text-xl !w-5 !h-5">checklist</mat-icon>
         Review Guidance
       </h4>
 
-      <div class="guidance-list">
-        <div class="guidance-item">
-          <div class="guidance-number">1</div>
-          <div class="guidance-content">
-            <strong>Confirm Changes</strong>
-            <p>Discuss detected changes with client and verify accuracy.</p>
+      <div class="flex flex-col gap-4">
+        <div class="flex items-start gap-4">
+          <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-indigo-600 text-base font-semibold text-white">1</div>
+          <div class="pt-1">
+            <strong class="mb-1 block text-[15px] text-slate-800">Confirm Changes</strong>
+            <p class="m-0 text-sm leading-relaxed text-slate-500">Discuss detected changes with client and verify accuracy.</p>
           </div>
         </div>
 
-        <div class="guidance-item">
-          <div class="guidance-number">2</div>
-          <div class="guidance-content">
-            <strong>Assess Current Product</strong>
-            <p>Evaluate whether existing policy features meet updated needs (e.g., income riders for income objective).</p>
+        <div class="flex items-start gap-4">
+          <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-indigo-600 text-base font-semibold text-white">2</div>
+          <div class="pt-1">
+            <strong class="mb-1 block text-[15px] text-slate-800">Assess Current Product</strong>
+            <p class="m-0 text-sm leading-relaxed text-slate-500">Evaluate whether existing policy features meet updated needs (e.g., income riders for income objective).</p>
           </div>
         </div>
 
-        <div class="guidance-item">
-          <div class="guidance-number">3</div>
-          <div class="guidance-content">
-            <strong>Document Findings</strong>
-            <p>Record review outcome and any recommended actions or affirmations.</p>
+        <div class="flex items-start gap-4">
+          <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-indigo-600 text-base font-semibold text-white">3</div>
+          <div class="pt-1">
+            <strong class="mb-1 block text-[15px] text-slate-800">Document Findings</strong>
+            <p class="m-0 text-sm leading-relaxed text-slate-500">Record review outcome and any recommended actions or affirmations.</p>
           </div>
         </div>
 
-        <div class="guidance-item">
-          <div class="guidance-number">4</div>
-          <div class="guidance-content">
-            <strong>Consider Alternatives</strong>
-            <p>If current policy no longer aligns, consider whether alternatives better serve client needs.</p>
+        <div class="flex items-start gap-4">
+          <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-indigo-600 text-base font-semibold text-white">4</div>
+          <div class="pt-1">
+            <strong class="mb-1 block text-[15px] text-slate-800">Consider Alternatives</strong>
+            <p class="m-0 text-sm leading-relaxed text-slate-500">If current policy no longer aligns, consider whether alternatives better serve client needs.</p>
           </div>
         </div>
       </div>
@@ -140,41 +142,41 @@
     <mat-divider></mat-divider>
 
     <!-- Neutral Considerations -->
-    <section class="considerations-section">
-      <h4 class="section-title">
-        <mat-icon>psychology</mat-icon>
+    <section class="px-8 py-6">
+      <h4 class="mb-5 flex items-center gap-2 text-base font-semibold text-slate-800">
+        <mat-icon class="text-indigo-600 !text-xl !w-5 !h-5">psychology</mat-icon>
         Key Considerations
       </h4>
 
-      <div class="considerations-grid">
-        <div class="consideration-card">
-          <mat-icon class="card-icon">question_mark</mat-icon>
-          <h5>Current Product Features</h5>
-          <p>Does the existing policy have features that align with income objectives (e.g., income riders, guaranteed withdrawals)?</p>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
+        <div class="rounded-lg border border-slate-200 bg-white p-5 transition-all duration-200 hover:border-indigo-500 hover:shadow-md">
+          <mat-icon class="mb-3 text-indigo-600 !text-[32px] !w-8 !h-8">question_mark</mat-icon>
+          <h5 class="m-0 mb-2 text-[15px] font-semibold text-slate-800">Current Product Features</h5>
+          <p class="m-0 text-[13px] leading-relaxed text-slate-500">Does the existing policy have features that align with income objectives (e.g., income riders, guaranteed withdrawals)?</p>
         </div>
 
-        <div class="consideration-card">
-          <mat-icon class="card-icon">timeline</mat-icon>
-          <h5>Time Horizon</h5>
-          <p>When does the client anticipate needing income? Does the policy support their timing requirements?</p>
+        <div class="rounded-lg border border-slate-200 bg-white p-5 transition-all duration-200 hover:border-indigo-500 hover:shadow-md">
+          <mat-icon class="mb-3 text-indigo-600 !text-[32px] !w-8 !h-8">timeline</mat-icon>
+          <h5 class="m-0 mb-2 text-[15px] font-semibold text-slate-800">Time Horizon</h5>
+          <p class="m-0 text-[13px] leading-relaxed text-slate-500">When does the client anticipate needing income? Does the policy support their timing requirements?</p>
         </div>
 
-        <div class="consideration-card">
-          <mat-icon class="card-icon">account_balance</mat-icon>
-          <h5>Overall Portfolio</h5>
-          <p>How does this annuity fit within the client's broader retirement income strategy?</p>
+        <div class="rounded-lg border border-slate-200 bg-white p-5 transition-all duration-200 hover:border-indigo-500 hover:shadow-md">
+          <mat-icon class="mb-3 text-indigo-600 !text-[32px] !w-8 !h-8">account_balance</mat-icon>
+          <h5 class="m-0 mb-2 text-[15px] font-semibold text-slate-800">Overall Portfolio</h5>
+          <p class="m-0 text-[13px] leading-relaxed text-slate-500">How does this annuity fit within the client's broader retirement income strategy?</p>
         </div>
 
-        <div class="consideration-card">
-          <mat-icon class="card-icon">swap_horiz</mat-icon>
-          <h5>Change Costs</h5>
-          <p>If a change is contemplated, what are the costs (surrender charges, taxes, lost benefits)?</p>
+        <div class="rounded-lg border border-slate-200 bg-white p-5 transition-all duration-200 hover:border-indigo-500 hover:shadow-md">
+          <mat-icon class="mb-3 text-indigo-600 !text-[32px] !w-8 !h-8">swap_horiz</mat-icon>
+          <h5 class="m-0 mb-2 text-[15px] font-semibold text-slate-800">Change Costs</h5>
+          <p class="m-0 text-[13px] leading-relaxed text-slate-500">If a change is contemplated, what are the costs (surrender charges, taxes, lost benefits)?</p>
         </div>
       </div>
     </section>
 
     <!-- Actions -->
-    <div class="module-actions">
+    <div class="flex justify-end gap-3 border-t border-slate-200 px-8 py-6">
       <button mat-button (click)="onAskAI()">
         <mat-icon>psychology</mat-icon>
         Explain Rationale
@@ -189,4 +191,4 @@
       </button>
     </div>
   </div>
-</mat-card>
+</div>

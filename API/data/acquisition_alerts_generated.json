@@ -75,11 +75,11 @@
         "alertId": "ACQ-CDM-102234567002",
         "type": "CD_MATURITY",
         "severity": "MEDIUM",
-        "title": "$180,000 CD Maturing in 33 Days at 3.5000000000000004%",
+        "title": "$180,000 CD Maturing in 33 Days at 3.5%",
         "reasonShort": "Multi-year guaranteed annuity (MYGA) offering 5.5%",
         "reasons": [
           "CD matures on 2026-03-30 (33 days)",
-          "Current CD rate: 3.5000000000000004%",
+          "Current CD rate: 3.5%",
           "Best MYGA rate: 5.5% (2.0% improvement)",
           "Estimated gain: $3,600/year",
           "MYGA offers comparable safety with better yield"

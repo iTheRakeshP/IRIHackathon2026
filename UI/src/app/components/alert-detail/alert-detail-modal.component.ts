@@ -58,6 +58,7 @@ export class AlertDetailModalComponent {
   }
 
   formatCurrency(value: number): string {
+    if (!value && value !== 0) return '$0';
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',

@@ -1,21 +1,21 @@
-<div class="performance-section">
+<div class="my-8 overflow-hidden rounded-2xl border-2 border-slate-200 bg-white shadow-md">
   <!-- Section Header -->
-  <div class="section-header">
-    <mat-icon>trending_up</mat-icon>
-    <h3>Performance & Rates</h3>
+  <div class="flex items-center gap-3 border-b-2 border-slate-200 bg-slate-50 px-6 py-5">
+    <mat-icon class="text-indigo-600 !text-[28px] !w-7 !h-7">trending_up</mat-icon>
+    <h3 class="m-0 text-xl font-semibold tracking-tight text-slate-900">Performance & Rates</h3>
   </div>
-  <p class="section-subtitle">Projected account values and interest rate scenarios</p>
+  <p class="m-0 bg-white px-6 pb-5 pt-4 text-sm text-slate-500">Projected account values and interest rate scenarios</p>
 
   <!-- Account Value Projections -->
-  <div class="chart-container account-value-chart">
-    <h4>
-      <mat-icon class="chart-icon">show_chart</mat-icon>
+  <div class="mx-6 mb-5 rounded-xl border border-slate-200 bg-slate-50/50 p-6 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md">
+    <h4 class="m-0 mb-1.5 flex items-center gap-2 pl-1 text-base font-semibold text-slate-900">
+      <mat-icon class="text-indigo-600 !text-[22px] !w-[22px] !h-[22px]">show_chart</mat-icon>
       Account Value Projections
     </h4>
-    <p class="chart-description">
+    <p class="m-0 mb-5 pl-3 text-[13px] text-slate-500">
       Projected account values based on current rates and product features • Income starts at age 70
     </p>
-    <div class="chart-wrapper">
+    <div class="relative h-[400px] w-full rounded-lg border border-slate-200 bg-slate-50/50 p-5">
       <canvas 
         baseChart
         [data]="accountValueChartData"
@@ -26,15 +26,15 @@
   </div>
 
   <!-- Interest Rate Projections -->
-  <div class="chart-container rate-chart">
-    <h4>
-      <mat-icon class="chart-icon">timeline</mat-icon>
+  <div class="mx-6 mb-6 rounded-xl border border-slate-200 bg-slate-50/50 p-6 shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-md">
+    <h4 class="m-0 mb-1.5 flex items-center gap-2 pl-1 text-base font-semibold text-slate-900">
+      <mat-icon class="text-indigo-600 !text-[22px] !w-[22px] !h-[22px]">timeline</mat-icon>
       Interest Rate Projections
     </h4>
-    <p class="chart-description">
+    <p class="m-0 mb-5 pl-3 text-[13px] text-slate-500">
       Conservative, expected, and optimistic rate scenarios for the first 10 years
     </p>
-    <div class="chart-wrapper">
+    <div class="relative h-[400px] w-full rounded-lg border border-slate-200 bg-slate-50/50 p-5">
       <canvas 
         baseChart
         [data]="rateChartData"

@@ -534,6 +534,85 @@ export class PolicyDashboardComponent implements OnInit {
     return '';
   }
 
+  // =========================================================================
+  // NEW HELPERS for Tailwind table layout
+  // =========================================================================
+
+  /** Unique alert type badges for a client (collapsed row) */
+  getClientAlertTypeBadges(group: any): AlertBadge[] {
+    const seen = new Set<string>();
+    const badges: AlertBadge[] = [];
+    group.policies.forEach((p: any) => {
+      (p.alerts || []).forEach((a: Alert) => {
+        if (!seen.has(a.type)) {
+          seen.add(a.type);
+          badges.push(this.getAlertBadge(a.type));
+        }
+      });
+    });
+    return badges;
+  }
+
+  /** Shortest renewal period across all client policies (e.g. "15 Days") */
+  getClientMinRenewal(group: any): string {
+    let min: number | null = null;
+    group.policies.forEach((p: any) => {
+      if (p.renewalDays != null && (min === null || p.renewalDays < min)) {
+        min = p.renewalDays;
+      }
+    });
+    return min !== null ? `${min} Days` : 'N/A';
+  }
+
+  /** Count of policies with ≤ 30 days to renewal */
+  getClientUrgentCount(group: any): number {
+    return group.policies.filter((p: any) => p.renewalDays != null && p.renewalDays <= 30).length;
+  }
+
+  /** Label like "1 at MIN" if any policy is renewing at a minimum rate */
+  getClientMinRateAlert(group: any): string | null {
+    let minCount = 0;
+    group.policies.forEach((p: any) => {
+      if (p.currentCapRate && p.projectedRenewalRate && p.projectedRenewalRate < p.currentCapRate) {
+        minCount++;
+      }
+    });
+    return minCount > 0 ? `${minCount} at MIN` : null;
+  }
+
+  /** Total account value across all policies for a client */
+  getClientTotalValue(group: any): string {
+    const total = group.policies.reduce((sum: number, p: any) => sum + (p.accountValue || p.contractValue || 0), 0);
+    return this.formatCurrency(total);
+  }
+
+  /** Rate impact string, e.g. "-60.5%" */
+  getRateImpact(policy: any): string {
+    if (!policy.currentCapRate || !policy.projectedRenewalRate) return '—';
+    const diff = ((policy.projectedRenewalRate - policy.currentCapRate) / policy.currentCapRate) * 100;
+    return `${diff > 0 ? '+' : ''}${diff.toFixed(1)}%`;
+  }
+
+  /** Is the projected renewal rate below the current rate? */
+  isRateAtMin(policy: any): boolean {
+    return !!(policy.projectedRenewalRate && policy.currentCapRate && policy.projectedRenewalRate < policy.currentCapRate);
+  }
+
+  /** Get the highest severity among all alerts for a policy */
+  getPolicyHighestSeverity(policy: any): string {
+    if (!policy.alerts || policy.alerts.length === 0) return 'LOW';
+    const severityOrder: { [key: string]: number } = { 'HIGH': 1, 'MEDIUM': 2, 'LOW': 3 };
+    return policy.alerts.reduce((highest: string, alert: Alert) => {
+      return (severityOrder[alert.severity] || 999) < (severityOrder[highest] || 999) ? alert.severity : highest;
+    }, 'LOW');
+  }
+
+  /** Format a number as compact currency (e.g. 180000 → "180,000") */
+  formatCurrency(value: number | undefined | null): string {
+    if (value == null) return '—';
+    return value.toLocaleString('en-US', { maximumFractionDigits: 0 });
+  }
+
   onReviewPolicy(policy: Policy): void {
     console.log('Opening modal for policy:', policy);
     

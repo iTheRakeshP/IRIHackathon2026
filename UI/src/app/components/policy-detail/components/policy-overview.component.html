@@ -1,27 +1,27 @@
-<mat-card class="policy-overview-card">
-  <div class="overview-grid">
+<div class="rounded-xl border border-slate-200 bg-white">
+  <div class="flex flex-col">
     <!-- Basic Information -->
-    <div class="overview-section">
-      <h4 class="section-header">
-        <mat-icon>info</mat-icon>
+    <div class="px-6 py-5">
+      <h4 class="mb-4 flex items-center gap-2 text-base font-semibold text-slate-800">
+        <mat-icon class="text-indigo-500 !text-xl !w-5 !h-5">info</mat-icon>
         Basic Information
       </h4>
-      <div class="info-grid">
-        <div class="info-item">
-          <span class="label">Issue Date</span>
-          <span class="value">{{ formatDate(policy.issueDate) }}</span>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
+        <div class="flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Issue Date</span>
+          <span class="text-[15px] font-medium text-slate-700">{{ formatDate(policy.issueDate) }}</span>
         </div>
-        <div class="info-item">
-          <span class="label">Policy Type</span>
-          <span class="value">{{ policy.productType || 'N/A' }}</span>
+        <div class="flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Policy Type</span>
+          <span class="text-[15px] font-medium text-slate-700">{{ policy.productType || 'N/A' }}</span>
         </div>
-        <div class="info-item">
-          <span class="label">Carrier</span>
-          <span class="value">{{ policy.carrier || 'N/A' }}</span>
+        <div class="flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Carrier</span>
+          <span class="text-[15px] font-medium text-slate-700">{{ policy.carrier || 'N/A' }}</span>
         </div>
-        <div class="info-item">
-          <span class="label">Product Name</span>
-          <span class="value">{{ policy.productName || 'N/A' }}</span>
+        <div class="flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Product Name</span>
+          <span class="text-[15px] font-medium text-slate-700">{{ policy.productName || 'N/A' }}</span>
         </div>
       </div>
     </div>
@@ -29,27 +29,27 @@
     <mat-divider></mat-divider>
 
     <!-- Account Values -->
-    <div class="overview-section">
-      <h4 class="section-header">
-        <mat-icon>account_balance_wallet</mat-icon>
+    <div class="px-6 py-5">
+      <h4 class="mb-4 flex items-center gap-2 text-base font-semibold text-slate-800">
+        <mat-icon class="text-indigo-500 !text-xl !w-5 !h-5">account_balance_wallet</mat-icon>
         Account Values
       </h4>
-      <div class="info-grid">
-        <div class="info-item highlight">
-          <span class="label">Contract Value</span>
-          <span class="value large">{{ formatCurrency(policy.contractValue) }}</span>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
+        <div class="flex flex-col gap-1 rounded-lg border border-indigo-100 bg-indigo-50/60 p-3">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Contract Value</span>
+          <span class="text-xl font-semibold text-indigo-600">{{ formatCurrency(policy.contractValue) }}</span>
         </div>
-        <div class="info-item highlight">
-          <span class="label">Account Value</span>
-          <span class="value large">{{ formatCurrency(policy.accountValue) }}</span>
+        <div class="flex flex-col gap-1 rounded-lg border border-indigo-100 bg-indigo-50/60 p-3">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Account Value</span>
+          <span class="text-xl font-semibold text-indigo-600">{{ formatCurrency(policy.accountValue) }}</span>
         </div>
-        <div class="info-item">
-          <span class="label">Cash Surrender Value</span>
-          <span class="value">{{ formatCurrency(policy.cashSurrenderValue) }}</span>
+        <div class="flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Cash Surrender Value</span>
+          <span class="text-[15px] font-medium text-slate-700">{{ formatCurrency(policy.cashSurrenderValue) }}</span>
         </div>
-        <div class="info-item">
-          <span class="label">Death Benefit</span>
-          <span class="value">{{ formatCurrency(policy.deathBenefit) }}</span>
+        <div class="flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Death Benefit</span>
+          <span class="text-[15px] font-medium text-slate-700">{{ formatCurrency(policy.deathBenefit) }}</span>
         </div>
       </div>
     </div>
@@ -57,23 +57,24 @@
     <mat-divider></mat-divider>
 
     <!-- Surrender Schedule -->
-    <div class="overview-section">
-      <h4 class="section-header">
-        <mat-icon>schedule</mat-icon>
+    <div class="px-6 py-5">
+      <h4 class="mb-4 flex items-center gap-2 text-base font-semibold text-slate-800">
+        <mat-icon class="text-indigo-500 !text-xl !w-5 !h-5">schedule</mat-icon>
         Surrender Schedule
       </h4>
-      <div class="info-grid">
-        <div class="info-item">
-          <span class="label">Current Surrender Charge</span>
-          <span class="value">{{ formatPercentage(policy.currentSurrenderCharge) }}</span>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
+        <div class="flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Current Surrender Charge</span>
+          <span class="text-[15px] font-medium text-slate-700">{{ formatPercentage(policy.currentSurrenderCharge) }}</span>
         </div>
-        <div class="info-item">
-          <span class="label">Surrender End Date</span>
-          <span class="value">{{ formatDate(policy.surrenderEndDate) }}</span>
+        <div class="flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Surrender End Date</span>
+          <span class="text-[15px] font-medium text-slate-700">{{ formatDate(policy.surrenderEndDate) }}</span>
         </div>
-        <div class="info-item full-width">
-          <span class="label">Status</span>
-          <span class="value status-badge" [class.ending-soon]="getSurrenderStatus().includes('days')">
+        <div class="col-span-full flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Status</span>
+          <span class="inline-block w-fit rounded px-3 py-1 text-[13px] font-medium"
+                [ngClass]="getSurrenderStatus().includes('days') ? 'bg-orange-50 text-orange-700' : 'bg-green-50 text-green-700'">
             {{ getSurrenderStatus() }}
           </span>
         </div>
@@ -84,38 +85,40 @@
 
     <!-- Renewal Terms -->
     @if (policy.renewalDays !== undefined && policy.renewalDays !== null) {
-      <div class="overview-section">
-        <h4 class="section-header">
-          <mat-icon>autorenew</mat-icon>
+      <div class="px-6 py-5">
+        <h4 class="mb-4 flex items-center gap-2 text-base font-semibold text-slate-800">
+          <mat-icon class="text-indigo-500 !text-xl !w-5 !h-5">autorenew</mat-icon>
           Renewal Terms
         </h4>
-        <div class="info-grid">
-          <div class="info-item">
-            <span class="label">Days to Renewal</span>
-            <span class="value" [class.urgent]="policy.renewalDays <= 15" [class.warning]="policy.renewalDays > 15 && policy.renewalDays <= 30">
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
+          <div class="flex flex-col gap-1">
+            <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Days to Renewal</span>
+            <span class="text-[15px] font-medium"
+                  [ngClass]="policy.renewalDays <= 15 ? 'text-red-600 font-semibold' : policy.renewalDays <= 30 ? 'text-orange-600 font-semibold' : 'text-slate-700'">
               {{ policy.renewalDays }} days
             </span>
           </div>
-          <div class="info-item">
-            <span class="label">Current Cap Rate</span>
-            <span class="value">{{ formatPercentage(policy.currentCapRate) }}</span>
+          <div class="flex flex-col gap-1">
+            <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Current Cap Rate</span>
+            <span class="text-[15px] font-medium text-slate-700">{{ formatPercentage(policy.currentCapRate) }}</span>
           </div>
-          <div class="info-item">
-            <span class="label">Projected Renewal Rate</span>
-            <span class="value">{{ formatPercentage(policy.projectedRenewalRate) }}</span>
+          <div class="flex flex-col gap-1">
+            <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Projected Renewal Rate</span>
+            <span class="text-[15px] font-medium text-slate-700">{{ formatPercentage(policy.projectedRenewalRate) }}</span>
           </div>
           @if (policy.currentCapRate && policy.projectedRenewalRate) {
-            <div class="info-item full-width">
-              <span class="label">Rate Change</span>
-              <span class="value" [class.negative]="policy.projectedRenewalRate < policy.currentCapRate">
+            <div class="col-span-full flex flex-col gap-1">
+              <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Rate Change</span>
+              <span class="text-[15px] font-medium"
+                    [ngClass]="policy.projectedRenewalRate < policy.currentCapRate ? 'text-red-600' : 'text-slate-700'">
                 @if (policy.projectedRenewalRate < policy.currentCapRate) {
-                  <mat-icon class="trend-icon down">trending_down</mat-icon>
+                  <mat-icon class="align-middle mr-1 text-red-600 !text-lg !w-[18px] !h-[18px]">trending_down</mat-icon>
                   {{ formatPercentage(policy.currentCapRate - policy.projectedRenewalRate) }} decrease
                 } @else if (policy.projectedRenewalRate > policy.currentCapRate) {
-                  <mat-icon class="trend-icon up">trending_up</mat-icon>
+                  <mat-icon class="align-middle mr-1 text-green-500 !text-lg !w-[18px] !h-[18px]">trending_up</mat-icon>
                   {{ formatPercentage(policy.projectedRenewalRate - policy.currentCapRate) }} increase
                 } @else {
-                  <mat-icon class="trend-icon">trending_flat</mat-icon>
+                  <mat-icon class="align-middle mr-1 text-slate-400 !text-lg !w-[18px] !h-[18px]">trending_flat</mat-icon>
                   No change
                 }
               </span>
@@ -128,14 +131,14 @@
     }
 
     <!-- Riders & Features -->
-    <div class="overview-section">
-      <h4 class="section-header">
-        <mat-icon>add_circle</mat-icon>
+    <div class="px-6 py-5">
+      <h4 class="mb-4 flex items-center gap-2 text-base font-semibold text-slate-800">
+        <mat-icon class="text-indigo-500 !text-xl !w-5 !h-5">add_circle</mat-icon>
         Riders & Features
       </h4>
-      <div class="riders-container">
+      <div class="flex flex-wrap gap-2">
         @for (rider of getRiders(); track rider) {
-          <mat-chip class="rider-chip">{{ rider }}</mat-chip>
+          <mat-chip class="!bg-indigo-50 !text-indigo-700 !text-[13px]">{{ rider }}</mat-chip>
         }
       </div>
     </div>
@@ -143,29 +146,29 @@
     <mat-divider></mat-divider>
 
     <!-- Fees & Charges -->
-    <div class="overview-section">
-      <h4 class="section-header">
-        <mat-icon>receipt</mat-icon>
+    <div class="px-6 py-5">
+      <h4 class="mb-4 flex items-center gap-2 text-base font-semibold text-slate-800">
+        <mat-icon class="text-indigo-500 !text-xl !w-5 !h-5">receipt</mat-icon>
         Fees & Charges
       </h4>
-      <div class="info-grid">
-        <div class="info-item">
-          <span class="label">Annual Fee</span>
-          <span class="value">{{ formatCurrency(policy.annualFee) }}</span>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
+        <div class="flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Annual Fee</span>
+          <span class="text-[15px] font-medium text-slate-700">{{ formatCurrency(policy.annualFee) }}</span>
         </div>
-        <div class="info-item">
-          <span class="label">Rider Fee</span>
-          <span class="value">{{ formatPercentage(policy.riderFee) }}</span>
+        <div class="flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Rider Fee</span>
+          <span class="text-[15px] font-medium text-slate-700">{{ formatPercentage(policy.riderFee) }}</span>
         </div>
-        <div class="info-item">
-          <span class="label">M&E Fee</span>
-          <span class="value">{{ formatPercentage(policy.meFee) }}</span>
+        <div class="flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">M&E Fee</span>
+          <span class="text-[15px] font-medium text-slate-700">{{ formatPercentage(policy.meFee) }}</span>
         </div>
-        <div class="info-item">
-          <span class="label">Admin Fee</span>
-          <span class="value">{{ formatCurrency(policy.adminFee) }}</span>
+        <div class="flex flex-col gap-1">
+          <span class="text-xs uppercase tracking-wider font-medium text-slate-400">Admin Fee</span>
+          <span class="text-[15px] font-medium text-slate-700">{{ formatCurrency(policy.adminFee) }}</span>
         </div>
       </div>
     </div>
   </div>
-</mat-card>
+</div>

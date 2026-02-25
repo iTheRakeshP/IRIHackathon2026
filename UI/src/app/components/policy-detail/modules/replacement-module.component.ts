@@ -9,6 +9,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 import { Alert } from '../../../models/alert.model';
 import { Policy } from '../../../models/policy.model';
 import { Client } from '../../../models/client.model';
@@ -31,6 +32,10 @@ interface Alternative {
   incomeRider: boolean;
   suitabilityScore: number;
   highlights: string[];
+  keyBenefits: string[];
+  considerations: string[];
+  optionType: 'renewal' | 'replacement';
+  optionTitle: string;
   hasLicense?: boolean;
   hasAppointment?: boolean;
   hasTraining?: boolean;
@@ -52,6 +57,7 @@ interface Alternative {
     MatTableModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
     PerformanceChartsComponent,
     SuitabilityFormComponent
   ],
@@ -71,6 +77,12 @@ export class ReplacementModuleComponent {
   loadingAlternatives = signal<boolean>(false);
   savedNote = signal<string>('');
   exportingPDF = signal<boolean>(false);
+
+  // Selection & Documentation flow
+  selectedAlternativeId = signal<string | null>(null);
+  documentationSummary = signal<string>('');
+  documentationConfirmed = signal<boolean>(false);
+  generatingDocumentation = signal<boolean>(false);
 
   // Computed
   canProceedToAlternatives = computed(() => this.suitabilityVerified());
@@ -173,8 +185,12 @@ export class ReplacementModuleComponent {
         riderFee: riderFee,
         totalCost: this.calculateTotalCostFromFees(annualFee, riderFee),
         incomeRider: hasIncomeRider,
-        suitabilityScore: 90 - (index * 5), // Mock score, higher for first alternatives
+        suitabilityScore: 90 - (index * 5),
         highlights: this.generateHighlights(product, capRate),
+        keyBenefits: this.generateKeyBenefits(product, capRate),
+        considerations: this.generateConsiderations(product),
+        optionType: 'replacement' as const,
+        optionTitle: this.generateOptionTitle(product, capRate),
         hasLicense: product.hasLicense ?? true,
         hasAppointment: product.hasAppointment ?? true,
         hasTraining: product.hasTraining ?? true,
@@ -221,39 +237,215 @@ export class ReplacementModuleComponent {
     return highlights.slice(0, 3);
   }
 
-  onInitiateReplacementReview(): void {
-    this.actionComplete.emit({
-      action: 'initiate_replacement',
-      alertId: this.alert.alertId,
-      policyId: this.policy.policyId
-    });
+  private generateKeyBenefits(product: any, productCap: number): string[] {
+    const benefits: string[] = [];
+    const currentCap = this.policy.currentCapRate || this.policy.projectedRenewalRate || 0;
+
+    // Rate improvement
+    if (productCap > currentCap) {
+      benefits.push(`Rate improvement: ${(productCap - currentCap).toFixed(1)}% increase (${currentCap.toFixed(1)}% → ${productCap.toFixed(1)}%)`);
+    }
+
+    // Premium bonus
+    if (product.bonusRate) {
+      benefits.push(`${product.bonusRate}% premium bonus on entire account value`);
+    }
+
+    // Enhanced features
+    if (product.availableRiders && product.availableRiders.length > 0) {
+      benefits.push('Enhanced features including death benefit protection');
+    }
+
+    // Carrier strength
+    benefits.push(`Strong carrier rating (${product.carrier})`);
+
+    // Income rider specifics
+    if (product.availableRiders) {
+      const incomeRider = product.availableRiders.find((r: any) =>
+        r.riderType && r.riderType.toLowerCase().includes('income')
+      );
+      if (incomeRider && incomeRider.rollUpRate) {
+        benefits.push(`Income rider with ${incomeRider.rollUpRate}% guaranteed rollup`);
+      }
+    }
+
+    // From product data
+    if (product.keyBenefits) {
+      for (const b of product.keyBenefits) {
+        if (!benefits.some(existing => existing.toLowerCase().includes(b.toLowerCase().substring(0, 20)))) {
+          benefits.push(b);
+        }
+      }
+    }
+
+    return benefits.slice(0, 4);
   }
 
-  onInitiateReplacementReviewForProduct(alternative: Alternative): void {
-    // Update context when user hovers or clicks on a specific product
-    this.chatService.updateContext({
-      viewingAlternative: alternative,
-      interactionType: 'reviewing-product'
-    });
-    
+  private generateConsiderations(product: any): string[] {
+    const considerations: string[] = [];
+
+    // New surrender period
+    if (product.surrenderSchedule?.years) {
+      considerations.push(`New ${product.surrenderSchedule.years}-year surrender period begins`);
+    }
+
+    // 1035 exchange
+    considerations.push('Requires 1035 exchange paperwork');
+
+    // State replacement forms
+    considerations.push('State replacement forms and review period');
+
+    // Client acknowledgment
+    considerations.push('Client must acknowledge new terms and conditions');
+
+    // Minimum premium
+    if (product.minimumPremium && product.minimumPremium > 25000) {
+      considerations.push(`Minimum premium requirement: $${product.minimumPremium.toLocaleString()}`);
+    }
+
+    return considerations.slice(0, 4);
+  }
+
+  private generateOptionTitle(product: any, capRate: number): string {
+    const productType = product.productType === 'MYGA' || product.productType === 'Fixed'
+      ? 'MYGA' : product.productType;
+    let title = `1035 exchange to ${product.carrier} ${product.productName} ${productType} at ${capRate.toFixed(2)}%`;
+    if (product.bonusRate) {
+      title += ` with ${product.bonusRate}% premium bonus`;
+    }
+    return title;
+  }
+
+  getRenewalOption(): Alternative {
+    const currentRate = this.policy.projectedRenewalRate || this.policy.currentCapRate || 0;
+    return {
+      productId: 'RENEWAL',
+      carrier: this.policy.carrier,
+      productName: `${this.policy.carrier} ${this.policy.productType}`,
+      productType: this.policy.productType,
+      capRate: currentRate,
+      annualFee: this.policy.annualFee || 0,
+      riderFee: this.policy.riderFee || 0,
+      totalCost: 0,
+      incomeRider: this.policy.riders?.includes('Income') || false,
+      suitabilityScore: 0,
+      highlights: [],
+      keyBenefits: [
+        'No new paperwork or underwriting',
+        'Maintains existing carrier relationship',
+        'Surrender period already expired or minimal remaining'
+      ],
+      considerations: [
+        `Significant rate drop to guaranteed minimum ${currentRate}%`,
+        `Missing opportunity to capture higher market rates`,
+        'Lower returns for client over policy term'
+      ],
+      optionType: 'renewal',
+      optionTitle: `Continue with ${this.policy.carrier} at renewal rate of ${currentRate}%`,
+      hasLicense: true,
+      hasAppointment: true,
+      hasTraining: true,
+      canSell: true,
+      complianceNotes: null
+    };
+  }
+
+  onSelectOption(alternativeId: string): void {
+    this.selectedAlternativeId.set(alternativeId);
+    this.documentationConfirmed.set(false);
+    this.generatingDocumentation.set(true);
+    this.documentationSummary.set('');
+
+    // Find the selected alternative
+    const selected = alternativeId === 'renewal'
+      ? this.getRenewalOption()
+      : this.alternatives().find(a => a.productId === alternativeId);
+
+    if (selected) {
+      this.chatService.updateContext({
+        viewingAlternative: selected,
+        interactionType: 'reviewing-product'
+      });
+    }
+
+    // Simulate AI generation delay
+    setTimeout(() => {
+      this.documentationSummary.set(this.generateDocumentationSummary(alternativeId));
+      this.generatingDocumentation.set(false);
+    }, 1200);
+  }
+
+  private generateDocumentationSummary(alternativeId: string): string {
+    const clientName = `${this.client.firstName} ${this.client.lastName}`;
+    const riskTolerance = this.client.suitability?.riskTolerance || 'moderate';
+    const horizon = this.client.suitability?.investmentHorizon || 'long-term';
+    const objective = this.client.suitability?.primaryObjective || 'growth with income';
+    const experience = this.client.suitability?.investmentExperience || 5;
+    const liquidity = this.client.suitability?.liquidityImportance || 'moderate';
+
+    if (alternativeId === 'renewal') {
+      return `Based on comprehensive suitability analysis, the renewal of ${clientName}'s existing ${this.policy.carrier} ${this.policy.productType} policy aligns with the client's ${riskTolerance} risk tolerance and ${horizon} investment horizon. ` +
+        `Continuing the current policy maintains established guarantees and avoids new surrender periods. ` +
+        `However, the projected renewal rate of ${(this.policy.projectedRenewalRate || this.policy.currentCapRate || 0).toFixed(2)}% represents a reduction from the current cap rate, ` +
+        `which may not optimally serve the client's ${objective} objective. ` +
+        `Client demonstrates suitable investment experience (${experience}/10) and confirmed understanding of all product features and limitations.`;
+    }
+
+    const alt = this.alternatives().find(a => a.productId === alternativeId);
+    if (!alt) return '';
+
+    return `Based on comprehensive suitability analysis, this annuity recommendation aligns with ${clientName}'s ${riskTolerance} risk tolerance and ${horizon} investment horizon. ` +
+      `The ${alt.carrier} ${alt.productName} provides ${alt.capRate.toFixed(2)}% cap rate${alt.keyBenefits.find(b => b.includes('bonus')) ? ' with premium bonus' : ''}, ` +
+      `offering appropriate guarantees while maintaining flexibility for ${liquidity} liquidity needs. ` +
+      `The 1035 exchange from ${this.policy.carrier} ${this.policy.productType} to ${alt.productName} results in a rate improvement of ${(alt.capRate - (this.policy.currentCapRate || 0)).toFixed(2)}% ` +
+      `and enhanced product features suited to the client's ${objective} objective. ` +
+      `Client demonstrates suitable investment experience (${experience}/10) and confirmed understanding of all product features and limitations.`;
+  }
+
+  onConfirmDocumentation(): void {
+    this.documentationConfirmed.set(true);
+  }
+
+  onContinue(): void {
+    const selectedId = this.selectedAlternativeId();
+    if (!selectedId) return;
+
+    const selected = selectedId === 'renewal'
+      ? this.getRenewalOption()
+      : this.alternatives().find(a => a.productId === selectedId);
+
+    if (!selected) return;
+
     this.actionComplete.emit({
-      action: 'initiate_replacement',
+      action: selectedId === 'renewal' ? 'continue_renewal' : 'initiate_replacement',
       alertId: this.alert.alertId,
       policyId: this.policy.policyId,
       selectedProduct: {
-        productId: alternative.productId,
-        productName: alternative.productName,
-        carrier: alternative.carrier,
-        suitabilityScore: alternative.suitabilityScore
+        productId: selected.productId,
+        productName: selected.productName,
+        carrier: selected.carrier,
+        suitabilityScore: selected.suitabilityScore
+      },
+      documentation: {
+        summary: this.documentationSummary(),
+        confirmedAt: new Date().toISOString()
       }
     });
-    
-    console.log('Initiating replacement review for:', {
+
+    console.log('Continuing with selected option:', {
       currentPolicy: this.policy.policyId,
-      newProduct: alternative.productName,
-      carrier: alternative.carrier,
-      matchScore: alternative.suitabilityScore
+      selectedProduct: selected.productName,
+      carrier: selected.carrier,
+      matchScore: selected.suitabilityScore,
+      documentationConfirmed: true
     });
+  }
+
+  getSelectedAlternative(): Alternative | null {
+    const id = this.selectedAlternativeId();
+    if (!id) return null;
+    if (id === 'renewal') return this.getRenewalOption();
+    return this.alternatives().find(a => a.productId === id) || null;
   }
 
   onAlternativeHover(alternative: Alternative): void {
@@ -308,23 +500,38 @@ export class ReplacementModuleComponent {
   }
 
   private getMockAlternatives(): Alternative[] {
+    const currentCap = this.policy.currentCapRate || this.policy.projectedRenewalRate || 1.5;
     return [
       {
         productId: 'ALT-001',
-        carrier: 'Symetra',
-        productName: 'Symetra Advantage Income Pro',
+        carrier: 'Great American',
+        productName: 'FlexGrowth Plus',
         productType: 'Fixed Index Annuity',
-        capRate: 6.50,
+        capRate: 4.25,
         annualFee: 0,
         riderFee: 0.95,
         totalCost: 950,
         incomeRider: true,
         suitabilityScore: 92,
         highlights: [
-          'Higher cap rate (6.50% vs current 4.25%)',
+          `Higher cap rate (4.25% vs current ${currentCap}%)`,
           'Income rider with 7% rollup',
           'Best-in-class features for income'
         ],
+        keyBenefits: [
+          `Rate improvement: ${(4.25 - currentCap).toFixed(1)}% increase (${currentCap}% → 4.25%)`,
+          '3.0% premium bonus on entire account value',
+          'Enhanced features including death benefit protection',
+          'Strong carrier rating (Great American)'
+        ],
+        considerations: [
+          'New 7-year surrender period begins',
+          'Requires 1035 exchange paperwork',
+          'State replacement forms and review period',
+          'Client must acknowledge new terms and conditions'
+        ],
+        optionType: 'replacement',
+        optionTitle: `1035 exchange to Great American FlexGrowth Plus MYGA at 4.25% with 3.0% premium bonus`,
         hasLicense: true,
         hasAppointment: true,
         hasTraining: true,
@@ -333,47 +540,74 @@ export class ReplacementModuleComponent {
       },
       {
         productId: 'ALT-002',
-        carrier: 'Brighthouse Financial',
-        productName: 'Shield Level Select',
+        carrier: 'North American',
+        productName: 'Secure Income Pro',
         productType: 'Fixed Index Annuity',
-        capRate: 6.25,
+        capRate: 3.95,
         annualFee: 0,
         riderFee: 1.00,
         totalCost: 1000,
         incomeRider: true,
         suitabilityScore: 88,
         highlights: [
-          'Higher cap rate (6.25% vs current 4.25%)',
+          `Higher cap rate (3.95% vs current ${currentCap}%)`,
           'Downside protection with upside potential',
           'Guaranteed lifetime income available'
         ],
+        keyBenefits: [
+          `Rate improvement: ${(3.95 - currentCap).toFixed(1)}% increase (${currentCap}% → 3.95%)`,
+          'Enhanced features including death benefit protection',
+          'Strong carrier rating (North American)'
+        ],
+        considerations: [
+          'New 5-year surrender period begins',
+          'Requires 1035 exchange paperwork',
+          'State replacement forms and review period',
+          'Client must acknowledge new terms and conditions'
+        ],
+        optionType: 'replacement',
+        optionTitle: `1035 exchange to North American Secure Income Pro MYGA at 3.95%`,
         hasLicense: true,
-        hasAppointment: false,
-        hasTraining: false,
-        canSell: false,
-        complianceNotes: 'Carrier appointment pending. Product training required. Contact compliance@yourfirm.com to request Brighthouse onboarding and certification.'
+        hasAppointment: true,
+        hasTraining: true,
+        canSell: true,
+        complianceNotes: null
       },
       {
         productId: 'ALT-003',
         carrier: 'American Equity',
-        productName: 'AssetShield 10',
+        productName: 'Premium Shield',
         productType: 'Fixed Index Annuity',
-        capRate: 6.00,
+        capRate: 4.10,
         annualFee: 0,
         riderFee: 0.85,
         totalCost: 850,
         incomeRider: true,
         suitabilityScore: 85,
         highlights: [
-          'Competitive cap rate (6.00%)',
+          `Competitive cap rate (4.10%)`,
           'Lower fees than current policy',
           'Flexible income options'
         ],
+        keyBenefits: [
+          `Rate improvement: ${(4.10 - currentCap).toFixed(1)}% increase (${currentCap}% → 4.10%)`,
+          '2.0% premium bonus on entire account value',
+          'Enhanced features including death benefit protection',
+          'Strong carrier rating (American Equity)'
+        ],
+        considerations: [
+          'New 6-year surrender period begins',
+          'Requires 1035 exchange paperwork',
+          'State replacement forms and review period',
+          'Client must acknowledge new terms and conditions'
+        ],
+        optionType: 'replacement',
+        optionTitle: `1035 exchange to American Equity Premium Shield MYGA at 4.10% with 2.0% premium bonus`,
         hasLicense: true,
         hasAppointment: true,
         hasTraining: false,
         canSell: false,
-        complianceNotes: 'Product training required. Contact compliance@yourfirm.com to request American Equity AssetShield certification.'
+        complianceNotes: 'Product training required. Contact compliance@yourfirm.com to request American Equity Premium Shield certification.'
       }
     ];
   }
