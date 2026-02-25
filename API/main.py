@@ -4,7 +4,7 @@ Hackathon PoC - February 2026
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import policies, clients, products, ai
+from app.api import policies, clients, products, ai, replacement_transactions
 from app.config import settings
 
 app = FastAPI(
@@ -27,6 +27,7 @@ app.include_router(policies.router, prefix="/api", tags=["policies"])
 app.include_router(clients.router, prefix="/api", tags=["clients"])
 app.include_router(products.router, prefix="/api", tags=["products"])
 app.include_router(ai.router)
+app.include_router(replacement_transactions.router, prefix="/api", tags=["replacement-transactions"])
 
 @app.get("/")
 async def root():

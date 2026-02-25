@@ -18,6 +18,8 @@ import { ApiService } from '../../services/api.service';
 import { Policy } from '../../models/policy.model';
 import { Alert, AlertBadge, AlertType, AlertSeverity } from '../../models/alert.model';
 import { PolicyDetailModalComponent } from '../policy-detail/policy-detail-modal.component';
+import { AlertDetailModalComponent } from '../alert-detail/alert-detail-modal.component';
+import { AcquisitionAlertsListComponent } from '../acquisition-alerts-list/acquisition-alerts-list.component';
 
 @Component({
   selector: 'app-policy-dashboard',
@@ -61,10 +63,17 @@ export class PolicyDashboardComponent implements OnInit {
   // Available filter options
   availableCarriers: string[] = [];
   availableAlertTypes: { value: AlertType, label: string }[] = [
+    // Policy-level alerts (annuity optimization)
     { value: 'REPLACEMENT', label: 'Replacement' },
     { value: 'INCOME_ACTIVATION', label: 'Income Activation' },
     { value: 'SUITABILITY_DRIFT', label: 'Suitability Drift' },
-    { value: 'MISSING_INFO', label: 'Missing Info' }
+    { value: 'MISSING_INFO', label: 'Missing Info' },
+    // Client-level acquisition alerts (NEW business growth)
+    { value: 'EXCESS_LIQUIDITY', label: '💰 Excess Cash' },
+    { value: 'PORTFOLIO_UNPROTECTED', label: '🎯 Unprotected Portfolio' },
+    { value: 'CD_MATURITY', label: '🔔 CD Maturing' },
+    { value: 'INCOME_GAP', label: '🚀 Income Gap' },
+    { value: 'DIVERSIFICATION_GAP', label: '📊 Diversification Gap' }
   ];
   availablePriorities: { value: AlertSeverity, label: string }[] = [
     { value: 'HIGH', label: 'High Priority' },
@@ -92,20 +101,47 @@ export class PolicyDashboardComponent implements OnInit {
             ...policy,
             clientName: group.clientName,
             clientAccountNumber: group.clientAccountNumber
-          }))
+          })),
+          acquisitionAlerts: []  // Will be populated below
         }));
 
-        // Extract unique carriers and clients for filter options
-        this.extractFilterOptions();
+        // Load acquisition alerts for each client (parallel requests)
+        const acquisitionAlertRequests = this.groupedPolicies.map(group =>
+          this.apiService.getClientAcquisitionAlerts(group.clientAccountNumber)
+        );
 
-        // Apply initial filtering
-        this.applyFilters();
+        // Wait for all acquisition alert requests to complete
+        Promise.all(acquisitionAlertRequests.map(req => req.toPromise()))
+          .then(results => {
+            // Attach acquisition alerts to each client group
+            results.forEach((result: any, index) => {
+              if (result && result.alerts) {
+                this.groupedPolicies[index].acquisitionAlerts = result.alerts;
+              }
+            });
 
-        // Expand all clients by default
-        this.filteredGroupedPolicies.forEach(group => {
-          this.expandedClients.add(group.clientAccountNumber);
-        });
-        this.loading = false;
+            // Extract unique carriers and clients for filter options
+            this.extractFilterOptions();
+
+            // Apply initial filtering
+            this.applyFilters();
+
+            // Expand all clients by default
+            this.filteredGroupedPolicies.forEach(group => {
+              this.expandedClients.add(group.clientAccountNumber);
+            });
+            this.loading = false;
+          })
+          .catch(error => {
+            console.warn('Error loading acquisition alerts:', error);
+            // Continue anyway - policy data is already loaded
+            this.extractFilterOptions();
+            this.applyFilters();
+            this.filteredGroupedPolicies.forEach(group => {
+              this.expandedClients.add(group.clientAccountNumber);
+            });
+            this.loading = false;
+          });
       },
       error: (error) => {
         console.error('Error loading policies:', error);
@@ -240,17 +276,25 @@ export class PolicyDashboardComponent implements OnInit {
   // Dashboard stat methods
   getTotalAlerts(): number {
     return this.filteredGroupedPolicies.reduce((total, group) => {
-      return total + group.policies.reduce((sum: number, policy: any) => {
+      // Policy-level alerts
+      const policyAlerts = group.policies.reduce((sum: number, policy: any) => {
         return sum + (policy.alerts?.length || 0);
       }, 0);
+      // Client-level acquisition alerts
+      const acquisitionAlerts = group.acquisitionAlerts?.length || 0;
+      return total + policyAlerts + acquisitionAlerts;
     }, 0);
   }
 
   getHighPriorityCount(): number {
     return this.filteredGroupedPolicies.reduce((total, group) => {
-      return total + group.policies.reduce((sum: number, policy: any) => {
+      // Policy-level high priority
+      const policyHighPriority = group.policies.reduce((sum: number, policy: any) => {
         return sum + (policy.alerts?.filter((a: Alert) => a.severity === 'HIGH').length || 0);
       }, 0);
+      // Client-level acquisition high priority
+      const acquisitionHighPriority = group.acquisitionAlerts?.filter((a: Alert) => a.severity === 'HIGH').length || 0;
+      return total + policyHighPriority + acquisitionHighPriority;
     }, 0);
   }
 
@@ -269,9 +313,21 @@ export class PolicyDashboardComponent implements OnInit {
 
   // Client-level helper methods
   getTotalAlertsForClient(group: any): number {
-    return group.policies.reduce((sum: number, policy: any) => {
+    // Policy-level alerts
+    const policyAlerts = group.policies.reduce((sum: number, policy: any) => {
       return sum + (policy.alerts?.length || 0);
     }, 0);
+    // Client-level acquisition alerts
+    const acquisitionAlerts = group.acquisitionAlerts?.length || 0;
+    return policyAlerts + acquisitionAlerts;
+  }
+
+  getAcquisitionAlertsForClient(group: any): Alert[] {
+    return group.acquisitionAlerts || [];
+  }
+
+  hasAcquisitionAlerts(group: any): boolean {
+    return group.acquisitionAlerts && group.acquisitionAlerts.length > 0;
   }
 
   getClientRenewalSummary(group: any): string {
@@ -327,42 +383,96 @@ export class PolicyDashboardComponent implements OnInit {
     return `${policy.carrier} ${policy.productType}`;
   }
 
+  getAlertBadge(alertType: AlertType): AlertBadge {
+    let icon = '';
+    let color = '';
+    let label = '';
+
+    switch (alertType) {
+      // Policy-level alerts (annuity optimization)
+      case 'REPLACEMENT':
+        icon = 'sync_alt';
+        color = 'warn';
+        label = 'Replacement';
+        break;
+      case 'INCOME_ACTIVATION':
+        icon = 'payments';
+        color = 'accent';
+        label = 'Income';
+        break;
+      case 'SUITABILITY_DRIFT':
+        icon = 'info';
+        color = 'primary';
+        label = 'Suitability';
+        break;
+      case 'MISSING_INFO':
+        icon = 'assignment_late';
+        color = 'accent';
+        label = 'Missing Info';
+        break;
+      // Client-level acquisition alerts (NEW business growth)
+      case 'EXCESS_LIQUIDITY':
+        icon = 'attach_money';
+        color = 'success';
+        label = 'Excess Cash';
+        break;
+      case 'PORTFOLIO_UNPROTECTED':
+        icon = 'shield';
+        color = 'warn';
+        label = 'Unprotected';
+        break;
+      case 'CD_MATURITY':
+        icon = 'schedule';
+        color = 'accent';
+        label = 'CD Maturing';
+        break;
+      case 'INCOME_GAP':
+        icon = 'trending_down';
+        color = 'warn';
+        label = 'Income Gap';
+        break;
+      case 'DIVERSIFICATION_GAP':
+        icon = 'pie_chart';
+        color = 'primary';
+        label = 'Diversify';
+        break;
+      case 'TAX_INEFFICIENCY':
+        icon = 'account_balance';
+        color = 'accent';
+        label = 'Tax Savings';
+        break;
+      case 'QUALIFIED_OPPORTUNITY':
+        icon = 'savings';
+        color = 'success';
+        label = 'IRA Opportunity';
+        break;
+      case 'BENEFICIARY_PLANNING':
+        icon = 'family_restroom';
+        color = 'primary';
+        label = 'Estate Planning';
+        break;
+      default:
+        icon = 'info';
+        color = 'primary';
+        label = 'Alert';
+    }
+
+    return {
+      type: alertType,
+      severity: 'MEDIUM',  // Default, will be overridden by actual alert
+      icon,
+      color,
+      label
+    };
+  }
+
   getAlertBadges(alerts: Alert[]): AlertBadge[] {
     if (!alerts || !Array.isArray(alerts)) return [];
     return alerts.map(alert => {
-      let icon = '';
-      let color = '';
-      let label = '';
-
-      switch (alert.type) {
-        case 'REPLACEMENT':
-          icon = 'sync_alt';
-          color = 'warn';
-          label = 'Replacement';
-          break;
-        case 'INCOME_ACTIVATION':
-          icon = 'payments';
-          color = 'accent';
-          label = 'Income';
-          break;
-        case 'SUITABILITY_DRIFT':
-          icon = 'info';
-          color = 'primary';
-          label = 'Suitability';
-          break;
-        case 'MISSING_INFO':
-          icon = 'assignment_late';
-          color = 'accent';
-          label = 'Missing Info';
-          break;
-      }
-
+      const badge = this.getAlertBadge(alert.type);
       return {
-        type: alert.type,
-        severity: alert.severity,
-        icon,
-        color,
-        label
+        ...badge,
+        severity: alert.severity  // Use actual severity from alert
       };
     });
   }
@@ -477,5 +587,75 @@ export class PolicyDashboardComponent implements OnInit {
         policy.alerts[0].type
       );
     }
+  }
+
+  onViewAcquisitionAlert(alert: any, group: any, event?: Event): void {
+    if (event) {
+      event.stopPropagation();
+    }
+    
+    console.log('Opening acquisition alert detail:', alert);
+    
+    // Open the Alert Detail Modal
+    const dialogRef = this.dialog.open(AlertDetailModalComponent, {
+      width: '700px',
+      maxWidth: '90vw',
+      panelClass: 'alert-detail-dialog',
+      disableClose: false,
+      data: {
+        alert: alert,
+        clientName: group.clientName,
+        clientAccountNumber: group.clientAccountNumber,
+        totalPortfolioValue: group.totalPortfolioValue || 0
+      }
+    });
+
+    // Handle dialog close if needed
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Alert detail modal closed with result:', result);
+      }
+    });
+  }
+
+  getTotalAcquisitionAlerts(): number {
+    let total = 0;
+    this.groupedPolicies.forEach(group => {
+      if (group.acquisitionAlerts) {
+        total += group.acquisitionAlerts.length;
+      }
+    });
+    return total;
+  }
+
+  openAllAcquisitionAlerts(): void {
+    // Gather all acquisition alerts from all clients
+    const allAlerts = this.groupedPolicies
+      .filter(group => group.acquisitionAlerts && group.acquisitionAlerts.length > 0)
+      .map(group => ({
+        clientName: group.clientName,
+        clientAccountNumber: group.clientAccountNumber,
+        totalPortfolioValue: group.totalPortfolioValue || 0,
+        alerts: group.acquisitionAlerts
+      }));
+
+    // Open the comprehensive acquisition alerts list
+    const dialogRef = this.dialog.open(AcquisitionAlertsListComponent, {
+      width: '95vw',
+      maxWidth: '1600px',
+      height: '90vh',
+      maxHeight: '900px',
+      panelClass: 'acquisition-alerts-list-dialog',
+      disableClose: false,
+      data: {
+        allAlerts: allAlerts
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Acquisition alerts list closed with result:', result);
+      }
+    });
   }
 }

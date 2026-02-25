@@ -57,4 +57,13 @@ export class ApiService {
       userMessage: message
     });
   }
+
+  // Acquisition alerts (client-level portfolio opportunities)
+  getClientAcquisitionAlerts(clientAccountNumber: string): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/clients/${clientAccountNumber}/acquisition-alerts`);
+  }
+
+  getAllAcquisitionAlerts(): Observable<any> {
+    return this.http.get<any>(`${this.API_URL}/acquisition-alerts`);
+  }
 }

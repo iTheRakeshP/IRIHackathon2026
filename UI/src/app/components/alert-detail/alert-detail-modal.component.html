@@ -1,0 +1,81 @@
+<div class="alert-detail-modal">
+  <div class="modal-header">
+    <div class="header-content">
+      <div class="alert-icon" [ngClass]="getSeverityClass()">
+        <mat-icon>notifications_active</mat-icon>
+      </div>
+      <div class="header-text">
+        <h2>{{ data.alert.title }}</h2>
+        <p class="client-info">
+          <strong>{{ data.clientName }}</strong> • 
+          Account {{ data.clientAccountNumber }} • 
+          Portfolio Value: {{ formatCurrency(data.totalPortfolioValue) }}
+        </p>
+      </div>
+    </div>
+    <button mat-icon-button (click)="close()" class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <!-- Alert Metadata -->
+    <div class="alert-metadata">
+      <mat-chip-set>
+        <mat-chip [ngClass]="getSeverityClass()">
+          {{ data.alert.severity }} Priority
+        </mat-chip>
+        <mat-chip class="type-chip">
+          {{ getAlertTypeLabel() }}
+        </mat-chip>
+        <mat-chip class="date-chip">
+          <mat-icon>calendar_today</mat-icon>
+          {{ data.alert.createdAt }}
+        </mat-chip>
+      </mat-chip-set>
+    </div>
+
+    <!-- Alert Summary -->
+    <div class="alert-section">
+      <h3>
+        <mat-icon>info</mat-icon>
+        Summary
+      </h3>
+      <p class="summary-text">{{ data.alert.reasonShort }}</p>
+    </div>
+
+    <!-- Detailed Reasons -->
+    <div class="alert-section">
+      <h3>
+        <mat-icon>list</mat-icon>
+        Key Details
+      </h3>
+      <div class="reasons-list">
+        @for (reason of data.alert.reasons; track $index) {
+          <div class="reason-item">{{ reason }}</div>
+        }
+      </div>
+    </div>
+
+    <!-- Recommended Action -->
+    <div class="alert-section action-section">
+      <h3>
+        <mat-icon>trending_up</mat-icon>
+        Recommended Action
+      </h3>
+      <p class="action-text">
+        Review this portfolio opportunity with the client to explore annuity solutions 
+        that address the identified need. Consider scheduling a consultation to discuss 
+        how annuity products can enhance their financial strategy.
+      </p>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button mat-button (click)="close()">Close</button>
+    <button mat-raised-button color="primary">
+      <mat-icon>event</mat-icon>
+      Schedule Consultation
+    </button>
+  </div>
+</div>

@@ -47,6 +47,17 @@
           <div class="stat-value">{{ getTotalAUM() }} Total Value</div>
         </div>
       </div>
+
+      <div class="stat-card clickable-stat" (click)="openAllAcquisitionAlerts()">
+        <div class="stat-icon portfolio-icon">
+          <mat-icon>trending_up</mat-icon>
+        </div>
+        <div class="stat-content">
+          <div class="stat-label">Portfolio Opportunities</div>
+          <div class="stat-value">{{ getTotalAcquisitionAlerts() }} New Annuity Prospects</div>
+        </div>
+        <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+      </div>
     </div>
   </div>
 
@@ -140,6 +151,20 @@
                   <span class="alert-count">{{ getTotalAlertsForClient(group) }} {{ getTotalAlertsForClient(group) === 1 ? 'alert' : 'alerts' }}</span>
                 </div>
                 <div class="client-account">{{ formatAccountNumber(group.clientAccountNumber) }}</div>
+                
+                <!-- Client-Level Acquisition Alerts (Portfolio Opportunities) -->
+                @if (hasAcquisitionAlerts(group)) {
+                  <div class="acquisition-alerts-preview">
+                    <span class="acquisition-label">💰 Portfolio Opportunities:</span>
+                    @for (alert of getAcquisitionAlertsForClient(group); track alert.alertId) {
+                      <span [class]="'acquisition-chip ' + alert.severity.toLowerCase()" 
+                            [matTooltip]="alert.reasonShort"
+                            (click)="onViewAcquisitionAlert(alert, group, $event)">
+                        {{ getAlertBadge(alert.type).label }}
+                      </span>
+                    }
+                  </div>
+                }
               </div>
               
               <div class="client-summary-stats">

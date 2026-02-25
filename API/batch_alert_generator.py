@@ -2,10 +2,9 @@
 Overnight AI Batch Alert Generator
 Analyzes client profiles + policies and generates alerts with AI scoring
 
-This script simulates the overnight batch process that:
-1. Reads client profiles and policy data
+This script simulates the overnight batch process that:1. Reads client profiles, policy data, and position data
 2. Applies AI scoring algorithms for each alert type
-3. Generates AI analysis fields (score, confidence, breakdown, factors)
+3. Generates replacement AND acquisition alerts
 4. Saves results to NEW FILE (keeps original policies.json intact for UI)
 
 Run before demo to show "overnight AI processing" results.
@@ -15,6 +14,11 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional
 from pathlib import Path
 import os
+import sys
+
+# Add parent directory to path to import acquisition alert generator
+sys.path.insert(0, str(Path(__file__).parent))
+from app.services.acquisition_alerts import AcquisitionAlertGenerator
 
 
 class AIAlertGenerator:
@@ -26,6 +30,14 @@ class AIAlertGenerator:
         self.clients = self._load_json("clients_profile.json")
         self.policies = self._load_json("policies.json")
         self.products = self._load_json("products.json")
+        
+        # Load client positions for acquisition alert generation
+        try:
+            self.client_positions = self._load_json("client_positions.json")
+            print("✓ Client position data loaded (enables acquisition alerts)")
+        except FileNotFoundError:
+            self.client_positions = []
+            print("⚠️  client_positions.json not found - acquisition alerts disabled")
         
         # Initialize OpenAI if requested
         if self.use_openai and os.getenv("OPENAI_API_KEY"):
@@ -58,6 +70,13 @@ class AIAlertGenerator:
         for client in self.clients:
             if client.get("client", {}).get("clientAccountNumber") == account_number:
                 return client
+        return None
+    
+    def _get_client_positions(self, account_number: str) -> Optional[Dict]:
+        """Find client position data by account number"""
+        for position in self.client_positions:
+            if position.get("clientAccountNumber") == account_number:
+                return position
         return None
     
     def _calculate_replacement_score(self, policy: Dict, client: Dict) -> Dict[str, Any]:
@@ -718,6 +737,7 @@ class AIAlertGenerator:
     def generate_alerts(self):
         """
         Main batch process: Analyze policies and generate alerts with AI scoring
+        Generates both replacement alerts (from policies) and acquisition alerts (from positions)
         """
         print("=" * 60)
         print("AI ALERT BATCH GENERATOR - Overnight Processing")
@@ -726,8 +746,10 @@ class AIAlertGenerator:
         print()
         
         total_policies = len(self.policies)
-        total_alerts_generated = 0
+        total_replacement_alerts = 0
+        total_acquisition_alerts = 0
         
+        print(f"PHASE 1: REPLACEMENT ALERTS (Policy Analysis)")
         print(f"Analyzing {total_policies} policies...")
         print()
         
@@ -754,7 +776,7 @@ class AIAlertGenerator:
                 alert = self._create_replacement_alert(policy, client, ai_analysis)
                 generated_alerts.append(alert)
                 print(f"   ✓ REPLACEMENT alert generated (Score: {ai_analysis['ai_score']}, Confidence: {ai_analysis['confidence']:.2f})")
-            
+           
             # Check INCOME_ACTIVATION
             if self._should_generate_income_activation_alert(policy, client):
                 ai_analysis = self._calculate_income_activation_score(policy, client)
@@ -777,21 +799,120 @@ class AIAlertGenerator:
                 print(f"   ✓ MISSING_INFO alert generated (Score: {ai_analysis['ai_score']}, Confidence: {ai_analysis['confidence']:.2f})")
             
             if not generated_alerts:
-                print(f"   ℹ️  No alerts generated (all conditions below threshold)")
+                print(f"   ℹ️  No replacement alerts generated")
             
             # Update policy with generated alerts
             policy["alerts"] = generated_alerts
-            total_alerts_generated += len(generated_alerts)
+            total_replacement_alerts += len(generated_alerts)
             print()
         
         # Save policies with generated alerts to NEW FILE (don't overwrite original)
         output_file = self._save_json("alerts_generated.json", self.policies)
         
         print("=" * 60)
+        print(f"PHASE 2: ACQUISITION ALERTS (Portfolio Analysis)")
+        print(f"Analyzing {len(self.client_positions)} client portfolios...")
+        print()
+        
+        # Generate acquisition alerts from client positions
+        acquisition_alert_gen = AcquisitionAlertGenerator()
+        acquisition_alerts_list = []
+        
+        for position_data in self.client_positions:
+            client_account = position_data.get("clientAccountNumber")
+            
+            # Get client profile
+            client = self._get_client_by_account(client_account)
+            if not client:
+                print(f"⚠️  Client not found for position {client_account}")
+                continue
+            
+            client_name = client.get('client', {}).get('clientName', 'Unknown')
+            print(f"💼 Portfolio: {client_name} ({client_account})")
+            print(f"   Total: ${position_data.get('totalPortfolioValue', 0):,.0f}")
+            
+            generated_acquisition_alerts = []
+            
+            # Generate EXCESS_LIQUIDITY alert
+            excess_liq = acquisition_alert_gen.generate_excess_liquidity_alert(position_data, client)
+            if excess_liq:
+                generated_acquisition_alerts.append(excess_liq["alert"])
+                ai_score = excess_liq["ai_analysis"]["ai_score"]
+                confidence = excess_liq["ai_analysis"]["confidence"]
+                print(f"   ✓ EXCESS_LIQUIDITY alert (Score: {ai_score}, Confidence: {confidence:.2f})")
+            
+            # Generate PORTFOLIO_UNPROTECTED alert
+            unprotected = acquisition_alert_gen.generate_portfolio_unprotected_alert(position_data, client)
+            if unprotected:
+                generated_acquisition_alerts.append(unprotected["alert"])
+                ai_score = unprotected["ai_analysis"]["ai_score"]
+                confidence = unprotected["ai_analysis"]["confidence"]
+                print(f"   ✓ PORTFOLIO_UNPROTECTED alert (Score: {ai_score}, Confidence: {confidence:.2f})")
+            
+            # Generate CD_MATURITY alert
+            cd_maturity = acquisition_alert_gen.generate_cd_maturity_alert(position_data, client)
+            if cd_maturity:
+                generated_acquisition_alerts.append(cd_maturity["alert"])
+                ai_score = cd_maturity["ai_analysis"]["ai_score"]
+                confidence = cd_maturity["ai_analysis"]["confidence"]
+                print(f"   ✓ CD_MATURITY alert (Score: {ai_score}, Confidence: {confidence:.2f})")
+            
+            # Generate INCOME_GAP alert
+            income_gap = acquisition_alert_gen.generate_income_gap_alert(position_data, client)
+            if income_gap:
+                generated_acquisition_alerts.append(income_gap["alert"])
+                ai_score = income_gap["ai_analysis"]["ai_score"]
+                confidence = income_gap["ai_analysis"]["confidence"]
+                print(f"   ✓ INCOME_GAP alert (Score: {ai_score}, Confidence: {confidence:.2f})")
+            
+            # Generate DIVERSIFICATION_GAP alert
+            div_gap = acquisition_alert_gen.generate_diversification_gap_alert(position_data, client)
+            if div_gap:
+                generated_acquisition_alerts.append(div_gap["alert"])
+                ai_score = div_gap["ai_analysis"]["ai_score"]
+                confidence = div_gap["ai_analysis"]["confidence"]
+                print(f"   ✓ DIVERSIFICATION_GAP alert (Score: {ai_score}, Confidence: {confidence:.2f})")
+            
+            if not generated_acquisition_alerts:
+                print(f"   ℹ️  No acquisition alerts generated")
+            else:
+                # Store with client account for reference
+                acquisition_alerts_list.append({
+                    "clientAccountNumber": client_account,
+                    "clientName": client_name,
+                    "totalPortfolioValue": position_data.get("totalPortfolioValue", 0),
+                    "alerts": generated_acquisition_alerts
+                })
+                total_acquisition_alerts += len(generated_acquisition_alerts)
+            
+            print()
+        
+        # Save acquisition alerts to separate file
+        if acquisition_alerts_list:
+            acquisition_file = self._save_json("acquisition_alerts_generated.json", acquisition_alerts_list)
+            print(f"✓ Acquisition alerts saved to: {acquisition_file}")
+        
+        print("=" * 60)
         print(f"✅ BATCH PROCESSING COMPLETE")
         print(f"   Policies Analyzed: {total_policies}")
-        print(f"   Alerts Generated: {total_alerts_generated}")
+        print(f"   Replacement Alerts: {total_replacement_alerts}")
+        print(f"   Portfolios Analyzed: {len(self.client_positions)}")
+        print(f"   Acquisition Alerts: {total_acquisition_alerts}")
+        print(f"   TOTAL ALERTS: {total_replacement_alerts + total_acquisition_alerts}")
         print(f"   Completed at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        print("=" * 60)
+        print()
+        print(f"✓ Replacement alerts saved to: {output_file}")
+        if acquisition_alerts_list:
+            print(f"✓ Acquisition alerts saved to: {acquisition_file}")
+        print(f"✓ Original policies.json preserved for UI")
+        print()
+        print("AI-generated alerts ready for demo! 🚀")
+        print()
+        print("="* 60)
+        print("BUSINESS IMPACT:")
+        print(f"   Replacement Alerts: Move existing annuity AUM")
+        print(f"   Acquisition Alerts: ADD ${sum(a['totalPortfolioValue'] * 0.15 for a in acquisition_alerts_list):,.0f} NEW AUM (est.)")
         print("=" * 60)
         print()
         print(f"✓ Results saved to: {output_file}")

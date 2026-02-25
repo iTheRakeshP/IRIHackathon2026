@@ -1,0 +1,354 @@
+[
+  {
+    "clientAccountNumber": "101-123456-001",
+    "asOfDate": "2026-02-25",
+    "totalPortfolioValue": 2450000,
+    "positions": [
+      {
+        "positionId": "POS-101-001",
+        "assetClass": "EQUITY",
+        "accountType": "TAXABLE",
+        "symbol": "SPY",
+        "description": "SPDR S&P 500 ETF",
+        "quantity": 2500,
+        "marketValue": 625000,
+        "costBasis": 480000,
+        "unrealizedGain": 145000
+      },
+      {
+        "positionId": "POS-101-002",
+        "assetClass": "CASH",
+        "accountType": "TAXABLE",
+        "description": "Money Market Fund - High Yield Savings",
+        "marketValue": 450000,
+        "currentYield": 0.005
+      },
+      {
+        "positionId": "POS-101-003",
+        "assetClass": "EQUITY",
+        "accountType": "IRA",
+        "symbol": "VTI",
+        "description": "Vanguard Total Stock Market ETF",
+        "quantity": 3200,
+        "marketValue": 720000,
+        "costBasis": 580000,
+        "unrealizedGain": 140000
+      },
+      {
+        "positionId": "POS-101-004",
+        "assetClass": "EQUITY",
+        "accountType": "TAXABLE",
+        "symbol": "AAPL",
+        "description": "Apple Inc.",
+        "quantity": 1500,
+        "marketValue": 285000,
+        "costBasis": 195000,
+        "unrealizedGain": 90000
+      },
+      {
+        "positionId": "POS-101-005",
+        "assetClass": "FIXED_INCOME",
+        "accountType": "IRA",
+        "description": "iShares Core U.S. Aggregate Bond ETF",
+        "symbol": "AGG",
+        "quantity": 4000,
+        "marketValue": 370000,
+        "costBasis": 380000,
+        "unrealizedGain": -10000
+      }
+    ],
+    "summary": {
+      "equityAllocation": 0.77,
+      "fixedIncomeAllocation": 0.15,
+      "cashAllocation": 0.18,
+      "annuityAllocation": 0.00,
+      "alternativesAllocation": 0.00,
+      "taxableValue": 1360000,
+      "qualifiedValue": 1090000,
+      "totalCash": 450000,
+      "totalEquities": 1630000,
+      "totalFixedIncome": 370000,
+      "totalAnnuities": 0
+    }
+  },
+  {
+    "clientAccountNumber": "102-234567-002",
+    "asOfDate": "2026-02-25",
+    "totalPortfolioValue": 1350000,
+    "positions": [
+      {
+        "positionId": "POS-102-001",
+        "assetClass": "EQUITY",
+        "accountType": "TAXABLE",
+        "symbol": "VOO",
+        "description": "Vanguard S&P 500 ETF",
+        "quantity": 2200,
+        "marketValue": 550000,
+        "costBasis": 420000,
+        "unrealizedGain": 130000
+      },
+      {
+        "positionId": "POS-102-002",
+        "assetClass": "EQUITY",
+        "accountType": "IRA",
+        "symbol": "QQQ",
+        "description": "Invesco QQQ Trust (Tech-heavy)",
+        "quantity": 1800,
+        "marketValue": 450000,
+        "costBasis": 350000,
+        "unrealizedGain": 100000
+      },
+      {
+        "positionId": "POS-102-003",
+        "assetClass": "FIXED_INCOME",
+        "accountType": "TAXABLE",
+        "description": "5-Year CD - Maturing Soon",
+        "marketValue": 180000,
+        "maturityDate": "2026-03-30",
+        "currentRate": 0.035
+      },
+      {
+        "positionId": "POS-102-004",
+        "assetClass": "CASH",
+        "accountType": "IRA",
+        "description": "IRA Money Market",
+        "marketValue": 85000,
+        "currentYield": 0.004
+      },
+      {
+        "positionId": "POS-102-005",
+        "assetClass": "CASH",
+        "accountType": "TAXABLE",
+        "description": "Checking/Savings",
+        "marketValue": 85000,
+        "currentYield": 0.003
+      }
+    ],
+    "summary": {
+      "equityAllocation": 0.74,
+      "fixedIncomeAllocation": 0.13,
+      "cashAllocation": 0.13,
+      "annuityAllocation": 0.00,
+      "alternativesAllocation": 0.00,
+      "taxableValue": 815000,
+      "qualifiedValue": 535000,
+      "totalCash": 170000,
+      "totalEquities": 1000000,
+      "totalFixedIncome": 180000,
+      "totalAnnuities": 0
+    }
+  },
+  {
+    "clientAccountNumber": "103-345678-003",
+    "asOfDate": "2026-02-25",
+    "totalPortfolioValue": 1850000,
+    "positions": [
+      {
+        "positionId": "POS-103-001",
+        "assetClass": "EQUITY",
+        "accountType": "TAXABLE",
+        "symbol": "VNQ",
+        "description": "Vanguard Real Estate ETF",
+        "quantity": 3500,
+        "marketValue": 320000,
+        "costBasis": 280000,
+        "unrealizedGain": 40000
+      },
+      {
+        "positionId": "POS-103-002",
+        "assetClass": "EQUITY",
+        "accountType": "IRA",
+        "symbol": "SCHD",
+        "description": "Schwab U.S. Dividend Equity ETF",
+        "quantity": 7200,
+        "marketValue": 580000,
+        "costBasis": 510000,
+        "unrealizedGain": 70000
+      },
+      {
+        "positionId": "POS-103-003",
+        "assetClass": "FIXED_INCOME",
+        "accountType": "TAXABLE",
+        "description": "Corporate Bond Fund - High Yield",
+        "symbol": "HYG",
+        "quantity": 4500,
+        "marketValue": 360000,
+        "costBasis": 380000,
+        "unrealizedGain": -20000,
+        "currentYield": 0.058
+      },
+      {
+        "positionId": "POS-103-004",
+        "assetClass": "CASH",
+        "accountType": "TAXABLE",
+        "description": "High Yield Savings",
+        "marketValue": 320000,
+        "currentYield": 0.0045
+      },
+      {
+        "positionId": "POS-103-005",
+        "assetClass": "FIXED_INCOME",
+        "accountType": "IRA",
+        "description": "3-Year CD - Maturing in 60 days",
+        "marketValue": 150000,
+        "maturityDate": "2026-04-25",
+        "currentRate": 0.038
+      },
+      {
+        "positionId": "POS-103-006",
+        "assetClass": "CASH",
+        "accountType": "IRA",
+        "description": "IRA Cash Reserve",
+        "marketValue": 120000,
+        "currentYield": 0.004
+      }
+    ],
+    "summary": {
+      "equityAllocation": 0.49,
+      "fixedIncomeAllocation": 0.28,
+      "cashAllocation": 0.24,
+      "annuityAllocation": 0.00,
+      "alternativesAllocation": 0.00,
+      "taxableValue": 1000000,
+      "qualifiedValue": 850000,
+      "totalCash": 440000,
+      "totalEquities": 900000,
+      "totalFixedIncome": 510000,
+      "totalAnnuities": 0
+    }
+  },
+  {
+    "clientAccountNumber": "104-456789-004",
+    "asOfDate": "2026-02-25",
+    "totalPortfolioValue": 3200000,
+    "positions": [
+      {
+        "positionId": "POS-104-001",
+        "assetClass": "EQUITY",
+        "accountType": "TAXABLE",
+        "symbol": "BRK.B",
+        "description": "Berkshire Hathaway Inc.",
+        "quantity": 2800,
+        "marketValue": 680000,
+        "costBasis": 520000,
+        "unrealizedGain": 160000
+      },
+      {
+        "positionId": "POS-104-002",
+        "assetClass": "EQUITY",
+        "accountType": "IRA",
+        "symbol": "SPY",
+        "description": "SPDR S&P 500 ETF",
+        "quantity": 4500,
+        "marketValue": 1125000,
+        "costBasis": 890000,
+        "unrealizedGain": 235000
+      },
+      {
+        "positionId": "POS-104-003",
+        "assetClass": "FIXED_INCOME",
+        "accountType": "TAXABLE",
+        "description": "Municipal Bond Fund (Tax-Free)",
+        "symbol": "MUB",
+        "quantity": 8000,
+        "marketValue": 820000,
+        "costBasis": 780000,
+        "unrealizedGain": 40000,
+        "currentYield": 0.032
+      },
+      {
+        "positionId": "POS-104-004",
+        "assetClass": "CASH",
+        "accountType": "TAXABLE",
+        "description": "Money Market - Taxable",
+        "marketValue": 375000,
+        "currentYield": 0.005
+      },
+      {
+        "positionId": "POS-104-005",
+        "assetClass": "CASH",
+        "accountType": "IRA",
+        "description": "IRA Sweep Account",
+        "marketValue": 200000,
+        "currentYield": 0.004
+      }
+    ],
+    "summary": {
+      "equityAllocation": 0.56,
+      "fixedIncomeAllocation": 0.26,
+      "cashAllocation": 0.18,
+      "annuityAllocation": 0.00,
+      "alternativesAllocation": 0.00,
+      "taxableValue": 1875000,
+      "qualifiedValue": 1325000,
+      "totalCash": 575000,
+      "totalEquities": 1805000,
+      "totalFixedIncome": 820000,
+      "totalAnnuities": 0
+    }
+  },
+  {
+    "clientAccountNumber": "105-567890-005",
+    "asOfDate": "2026-02-25",
+    "totalPortfolioValue": 980000,
+    "positions": [
+      {
+        "positionId": "POS-105-001",
+        "assetClass": "EQUITY",
+        "accountType": "TAXABLE",
+        "symbol": "DIA",
+        "description": "SPDR Dow Jones Industrial Average ETF",
+        "quantity": 1200,
+        "marketValue": 420000,
+        "costBasis": 360000,
+        "unrealizedGain": 60000
+      },
+      {
+        "positionId": "POS-105-002",
+        "assetClass": "FIXED_INCOME",
+        "accountType": "TAXABLE",
+        "description": "10-Year Treasury Bond",
+        "marketValue": 200000,
+        "currentYield": 0.042
+      },
+      {
+        "positionId": "POS-105-003",
+        "assetClass": "FIXED_INCOME",
+        "accountType": "IRA",
+        "description": "5-Year CD - Maturing in 45 days",
+        "marketValue": 120000,
+        "maturityDate": "2026-04-10",
+        "currentRate": 0.034
+      },
+      {
+        "positionId": "POS-105-004",
+        "assetClass": "CASH",
+        "accountType": "TAXABLE",
+        "description": "High-Yield Savings Account",
+        "marketValue": 150000,
+        "currentYield": 0.0048
+      },
+      {
+        "positionId": "POS-105-005",
+        "assetClass": "CASH",
+        "accountType": "IRA",
+        "description": "IRA Money Market",
+        "marketValue": 90000,
+        "currentYield": 0.0042
+      }
+    ],
+    "summary": {
+      "equityAllocation": 0.43,
+      "fixedIncomeAllocation": 0.33,
+      "cashAllocation": 0.24,
+      "annuityAllocation": 0.00,
+      "alternativesAllocation": 0.00,
+      "taxableValue": 770000,
+      "qualifiedValue": 210000,
+      "totalCash": 240000,
+      "totalEquities": 420000,
+      "totalFixedIncome": 320000,
+      "totalAnnuities": 0
+    }
+  }
+]

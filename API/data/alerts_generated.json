@@ -56,7 +56,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -72,7 +72,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-17T21:38:48.506333",
+          "generated_at": "2026-02-25T11:27:24.400558",
           "algorithm_version": "1.0.0"
         }
       },
@@ -87,7 +87,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -129,7 +129,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.506333",
+          "generated_at": "2026-02-25T11:27:24.400641",
           "algorithm_version": "1.0.0"
         }
       }
@@ -183,7 +183,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -199,7 +199,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-17T21:38:48.506333",
+          "generated_at": "2026-02-25T11:27:24.400863",
           "algorithm_version": "1.0.0"
         }
       },
@@ -214,7 +214,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -256,7 +256,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.506832",
+          "generated_at": "2026-02-25T11:27:24.400916",
           "algorithm_version": "1.0.0"
         }
       },
@@ -270,7 +270,7 @@
           "Primary beneficiary not designated",
           "Tax withholding elections not selected"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 85,
           "confidence": 0.92,
@@ -321,7 +321,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.506832",
+          "generated_at": "2026-02-25T11:27:24.400966",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -381,7 +381,7 @@
           "Client age and income needs suggest review timing",
           "Deferral vs. activation tradeoffs warrant discussion"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 48,
           "confidence": 0.75,
@@ -409,7 +409,7 @@
             "Payout rate increases from 5.0% to 5.5% at age 64"
           ],
           "data_points_analyzed": 18,
-          "generated_at": "2026-02-17T21:38:48.506832",
+          "generated_at": "2026-02-25T11:27:24.401142",
           "algorithm_version": "1.0.0"
         }
       },
@@ -424,7 +424,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -469,7 +469,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.506832",
+          "generated_at": "2026-02-25T11:27:24.401191",
           "algorithm_version": "1.0.0"
         }
       },
@@ -485,7 +485,7 @@
           "Tax withholding elections not selected",
           "Owner email address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.92,
@@ -510,7 +510,7 @@
                 "policy_value": null,
                 "priority": "MEDIUM",
                 "auto_update_eligible": true,
-                "age_in_years": 7.62217659137577
+                "age_in_years": 7.644079397672827
               }
             ]
           },
@@ -541,7 +541,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.506832",
+          "generated_at": "2026-02-25T11:27:24.401239",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -610,7 +610,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -655,7 +655,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.507332",
+          "generated_at": "2026-02-25T11:27:24.401463",
           "algorithm_version": "1.0.0"
         }
       }
@@ -715,7 +715,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -731,7 +731,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-17T21:38:48.507332",
+          "generated_at": "2026-02-25T11:27:24.401617",
           "algorithm_version": "1.0.0"
         }
       },
@@ -746,7 +746,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -791,7 +791,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.507332",
+          "generated_at": "2026-02-25T11:27:24.401685",
           "algorithm_version": "1.0.0"
         }
       },
@@ -807,7 +807,7 @@
           "Tax withholding elections not selected",
           "Owner email address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.92,
@@ -832,7 +832,7 @@
                 "policy_value": null,
                 "priority": "MEDIUM",
                 "auto_update_eligible": true,
-                "age_in_years": 5.935660506502396
+                "age_in_years": 5.9575633127994525
               }
             ]
           },
@@ -863,7 +863,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.507835",
+          "generated_at": "2026-02-25T11:27:24.401765",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -903,7 +903,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -945,7 +945,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.507835",
+          "generated_at": "2026-02-25T11:27:24.402073",
           "algorithm_version": "1.0.0"
         }
       },
@@ -961,7 +961,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -1025,7 +1025,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.507835",
+          "generated_at": "2026-02-25T11:27:24.402133",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -1065,7 +1065,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -1107,7 +1107,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.507835",
+          "generated_at": "2026-02-25T11:27:24.402364",
           "algorithm_version": "1.0.0"
         }
       },
@@ -1123,7 +1123,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -1187,7 +1187,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.508332",
+          "generated_at": "2026-02-25T11:27:24.402436",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -1227,7 +1227,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -1269,7 +1269,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.508332",
+          "generated_at": "2026-02-25T11:27:24.402713",
           "algorithm_version": "1.0.0"
         }
       },
@@ -1285,7 +1285,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -1349,7 +1349,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.508332",
+          "generated_at": "2026-02-25T11:27:24.402764",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -1389,7 +1389,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -1434,7 +1434,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.508332",
+          "generated_at": "2026-02-25T11:27:24.402939",
           "algorithm_version": "1.0.0"
         }
       },
@@ -1450,7 +1450,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -1514,7 +1514,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.508332",
+          "generated_at": "2026-02-25T11:27:24.402982",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -1554,7 +1554,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -1599,7 +1599,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.508833",
+          "generated_at": "2026-02-25T11:27:24.403155",
           "algorithm_version": "1.0.0"
         }
       },
@@ -1615,7 +1615,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -1679,7 +1679,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.508833",
+          "generated_at": "2026-02-25T11:27:24.403211",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -1719,7 +1719,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 45,
           "confidence": 0.72,
@@ -1761,7 +1761,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.508833",
+          "generated_at": "2026-02-25T11:27:24.403423",
           "algorithm_version": "1.0.0"
         }
       },
@@ -1777,7 +1777,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -1841,7 +1841,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.508833",
+          "generated_at": "2026-02-25T11:27:24.403474",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -1881,7 +1881,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 45,
           "confidence": 0.72,
@@ -1923,7 +1923,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.508833",
+          "generated_at": "2026-02-25T11:27:24.403651",
           "algorithm_version": "1.0.0"
         }
       },
@@ -1939,7 +1939,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -2003,7 +2003,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.509332",
+          "generated_at": "2026-02-25T11:27:24.403702",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -2044,7 +2044,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -2108,7 +2108,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.509332",
+          "generated_at": "2026-02-25T11:27:24.403899",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -2148,7 +2148,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -2164,7 +2164,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-17T21:38:48.509332",
+          "generated_at": "2026-02-25T11:27:24.404024",
           "algorithm_version": "1.0.0"
         }
       },
@@ -2179,7 +2179,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -2221,7 +2221,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.509332",
+          "generated_at": "2026-02-25T11:27:24.404103",
           "algorithm_version": "1.0.0"
         }
       },
@@ -2237,7 +2237,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -2301,7 +2301,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.509332",
+          "generated_at": "2026-02-25T11:27:24.404187",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -2341,7 +2341,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -2383,7 +2383,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.509832",
+          "generated_at": "2026-02-25T11:27:24.404389",
           "algorithm_version": "1.0.0"
         }
       },
@@ -2399,7 +2399,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -2463,7 +2463,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.509832",
+          "generated_at": "2026-02-25T11:27:24.404432",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -2503,7 +2503,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -2519,7 +2519,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-17T21:38:48.509832",
+          "generated_at": "2026-02-25T11:27:24.404647",
           "algorithm_version": "1.0.0"
         }
       },
@@ -2534,7 +2534,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -2579,7 +2579,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.509832",
+          "generated_at": "2026-02-25T11:27:24.404705",
           "algorithm_version": "1.0.0"
         }
       },
@@ -2595,7 +2595,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -2659,7 +2659,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.509832",
+          "generated_at": "2026-02-25T11:27:24.404745",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -2699,7 +2699,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -2715,7 +2715,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-17T21:38:48.510335",
+          "generated_at": "2026-02-25T11:27:24.404891",
           "algorithm_version": "1.0.0"
         }
       },
@@ -2730,7 +2730,7 @@
           "Client age and income needs suggest review timing",
           "Deferral vs. activation tradeoffs warrant discussion"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 48,
           "confidence": 0.75,
@@ -2758,7 +2758,7 @@
             "Payout rate increases from 5.0% to 5.5% at age 66"
           ],
           "data_points_analyzed": 18,
-          "generated_at": "2026-02-17T21:38:48.510335",
+          "generated_at": "2026-02-25T11:27:24.404932",
           "algorithm_version": "1.0.0"
         }
       },
@@ -2773,7 +2773,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -2818,7 +2818,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.510335",
+          "generated_at": "2026-02-25T11:27:24.404974",
           "algorithm_version": "1.0.0"
         }
       },
@@ -2834,7 +2834,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -2898,7 +2898,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.510335",
+          "generated_at": "2026-02-25T11:27:24.405095",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -2938,7 +2938,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -2983,7 +2983,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.510335",
+          "generated_at": "2026-02-25T11:27:24.405385",
           "algorithm_version": "1.0.0"
         }
       },
@@ -2999,7 +2999,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -3063,7 +3063,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.510335",
+          "generated_at": "2026-02-25T11:27:24.405434",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -3103,7 +3103,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -3145,7 +3145,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.510833",
+          "generated_at": "2026-02-25T11:27:24.405612",
           "algorithm_version": "1.0.0"
         }
       },
@@ -3161,7 +3161,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -3225,7 +3225,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.510833",
+          "generated_at": "2026-02-25T11:27:24.405667",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -3265,7 +3265,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -3307,7 +3307,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.510833",
+          "generated_at": "2026-02-25T11:27:24.405799",
           "algorithm_version": "1.0.0"
         }
       },
@@ -3323,7 +3323,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -3387,7 +3387,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.510833",
+          "generated_at": "2026-02-25T11:27:24.405938",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -3427,7 +3427,7 @@
           "Better alternatives available with superior features",
           "Surrender schedule considerations favorable for replacement"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 77,
           "confidence": 0.87,
@@ -3443,7 +3443,7 @@
             "Surrender period ending in 8 months"
           ],
           "data_points_analyzed": 23,
-          "generated_at": "2026-02-17T21:38:48.510833",
+          "generated_at": "2026-02-25T11:27:24.406426",
           "algorithm_version": "1.0.0"
         }
       },
@@ -3458,7 +3458,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 35,
           "confidence": 0.72,
@@ -3500,7 +3500,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.510833",
+          "generated_at": "2026-02-25T11:27:24.406641",
           "algorithm_version": "1.0.0"
         }
       },
@@ -3516,7 +3516,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -3580,7 +3580,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.511334",
+          "generated_at": "2026-02-25T11:27:24.406817",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -3620,7 +3620,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -3665,7 +3665,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.511334",
+          "generated_at": "2026-02-25T11:27:24.407248",
           "algorithm_version": "1.0.0"
         }
       },
@@ -3681,7 +3681,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -3745,7 +3745,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.511334",
+          "generated_at": "2026-02-25T11:27:24.407567",
           "algorithm_version": "missing_info_v1.0"
         }
       }
@@ -3785,7 +3785,7 @@
           "Client profile changes may warrant product reassessment",
           "Compliance best practice: verify current suitability"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 52,
           "confidence": 0.88,
@@ -3830,7 +3830,7 @@
           ],
           "data_points_analyzed": 19,
           "last_profile_update": "2026-01-15T10:30:00Z",
-          "generated_at": "2026-02-17T21:38:48.511334",
+          "generated_at": "2026-02-25T11:27:24.407907",
           "algorithm_version": "1.0.0"
         }
       },
@@ -3846,7 +3846,7 @@
           "Owner email address missing",
           "Owner mailing address missing"
         ],
-        "createdAt": "2026-02-17",
+        "createdAt": "2026-02-25",
         "ai_analysis": {
           "ai_score": 83,
           "confidence": 0.85,
@@ -3910,7 +3910,7 @@
             "Account profile has current information available for auto-update"
           ],
           "data_points_analyzed": 8,
-          "generated_at": "2026-02-17T21:38:48.511334",
+          "generated_at": "2026-02-25T11:27:24.407967",
           "algorithm_version": "missing_info_v1.0"
         }
       }

@@ -4,6 +4,36 @@
 
 An intelligent platform for in-force annuity policy review, featuring AI-powered insights and compliance-aware replacement analysis.
 
+---
+
+## 🆕 **NEW: IARTS Standard**
+
+**We've created a brand new industry standard for annuity replacement transactions!**
+
+📋 **IARTS** (IRI Annuity Replacement Transaction Standard) is a modern, JSON-based payload format that replaces legacy ACORD XML for replacement transactions.
+
+| Feature | ACORD XML | **IARTS** |
+|---------|-----------|-----------|
+| Format | XML | **JSON** |
+| Size | 130+ lines | **65 lines (50% smaller)** |
+| Transport | Batch EDI | **REST API** |
+| Compliance | External | **Built-in** |
+| AI-Ready | No | **Yes** ✨ |
+
+**📚 Full Documentation:**
+- [**IARTS Overview**](IARTS_STANDARD_OVERVIEW.md) - Executive summary with badges
+- [**Full Specification**](REPLACEMENT_TRANSACTION_STANDARD.md) - Complete technical spec
+- [**Quick Start Guide**](REPLACEMENT_TRANSACTION_QUICK_START.md) - Get started in 5 minutes
+- [**ACORD Comparison**](ACORD_VS_IARTS_COMPARISON.md) - Side-by-side format comparison
+
+**🚀 Try It:**
+```bash
+cd API
+python example_replacement_transactions.py
+```
+
+---
+
 ## 🎯 Project Overview
 
 This application helps financial advisors review in-force annuity policies with:
@@ -32,11 +62,13 @@ This application helps financial advisors review in-force annuity policies with:
 IRIHackathon2026/
 ├── API/                            # FastAPI Backend
 │   ├── app/
-│   │   ├── api/                   # API endpoints (policies, clients, products, AI)
+│   │   ├── api/                   # API endpoints (policies, clients, products, AI, replacement-transactions)
 │   │   ├── models/                # Pydantic data models
+│   │   │   └── replacement_transaction.py  # 🆕 IARTS Standard Models
 │   │   └── services/              # Business logic (data store, product matching, AI)
 │   ├── data/                      # Mock data (JSON files)
 │   ├── main.py                    # FastAPI application entry point
+│   ├── example_replacement_transactions.py  # 🆕 IARTS Examples
 │   └── requirements.txt           # Python dependencies
 │
 ├── UI/                            # Angular Frontend
@@ -50,6 +82,13 @@ IRIHackathon2026/
 │   └── package.json              # Node dependencies
 │
 ├── wireframes/                    # UI mockups and designs
+├── diagrams/                      # PlantUML diagrams
+│
+├── 🆕 IARTS_STANDARD_OVERVIEW.md         # IARTS executive summary
+├── 🆕 REPLACEMENT_TRANSACTION_STANDARD.md # Full IARTS specification
+├── 🆕 REPLACEMENT_TRANSACTION_QUICK_START.md # IARTS quick start
+├── 🆕 ACORD_VS_IARTS_COMPARISON.md       # Format comparison
+│
 ├── DEMO_SCRIPT.md                # Demo walkthrough script
 ├── Functional_and_Technical_Doc_Angular19_FastAPI.md
 ├── UI_Specs_Annuity_Review_AI_Copilot.md

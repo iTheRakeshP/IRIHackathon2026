@@ -18,6 +18,7 @@ class DataStore:
         self._clients: List[ClientWithSuitability] = []
         self._products: List[Product] = []
         self._policies: List[Policy] = []
+        self._acquisition_alerts: List[Dict] = []  # Client-level acquisition opportunities
         self._load_data()
     
     def _load_data(self):
@@ -39,6 +40,14 @@ class DataStore:
                 products_data = json.load(f)
                 self._products = [Product(**product) for product in products_data]
                 self._policies = [Policy(**policy) for policy in policies_data]
+        
+        # Load acquisition alerts (client-level portfolio opportunities)
+        acquisition_alerts_file = settings.DATA_DIR / "acquisition_alerts_generated.json"
+        if acquisition_alerts_file.exists():
+            with open(acquisition_alerts_file, 'r', encoding='utf-8') as f:
+                self._acquisition_alerts = json.load(f)
+        else:
+            print("⚠️  acquisition_alerts_generated.json not found - run batch_alert_generator.py to generate")
     
     def get_all_policies(self) -> List[Policy]:
         """Get all policies"""
@@ -96,6 +105,17 @@ class DataStore:
                         setattr(client.clientSuitabilityProfile, key, value)
                 return client
         return None
+    
+    def get_acquisition_alerts_by_client(self, client_account_number: str) -> List[Dict]:
+        """Get acquisition alerts (portfolio opportunities) for a specific client"""
+        for client_alerts in self._acquisition_alerts:
+            if client_alerts.get("clientAccountNumber") == client_account_number:
+                return client_alerts.get("alerts", [])
+        return []
+    
+    def get_all_acquisition_alerts(self) -> List[Dict]:
+        """Get all acquisition alerts across all clients"""
+        return self._acquisition_alerts
     
     def update_policy(self, updated_policy: Policy) -> Optional[Policy]:
         """Update a policy in the data store"""

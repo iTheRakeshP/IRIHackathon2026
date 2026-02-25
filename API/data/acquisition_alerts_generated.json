@@ -1,0 +1,232 @@
+[
+  {
+    "clientAccountNumber": "101-123456-001",
+    "clientName": "Milovich Pichirallo",
+    "totalPortfolioValue": 2450000,
+    "alerts": [
+      {
+        "alertId": "ACQ-EXL-101123456001",
+        "type": "EXCESS_LIQUIDITY",
+        "severity": "HIGH",
+        "title": "Excess Cash Alert: $450,000 Earning 0.5%",
+        "reasonShort": "Move $270,000 to annuity for $16,200/year gain",
+        "reasons": [
+          "18% cash allocation (recommended: 10-15%)",
+          "$450,000 earning ~0.5% in money market",
+          "Fixed indexed annuity available at 6.5% cap",
+          "Liquidity importance: High (permits annuity allocation)",
+          "Age 50 (suitable time horizon)"
+        ],
+        "createdAt": "2026-02-25"
+      },
+      {
+        "alertId": "ACQ-DVG-101123456001",
+        "type": "DIVERSIFICATION_GAP",
+        "severity": "LOW",
+        "title": "$2,450,000 Portfolio with 0% Insurance Products",
+        "reasonShort": "Diversify with 15% annuity allocation ($367,500)",
+        "reasons": [
+          "$2,450,000 portfolio with zero annuity allocation",
+          "Risk tolerance: Moderate (insurance products appropriate)",
+          "Age 50 (suitable for annuity time horizon)",
+          "Missing downside protection and guaranteed growth layer",
+          "15% allocation would add $367,500 in principal-protected assets"
+        ],
+        "createdAt": "2026-02-25"
+      }
+    ]
+  },
+  {
+    "clientAccountNumber": "102-234567-002",
+    "clientName": "Sandra Collins",
+    "totalPortfolioValue": 1350000,
+    "alerts": [
+      {
+        "alertId": "ACQ-EXL-102234567002",
+        "type": "EXCESS_LIQUIDITY",
+        "severity": "LOW",
+        "title": "Excess Cash Alert: $170,000 Earning 0.5%",
+        "reasonShort": "Move $102,000 to annuity for $6,120/year gain",
+        "reasons": [
+          "13% cash allocation (recommended: 10-15%)",
+          "$170,000 earning ~0.5% in money market",
+          "Fixed indexed annuity available at 6.5% cap",
+          "Liquidity importance: Medium (permits annuity allocation)",
+          "Age 62 (suitable time horizon)"
+        ],
+        "createdAt": "2026-02-25"
+      },
+      {
+        "alertId": "ACQ-UNP-102234567002",
+        "type": "PORTFOLIO_UNPROTECTED",
+        "severity": "HIGH",
+        "title": "74% Equities at Age 62 with No Guaranteed Income",
+        "reasonShort": "Allocate $270,000 to annuity with GLWB for downside protection",
+        "reasons": [
+          "74% equity allocation (exposed to market volatility)",
+          "Age 62, life stage: Pre-Retirement",
+          "Primary objective: Income (needs guaranteed income)",
+          "Zero allocation to annuities or guaranteed income products",
+          "GLWB could provide $14,850/year guaranteed income"
+        ],
+        "createdAt": "2026-02-25"
+      },
+      {
+        "alertId": "ACQ-CDM-102234567002",
+        "type": "CD_MATURITY",
+        "severity": "MEDIUM",
+        "title": "$180,000 CD Maturing in 33 Days at 3.5000000000000004%",
+        "reasonShort": "Multi-year guaranteed annuity (MYGA) offering 5.5%",
+        "reasons": [
+          "CD matures on 2026-03-30 (33 days)",
+          "Current CD rate: 3.5000000000000004%",
+          "Best MYGA rate: 5.5% (2.0% improvement)",
+          "Estimated gain: $3,600/year",
+          "MYGA offers comparable safety with better yield"
+        ],
+        "createdAt": "2026-02-25"
+      },
+      {
+        "alertId": "ACQ-DVG-102234567002",
+        "type": "DIVERSIFICATION_GAP",
+        "severity": "MEDIUM",
+        "title": "$1,350,000 Portfolio with 0% Insurance Products",
+        "reasonShort": "Diversify with 15% annuity allocation ($202,500)",
+        "reasons": [
+          "$1,350,000 portfolio with zero annuity allocation",
+          "Risk tolerance: Moderate (insurance products appropriate)",
+          "Age 62 (suitable for annuity time horizon)",
+          "Missing downside protection and guaranteed growth layer",
+          "15% allocation would add $202,500 in principal-protected assets"
+        ],
+        "createdAt": "2026-02-25"
+      }
+    ]
+  },
+  {
+    "clientAccountNumber": "103-345678-003",
+    "clientName": "David Hernandez",
+    "totalPortfolioValue": 1850000,
+    "alerts": [
+      {
+        "alertId": "ACQ-EXL-103345678003",
+        "type": "EXCESS_LIQUIDITY",
+        "severity": "HIGH",
+        "title": "Excess Cash Alert: $440,000 Earning 0.5%",
+        "reasonShort": "Move $264,000 to annuity for $15,840/year gain",
+        "reasons": [
+          "24% cash allocation (recommended: 10-15%)",
+          "$440,000 earning ~0.5% in money market",
+          "Fixed indexed annuity available at 6.5% cap",
+          "Liquidity importance: Medium (permits annuity allocation)",
+          "Age 67 (suitable time horizon)"
+        ],
+        "createdAt": "2026-02-25"
+      },
+      {
+        "alertId": "ACQ-CDM-103345678003",
+        "type": "CD_MATURITY",
+        "severity": "LOW",
+        "title": "$150,000 CD Maturing in 59 Days at 3.8%",
+        "reasonShort": "Multi-year guaranteed annuity (MYGA) offering 5.5%",
+        "reasons": [
+          "CD matures on 2026-04-25 (59 days)",
+          "Current CD rate: 3.8%",
+          "Best MYGA rate: 5.5% (1.7% improvement)",
+          "Estimated gain: $2,550/year",
+          "MYGA offers comparable safety with better yield"
+        ],
+        "createdAt": "2026-02-25"
+      },
+      {
+        "alertId": "ACQ-ING-103345678003",
+        "type": "INCOME_GAP",
+        "severity": "HIGH",
+        "title": "Retirement in -7 Years: $39,000 Income Gap",
+        "reasonShort": "Deferred income annuity to close gap with guaranteed lifetime payment",
+        "reasons": [
+          "Retirement target: 2019 (-7 years away)",
+          "Estimated annual expenses: $74,000",
+          "Guaranteed income sources: $35,000 (Social Security)",
+          "Income gap: $39,000/year",
+          "Required annuity allocation: $709,091 at 5.5% payout"
+        ],
+        "createdAt": "2026-02-25"
+      }
+    ]
+  },
+  {
+    "clientAccountNumber": "104-456789-004",
+    "clientName": "Amit Patel",
+    "totalPortfolioValue": 3200000,
+    "alerts": [
+      {
+        "alertId": "ACQ-EXL-104456789004",
+        "type": "EXCESS_LIQUIDITY",
+        "severity": "HIGH",
+        "title": "Excess Cash Alert: $575,000 Earning 0.5%",
+        "reasonShort": "Move $345,000 to annuity for $20,700/year gain",
+        "reasons": [
+          "18% cash allocation (recommended: 10-15%)",
+          "$575,000 earning ~0.5% in money market",
+          "Fixed indexed annuity available at 6.5% cap",
+          "Liquidity importance: Low (permits annuity allocation)",
+          "Age 45 (suitable time horizon)"
+        ],
+        "createdAt": "2026-02-25"
+      }
+    ]
+  },
+  {
+    "clientAccountNumber": "105-567890-005",
+    "clientName": "Linda Morrison",
+    "totalPortfolioValue": 980000,
+    "alerts": [
+      {
+        "alertId": "ACQ-EXL-105567890005",
+        "type": "EXCESS_LIQUIDITY",
+        "severity": "LOW",
+        "title": "Excess Cash Alert: $240,000 Earning 0.5%",
+        "reasonShort": "Move $144,000 to annuity for $8,640/year gain",
+        "reasons": [
+          "24% cash allocation (recommended: 10-15%)",
+          "$240,000 earning ~0.5% in money market",
+          "Fixed indexed annuity available at 6.5% cap",
+          "Liquidity importance: High (permits annuity allocation)",
+          "Age 59 (suitable time horizon)"
+        ],
+        "createdAt": "2026-02-25"
+      },
+      {
+        "alertId": "ACQ-CDM-105567890005",
+        "type": "CD_MATURITY",
+        "severity": "LOW",
+        "title": "$120,000 CD Maturing in 44 Days at 3.4000000000000004%",
+        "reasonShort": "Multi-year guaranteed annuity (MYGA) offering 5.5%",
+        "reasons": [
+          "CD matures on 2026-04-10 (44 days)",
+          "Current CD rate: 3.4000000000000004%",
+          "Best MYGA rate: 5.5% (2.1% improvement)",
+          "Estimated gain: $2,520/year",
+          "MYGA offers comparable safety with better yield"
+        ],
+        "createdAt": "2026-02-25"
+      },
+      {
+        "alertId": "ACQ-DVG-105567890005",
+        "type": "DIVERSIFICATION_GAP",
+        "severity": "LOW",
+        "title": "$980,000 Portfolio with 0% Insurance Products",
+        "reasonShort": "Diversify with 15% annuity allocation ($147,000)",
+        "reasons": [
+          "$980,000 portfolio with zero annuity allocation",
+          "Risk tolerance: Moderate (insurance products appropriate)",
+          "Age 59 (suitable for annuity time horizon)",
+          "Missing downside protection and guaranteed growth layer",
+          "15% allocation would add $147,000 in principal-protected assets"
+        ],
+        "createdAt": "2026-02-25"
+      }
+    ]
+  }
+]

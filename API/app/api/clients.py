@@ -84,3 +84,50 @@ async def get_all_clients():
     """
     clients = data_store.get_all_clients()
     return [client.to_frontend_format() for client in clients]
+
+
+@router.get("/clients/{client_account_number}/acquisition-alerts")
+async def get_client_acquisition_alerts(
+    client_account_number: str = Path(..., description="Client account number")
+):
+    """
+    Get acquisition alerts (portfolio opportunities) for a specific client.
+    These are CLIENT-level alerts based on entire portfolio analysis,
+    not POLICY-level alerts (which are annuity replacements).
+    
+    Examples:
+    - EXCESS_LIQUIDITY: Too much cash earning low interest
+    - PORTFOLIO_UNPROTECTED: High equity exposure without guaranteed income
+    - CD_MATURITY: CDs maturing, better rates available
+    - INCOME_GAP: Retirement income shortfall
+    - DIVERSIFICATION_GAP: Missing annuity allocation
+    """
+    alerts = data_store.get_acquisition_alerts_by_client(client_account_number)
+    
+    return {
+        "clientAccountNumber": client_account_number,
+        "alerts": alerts,
+        "count": len(alerts)
+    }
+
+
+@router.get("/acquisition-alerts")
+async def get_all_acquisition_alerts():
+    """
+    Get all acquisition alerts across all clients.
+    Used for dashboard summary or management reporting.
+    """
+    all_alerts = data_store.get_all_acquisition_alerts()
+    
+    # Calculate summary stats
+    total_alerts = sum(len(client_data.get("alerts", [])) for client_data in all_alerts)
+    total_potential_aum = sum(client_data.get("totalPortfolioValue", 0) * 0.15 for client_data in all_alerts)
+    
+    return {
+        "clients": all_alerts,
+        "summary": {
+            "totalClients": len(all_alerts),
+            "totalAlerts": total_alerts,
+            "estimatedNewAUM": round(total_potential_aum, 2)
+        }
+    }
